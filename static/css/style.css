@@ -1,0 +1,12 @@
+nav {
+    background-color: white;
+    box-shadow: none;
+}
+
+nav ul a {
+    color: black;
+}
+
+nav ul a.login-register {
+    margin-left: 50px;
+}
