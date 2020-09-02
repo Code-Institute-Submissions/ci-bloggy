@@ -9,6 +9,23 @@
     <title>{% block title %} {% endblock title %}</title>
 </head>
 <body>
+    <nav>
+        <div class="nav-wrapper">
+          <a href="#!" class="brand-logo"><img src="{{ url_for('static', filename='img/logo.svg') }}" alt=""></a>
+          <a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="">Home</a></li>
+            <li><a href="">Blogs</a></li>
+            <li><a href="" class="login-register">Login/Register</a></li>
+          </ul>
+        </div>
+      </nav>
+    
+      <ul class="sidenav" id="mobile">
+        <li><a href="">Home</a></li>
+        <li><a href="">Blogs</a></li>
+        <li><a href="">Login/Register</a></li>
+      </ul>
     {% block main %}
         
     {% endblock main %}
