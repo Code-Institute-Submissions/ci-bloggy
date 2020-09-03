@@ -22,7 +22,7 @@ nav ul a {
 }
 
 nav ul a:hover {
-    color: rgb(21, 133, 226);
+    color: 1585E2;
     background-color: white;
 }
 
@@ -34,10 +34,77 @@ nav .material-icons {
     color: black;
 }
 
+img.sidemenu-logo {
+    width: 50%;
+}
+
+hr.sidemenu-hr {
+    width: 85%;
+}
+
+/* * Index.html syles */
+
+.index-hero {
+    padding-top: 50px
+}
+
+.index-hero h1 {
+    font-size: 4rem;
+    padding-top: 10%
+}
+
+.index-hero img {
+    height: 50vh;
+}
+
+  /* label focus color */
+  .input-field input[type=text]:focus + label {
+    color:#1585E2 !important;
+  }
+  /* label underline focus color */
+  .input-field input[type=text]:focus {
+    border-bottom: 1px solid #1585E2 !important;
+    box-shadow: 0 1px 0 0 #000;
+  }
+
+.search-button {
+    background-color: #1585E2;
+}
+
+.search-button:hover {
+    background-color: #F1007C
+}
+
 /* * Custom media queries for smaller devices */
 @media only screen and (max-width: 600px) {
-    nav img {
-        width: 90%;
-        padding: 5% 0 0 0;
+    nav {
+        margin: 2.5% 0 0 0;
     }
+    nav img {
+        width: 80%;
+        text-align: center;
+    }
+    .index-hero h1 {
+        text-align: center;
+        display: block;
+    }
+    .index-hero {
+        background-image: url('/static/img/index-background.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        padding-top: 30vh;
+        margin-top: 5%;
+    }
+    .mobile-hero h1 {
+        font-size: xx-large;
+        text-align: center;
+    }
+    .search-button {
+        margin-top: 10px;
+    }
+    .search-field {
+        margin-bottom: 0;
+    }
+
 }

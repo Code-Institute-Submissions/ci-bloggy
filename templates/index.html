@@ -1,7 +1,45 @@
 {% extends 'base.html' %}
 {% block title %}
-    
+Bloggy | Home
 {% endblock title %}
 {% block main %}
-
+<div class="row index-hero">
+    <div class="valign-wrapper">
+        <div class="col s12 m6 l7 hide-on-small-only">
+            <h1>Home of the blogs you love.</h1>
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s6 search-field">
+                        <input id="name" type="text" class="validate">
+                        <label for="name">Search for a blog...</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <button class="btn-floating waves-effect waves-light z-depth-2 search-button" type="submit"
+                            name="action"><i class="large material-icons">search</i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col s12 m6 l5 hide-on-small-only">
+            <img src="{{ url_for('static', filename='img/index-background.svg') }}" alt="">
+        </div>
+    </div>
+</div>
+<div class="row hide-on-med-and-up mobile-hero">
+    <div class="col s12 show-on-small">
+        <h1>Home of the blogs you love.</h1>
+        <form>
+            <div class="row">
+                <div class="input-field col s12 search-field">
+                    <input id="name" type="text" class="validate">
+                    <label for="name">Search for a blog...</label>
+                </div>
+                <div class="input-field col s12 center-align">
+                    <button class="btn-floating waves-effect waves-light z-depth-2 search-button" type="submit"
+                        name="action"><i class="large material-icons">search</i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}
