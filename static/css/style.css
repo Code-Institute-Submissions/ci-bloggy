@@ -1,12 +1,43 @@
+/* * Google Fonts import */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
+
+/* * Global font setting */
+html {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* * Navbar styling */
 nav {
     background-color: white;
     box-shadow: none;
+    line-height: 80px;
+}
+
+nav img {
+    padding: 7% 0 0 7%;
 }
 
 nav ul a {
     color: black;
 }
 
+nav ul a:hover {
+    color: rgb(21, 133, 226);
+    background-color: white;
+}
+
 nav ul a.login-register {
     margin-left: 50px;
+}
+
+nav .material-icons {
+    color: black;
+}
+
+/* * Custom media queries for smaller devices */
+@media only screen and (max-width: 600px) {
+    nav img {
+        width: 90%;
+        padding: 5% 0 0 0;
+    }
 }
