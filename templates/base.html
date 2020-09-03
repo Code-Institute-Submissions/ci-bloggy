@@ -1,40 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <title>{% block title %} {% endblock title %}</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <title>{% block title %} {% endblock title %}</title>
 </head>
+
 <body>
   <!-- * Nav bar -->
-    <nav>
-        <div class="nav-wrapper">
-          <a href="#!" class="brand-logo"><img src="{{ url_for('static', filename='img/logo.svg') }}" alt=""></a>
-          <a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-          <ul class="right hide-on-med-and-down">
-            <li><a href="">Home</a></li>
-            <li><a href="">Blogs</a></li>
-            <li><a href="" class="login-register">Login/Register</a></li>
-          </ul>
-        </div>
-      </nav>
-    <!-- * Mobile side nav bar -->
-      <ul class="sidenav" id="mobile">
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#!" class="brand-logo"><img src="{{ url_for('static', filename='img/logo.svg') }}" alt=""></a>
+      <a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
         <li><a href="">Home</a></li>
         <li><a href="">Blogs</a></li>
-        <li><a href="">Login/Register</a></li>
+        <li><a href="" class="login-register">Login/Register</a></li>
       </ul>
-    {% block main %}
-        
-    {% endblock main %}
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script>
-        M.AutoInit();
-    </script>
+    </div>
+  </nav>
+  <!-- * Mobile side nav bar -->
+  <ul class="sidenav" id="mobile">
+    <li><a href="">Home</a></li>
+    <li><a href="">Blogs</a></li>
+    <li><a href="">Login/Register</a></li>
+    <hr class="sidemenu-hr">
+    <br>
+    <div class="center-align"><img src="{{ url_for('static', filename='img/logo_greyscale.svg') }}" alt=""
+        class="sidemenu-logo"></div>
+  </ul>
+  {% block main %}
+
+  {% endblock main %}
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    M.AutoInit();
+  </script>
 </body>
+
 </html>
