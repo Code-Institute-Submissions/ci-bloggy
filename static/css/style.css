@@ -2,7 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
 
 /* * Global font setting */
-html {
+html, body {
+    width: 100%;
+    overflow-x: hidden;
     font-family: 'Noto Sans KR', sans-serif;
 }
 
@@ -73,6 +75,39 @@ hr.sidemenu-hr {
 
 .search-button:hover {
     background-color: #F1007C
+}
+
+/* * Blog posts styles */
+
+.recommended-blogs {
+    margin-top: 3rem;
+    margin-bottom: 1rem
+}
+
+.recommended-hr {
+    width: 50%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    height: 1px;
+    background-color: #1585E2
+}
+
+.card .card-image img {
+    display: inline;
+    height: 50%;
+}
+
+.card .card-content h4 {
+    font-weight: 700;
+}
+
+.card .read-time {
+    color: #7d7d7e;
+    padding-top: 10px;
+}
+
+.card-action .read-link {
+    color: #1585E2 !important;
 }
 
 /* * Custom media queries for smaller devices */
