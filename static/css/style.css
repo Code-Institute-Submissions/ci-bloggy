@@ -1,7 +1,7 @@
 /* * Google Fonts import */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
 
-/* * Global font setting */
+/* * Global font setting and overflow hide */
 html, body {
     width: 100%;
     overflow-x: hidden;
@@ -15,6 +15,7 @@ nav {
     line-height: 80px;
 }
 
+/* Logo styles */
 nav img {
     padding: 7% 0 0 7%;
 }
@@ -28,17 +29,21 @@ nav ul a:hover {
     background-color: white;
 }
 
+/* Push login/register futher right */
 nav ul a.login-register {
     margin-left: 50px;
 }
 
+/* Change hamburger menu colour */
 nav .material-icons {
     color: black;
 }
 
+/* Mobile menu logo width */
 img.sidemenu-logo {
     width: 50%;
 }
+
 
 hr.sidemenu-hr {
     width: 85%;
@@ -59,12 +64,13 @@ hr.sidemenu-hr {
     height: 50vh;
 }
 
-  /* label focus color */
-  .input-field input[type=text]:focus + label {
+/* label focus color for materialize input */
+.input-field input[type=text]:focus + label {
     color:#1585E2 !important;
   }
-  /* label underline focus color */
-  .input-field input[type=text]:focus {
+
+/* label underline focus color for materialize input  */
+.input-field input[type=text]:focus {
     border-bottom: 1px solid #1585E2 !important;
     box-shadow: 0 1px 0 0 #000;
   }
@@ -92,6 +98,7 @@ hr.sidemenu-hr {
     background-color: #1585E2
 }
 
+/* Recommended blogs cards width */
 .card .card-image img {
     display: inline;
     height: 50%;
@@ -109,6 +116,36 @@ hr.sidemenu-hr {
 .card-action .read-link {
     color: #1585E2 !important;
 }
+
+/* * Login page styles */
+
+.login-greeting {
+    padding-top: 2rem;
+}
+
+.login-form i {
+    color: #1585E2;
+}
+/* label focus color for materialize input*/
+.input-field input[type=password]:focus + label {
+    color:#1585E2 !important;
+  }
+
+/* label underline focus color for materialize input*/
+.input-field input[type=password]:focus {
+    border-bottom: 1px solid #1585E2 !important;
+    box-shadow: 0 1px 0 0 #000;
+  }
+
+/* icon prefix colour for materialize input */
+.input-field .prefix.active {
+    color: #1585E2;
+  }
+
+.login-button {
+    background-color: #1585E2;
+}
+
 
 /* * Custom media queries for smaller devices */
 @media only screen and (max-width: 600px) {
