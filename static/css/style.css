@@ -80,7 +80,7 @@ hr.sidemenu-hr {
 }
 
 .search-button:hover {
-    background-color: #F1007C
+    background-color: #F1007C;
 }
 
 /* * Blog posts styles */
@@ -117,7 +117,7 @@ hr.sidemenu-hr {
     color: #1585E2 !important;
 }
 
-/* * Login page styles */
+/* * Login/register page styles */
 
 .login-greeting {
     padding-top: 2rem;
@@ -142,10 +142,19 @@ hr.sidemenu-hr {
     color: #1585E2;
   }
 
-.login-button {
+.login-button,
+.register-button {
     background-color: #1585E2;
 }
 
+.login-button:hover,
+.register-button:hover {
+    background-color: #F1007C;
+}
+
+.dropdown-content li>span {
+    color: #1585E2;
+}
 
 /* * Custom media queries for smaller devices */
 @media only screen and (max-width: 600px) {
