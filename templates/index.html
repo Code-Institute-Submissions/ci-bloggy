@@ -48,57 +48,23 @@ Bloggy | Home
 <div class="row">
     <h4 class="recommended-blogs center-align">Blogs we love</h4>
     <hr class="recommended-hr">
+    {% for featured_post in featured_posts %}
     <div class="col s12 m4">
         <div class="card card-panel hoverable">
             <div class="card-image center-align">
-                <img src="https://media.ringofcork.ie/wp-content/uploads/2019/02/08221540/IMG_38171.jpg" class="card-img">
+                <img src="{{featured_post.image_url}}" class="card-img">
             </div>
             <div class="card-content">
-                <h4 class="card-title">Day at the beach</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse placerat leo eu risus
-                    fermentum tincidunt sit amet pulvinar sapien. Pellentesque habitant morbi tristique senectus et
-                    netus et malesuada fames ac turpis egestas.</p>
-                <p class="read-time">10 minute read</p>
+                <h4 class="card-title">{{featured_post.title}}</h4>
+                <p>{{featured_post.body|safe}}</p>
+                <p class="read-time">{{featured_post.read_time}}</p>
             </div>
             <div class="card-action">
                 <a href="#" class="read-link">Read</a>
             </div>
         </div>
     </div>
-    <div class="col s12 m4">
-        <div class="card card-panel hoverable">
-            <div class="card-image center-align">
-                <img src="https://media.ringofcork.ie/wp-content/uploads/2019/02/08221540/IMG_38171.jpg" class="card-img">
-            </div>
-            <div class="card-content">
-                <h4 class="card-title">Day at the beach</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse placerat leo eu risus
-                    fermentum tincidunt sit amet pulvinar sapien. Pellentesque habitant morbi tristique senectus et
-                    netus et malesuada fames ac turpis egestas.</p>
-                <p class="read-time">10 minute read</p>
-            </div>
-            <div class="card-action">
-                <a href="#" class="read-link">Read</a>
-            </div>
-        </div>
-    </div>
-    <div class="col s12 m4">
-        <div class="card card-panel hoverable">
-            <div class="card-image center-align">
-                <img src="https://media.ringofcork.ie/wp-content/uploads/2019/02/08221540/IMG_38171.jpg" class="card-img">
-            </div>
-            <div class="card-content">
-                <h4 class="card-title">Day at the beach</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse placerat leo eu risus
-                    fermentum tincidunt sit amet pulvinar sapien. Pellentesque habitant morbi tristique senectus et
-                    netus et malesuada fames ac turpis egestas.</p>
-                <p class="read-time">10 minute read</p>
-            </div>
-            <div class="card-action">
-                <a href="#" class="read-link">Read</a>
-            </div>
-        </div>
-    </div>
+    {% endfor %}
 </div>
 </main>
 {% endblock %}

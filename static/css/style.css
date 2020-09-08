@@ -99,10 +99,6 @@ hr.sidemenu-hr {
 }
 
 /* Recommended blogs cards width */
-.card .card-image img {
-    display: inline;
-    height: 50%;
-}
 
 .card .card-content h4 {
     font-weight: 700;
