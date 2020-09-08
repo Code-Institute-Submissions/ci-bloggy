@@ -4,6 +4,7 @@ from flask import (
     request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from flask_login import LoginManager, UserMixin
 # * Import env from env.py file
 if os.path.exists("env.py"):
     import env
@@ -15,6 +16,13 @@ app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
+'''Required code to initiate flask_login'''
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return mongo.db.users.find_one({user_id})
 
 '''Define index route'''
 @app.route('/')
@@ -26,6 +34,7 @@ def index():
 '''Define login route'''
 @app.route('/login')
 def login():
+    
     return render_template('login.html')
 
 '''Define register route'''
