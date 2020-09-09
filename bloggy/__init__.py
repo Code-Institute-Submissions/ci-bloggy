@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.config["MONO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.config["RECAPTCHA_PUBLIC_KEY"]=os.environ.get("RECAPTCHA_PUBLIC_KEY")
-app.config["RECAPTCHA_SECRET_KEY"]=os.environ.get("RECAPTCHA_SECRET_KEY")
+app.config["RECAPTCHA_PRIVATE_KEY"]=os.environ.get("RECAPTCHA_PRIVATE_KEY")
 app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
