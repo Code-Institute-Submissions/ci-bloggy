@@ -11,8 +11,8 @@ class RegisterForm(FlaskForm):
         'email', validators=[DataRequired(), 
                              Email(), 
                              InputRequired(message="This field is requried")])
-    blog_name = StringField(
-        'blog_name', validators=[DataRequired(), 
+    blog_title = StringField(
+        'blog_title', validators=[DataRequired(), 
                                         Length(min=5, max=35), 
                                         InputRequired(message="This field is requried")])
     blog_description = StringField(
