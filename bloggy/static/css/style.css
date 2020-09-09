@@ -153,6 +153,10 @@ p.small {
     color: #7d7d7e;
 }
 
+.g-recaptcha {
+    display: inline-block;
+}
+
 /* * Custom media queries for smaller devices */
 @media only screen and (max-width: 600px) {
     nav {

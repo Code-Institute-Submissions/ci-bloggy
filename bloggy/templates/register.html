@@ -49,6 +49,9 @@ Bloggy | Register
           {{ form.confirm_password(class_="form-control") }}
           <label for="confirm_password">Repeat Password</label>
         </div>
+        <div class="input-field col s12 center-align">
+          {{ form.recaptcha }}
+        </div>
         <div class="col s12 center-align">
           <button class="btn waves-effect register-button" type="submit" name="action">Register account</button>
           <p>Already registered with us? Click <a href="{{ url_for('login') }}">here</a> to log in</p>
