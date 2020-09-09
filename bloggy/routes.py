@@ -1,9 +1,10 @@
 from flask import (
     render_template, redirect,
-    request, session, url_for)
-from bloggy import app
+    request, session, url_for, flash)
+from bloggy import app, mongo, bcrypt
 from bloggy.forms import RegisterForm, LoginForm
-from bloggy.utilities import all_posts, featured_posts
+from bloggy.utilities import all_posts, featured_posts, existing_user, existing_email, existing_blog
+from slugify import slugify
 
 '''Define index route'''
 @app.route('/')
@@ -21,5 +22,27 @@ def login():
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
-        return redirect(url_for('register.html'), form=form)
+        if existing_user(form.username.data):
+            flash("Username already exists")
+            return redirect(url_for('register'))
+        elif existing_email(form.email.data):
+            flash("Email is already in use.")
+            return redirect(url_for('register'))
+        else:
+            hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+            register_user = {
+                "username": form.username.data,
+                "password": hashed_password,
+                "email": form.email.data,
+            }
+            registered_usr_id = mongo.db.users.insert_one(register_user)
+            register_blog = {
+                "owner_id": str(registered_usr_id.inserted_id),
+                "title": form.blog_title.data,
+                "title-slug": slugify(form.blog_title.data),
+                "description": form.blog_description.data
+            }
+            mongo.db.blogs.insert_one(register_blog)
+            flash("User & blog have been registered sucessfully")
+        return redirect(url_for('login'))
     return render_template('register.html', form=form)
