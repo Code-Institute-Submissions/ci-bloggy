@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}
+Bloggy | Register
+{% endblock title %}
+{% block main %}
+<header>
+  <div class="login-hero center-align">
+    <div class="row">
+      <h3 class="login-greeting">Hey there creator! Let's get you started!</h1>
+    </div>
+  </div>
+</header>
+<main>
+  <div class="row">
+    <form method="POST" action="{{ url_for('register') }}" class="col s12 m6 offset-m3 login-form">
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">account_circle</i>
+          {{ form.csrf_token }}
+          {{ form.username(class_="form-control") }}
+          {% if form.username.errors %}
+          <ul class="errors">{% for error in form.username.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+          {% endif %}
+          <label for="icon_prefix">Username</label>
+        </div>
+        <div class="input-field col s12">
+          <i class="material-icons prefix">mail</i>
+          {{ form.email(class_="form-control") }}
+          <label for="icon_prefix">Email</label>
+        </div>
+        <div class="input-field col s12">
+          <i class="material-icons prefix">description</i>
+          {{ form.blog_name(class_="form-control") }}
+          <label for="icon_prefix">Blog name</label>
+        </div>
+        <div class="input-field col s12">
+          <i class="material-icons prefix">description</i>
+          {{ form.blog_description(class_="form-control") }}
+          <label for="icon_prefix">Blog description</label>
+          <p class="small center-align">Give us a very brief description of what your blog's about</p>
+        </div>
+        <div class="input-field col s12">
+          <i class="material-icons prefix">lock</i>
+          {{ form.password(class_="form-control") }}
+          <label for="password">Password</label>
+        </div>
+        <div class="col s12 center-align">
+          <button class="btn waves-effect register-button" type="submit" name="action">Register account</button>
+          <p>Already registered with us? Click <a href="{{ url_for('login') }}">here</a> to log in</p>
+        </div>
+      </div>
+    </form>
+  </div>
+</main>
+{% endblock %}
