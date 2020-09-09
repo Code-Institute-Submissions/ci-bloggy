@@ -4,7 +4,6 @@ from flask import (
 from bloggy import app
 from bloggy.forms import RegisterForm, LoginForm
 from bloggy.utilities import all_posts, featured_posts
-from bloggy import mongo
 
 '''Define index route'''
 @app.route('/')
