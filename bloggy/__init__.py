@@ -2,6 +2,7 @@ import os
 from flask import Flask
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from flask_bcrypt import Bcrypt
 # * Import env from env.py file
 if os.path.exists("./env.py"):
     import env
@@ -14,6 +15,7 @@ app.config["RECAPTCHA_PRIVATE_KEY"]=os.environ.get("RECAPTCHA_PRIVATE_KEY")
 app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
+bcrypt = Bcrypt(app)
 
 from bloggy import routes
 
