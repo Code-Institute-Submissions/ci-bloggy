@@ -13,4 +13,4 @@ def existing_email(existing_email):
     return mongo.db.users.find_one({"email": existing_email})
 
 def existing_blog(existing_blog_name):
-    return mongo.db.blogs.find_one({"blog_name": existing_blog_name})
+    return mongo.db.blogs.find_one({"title-slug": existing_blog_name})
