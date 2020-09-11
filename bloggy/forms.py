@@ -1,20 +1,36 @@
+import re
 from flask_wtf import FlaskForm, RecaptchaField
 from wtforms import StringField, PasswordField
-from wtforms.validators import DataRequired, Length, InputRequired, Email, EqualTo
+from wtforms.validators import DataRequired, Length, InputRequired, Email, EqualTo, ValidationError
+from bloggy.utilities import existing_user, existing_email, existing_blog
+from slugify import slugify
 
 class RegisterForm(FlaskForm):
+    def username_check(form, username):
+        specials = re.compile("[@_!#$%^&*()<>?/\|}{~:]")
+        if specials.search(username.data) != None:
+            raise ValidationError('You cannot use special charachters such as [@_!#$%^&*()<>?/\|}{~:] in your username')
+        
+    def check_existing_blog(form, blog_title):
+        if existing_blog(slugify(form.blog_title.data)):
+            raise ValidationError('Great idea, but the blog whith such name already exists')
+        
+    def check_existing_email(form, email):
+        if existing_email(form.email.data):
+            raise ValidationError("This email address is already in use, please choose a different one")
+    
     username = StringField(
         'username', validators=[DataRequired(), 
                                 Length(min=5, max=35, message="Username should be between 5 and 35 charachters long"), 
-                                InputRequired(message="This field is requried")])
+                                InputRequired(message="This field is requried"), username_check])
     email = StringField(
         'email', validators=[DataRequired(), 
                              Email(), 
-                             InputRequired(message="This field is requried")])
+                             InputRequired(message="This field is requried"), check_existing_email])
     blog_title = StringField(
         'blog_title', validators=[DataRequired(), 
                                         Length(min=5, max=35), 
-                                        InputRequired(message="This field is requried")])
+                                        InputRequired(message="This field is requried"), check_existing_blog])
     blog_description = StringField(
         'blog_description', validators=[DataRequired(), 
             Length(min=5, max=200), 
