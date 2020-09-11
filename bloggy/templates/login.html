@@ -9,17 +9,19 @@ Bloggy | Log in
             <h3 class="login-greeting">Here we meet again...</h1>
         </div>
     </div>
+</header>
 <main>
     <div class="row">
       {% with messages = get_flashed_messages() %}
         {% if messages %}
-        <ul class=flashes>
+        <ul class="flashes center-align">
           {% for message in messages %}
-          <li>{{ message }}</li>
+          <li class="success-message">{{ message }}</li>
           {% endfor %}
         </ul>
         {% endif %}
         {% endwith %}
+      </row>
         <form class="col s12 m6 offset-m3 login-form">
           <div class="row">
             <div class="input-field col s12">

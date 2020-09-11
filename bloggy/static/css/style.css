@@ -151,6 +151,11 @@ hr.sidemenu-hr {
 p.small {
     font-size: small;
     color: #7d7d7e;
+    margin: 0;
+}
+
+.success-message {
+    color: #1585E2;
 }
 
 .g-recaptcha {

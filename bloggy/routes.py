@@ -36,6 +36,6 @@ def register():
                 "description": form.blog_description.data
             }
             mongo.db.blogs.insert_one(register_blog)
-            flash("User & blog have been registered sucessfully")
+            flash("You have been sucessfully registered, you can now log in below")
             return redirect(url_for('login'))
     return render_template('register.html', form=form)
