@@ -6,7 +6,7 @@ from bloggy import mongo
 all_posts = mongo.db.posts.find() # Fetch all posts from the database
 featured_posts = mongo.db.posts.find({"is_featured": True}) # Fetch featured posts from database
 
-def existing_user(existing_username):
+def check_username(existing_username):
     return mongo.db.users.find_one({"username": existing_username.lower()})
 
 def existing_email(existing_email):
