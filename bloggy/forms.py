@@ -2,7 +2,7 @@ import re
 from flask_wtf import FlaskForm, RecaptchaField
 from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired, Length, InputRequired, Email, EqualTo, ValidationError
-from bloggy.utilities import existing_user, existing_email, existing_blog
+from bloggy.utilities import check_username, existing_email, existing_blog
 from slugify import slugify
 
 class RegisterForm(FlaskForm):
@@ -10,6 +10,8 @@ class RegisterForm(FlaskForm):
         specials = re.compile("[@_!#$%^&*()<>?/\|}{~:]")
         if specials.search(username.data) != None:
             raise ValidationError('You cannot use special charachters such as [@_!#$%^&*()<>?/\|}{~:] in your username')
+        if check_username:
+            raise ValidationError('User with such username already exists, please choose a different one')
         
     def check_existing_blog(form, blog_title):
         if existing_blog(slugify(form.blog_title.data)):
