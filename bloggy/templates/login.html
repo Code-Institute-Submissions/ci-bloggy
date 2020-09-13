@@ -4,42 +4,51 @@ Bloggy | Log in
 {% endblock title %}
 {% block main %}
 <header>
-    <div class="login-hero center-align">
-        <div class="row">
-            <h3 class="login-greeting">Here we meet again...</h1>
-        </div>
+  <div class="login-hero center-align">
+    <div class="row">
+      <h3 class="login-greeting">Here we meet again...</h1>
     </div>
+  </div>
 </header>
 <main>
-    <div class="row">
-      {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul class="flashes center-align">
-          {% for message in messages %}
-          <li class="success-message">{{ message }}</li>
-          {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-      </row>
-        <form class="col s12 m6 offset-m3 login-form">
-          <div class="row">
-            <div class="input-field col s12">
-              <i class="material-icons prefix">account_circle</i>
-              <input id="icon_prefix" type="text" class="validate">
-              <label for="icon_prefix">Username</label>
-            </div>
-            <div class="input-field col s12">
-              <i class="material-icons prefix">lock</i>
-              <input id="password" type="password" class="validate">
-              <label for="password">Password</label>
-            </div>
-            <div class="col s12 center-align">
-                <button class="btn waves-effect login-button" type="submit" name="action">Log in</button>
-                <p>Not registered with us yet? You can sign up by clicking <a href="{{ url_for('register') }}">here</a></p>
-            </div>
-          </div>
-        </form>
+  <div class="row">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flashes center-align">
+      {% for message in messages %}
+      <li class="success-message">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    </row>
+    <form method="POST" action="{{ url_for('login') }}" class="col s12 m6 offset-m3 login-form">
+      {{ form.csrf_token }}
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">account_circle</i>
+          {{form.username}}
+          {% if form.username.errors %}
+          <ul class="center-align">{% for error in form.username.errors %}<li style="font-size: small; color: #F1007C;">
+              {{ error }}</li>{% endfor %}</ul>
+          {% endif %}
+          <label for="icon_prefix">Username</label>
+        </div>
+        <div class="input-field col s12">
+          <i class="material-icons prefix">lock</i>
+          {{form.password}}
+          {% if form.password.errors %}
+          <ul class="center-align">{% for error in form.password.errors %}<li style="font-size: small; color: #F1007C;">
+              {{ error }}</li>{% endfor %}</ul>
+          {% endif %}
+          <label for="password">Password</label>
+        </div>
+        <div class="col s12 center-align">
+          <button class="btn waves-effect login-button" type="submit" name="action">Log in</button>
+          <p>Not registered with us yet? You can sign up by clicking <a href="{{ url_for('register') }}">here</a></p>
+        </div>
       </div>
+    </form>
+  </div>
 </main>
 {% endblock %}
