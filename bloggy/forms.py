@@ -4,13 +4,14 @@ from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired, Length, InputRequired, Email, EqualTo, ValidationError
 from bloggy.utilities import check_username, existing_email, existing_blog
 from slugify import slugify
+from bloggy import bcrypt
 
 class RegisterForm(FlaskForm):
     def username_check(form, username):
         specials = re.compile("[@_!#$%^&*()<>?/\|}{~:]")
         if specials.search(username.data) != None:
             raise ValidationError('You cannot use special charachters such as [@_!#$%^&*()<>?/\|}{~:] in your username')
-        if check_username:
+        if check_username(form.username.data):
             raise ValidationError('User with such username already exists, please choose a different one')
         
     def check_existing_blog(form, blog_title):
@@ -48,12 +49,15 @@ class RegisterForm(FlaskForm):
     recaptcha = RecaptchaField()
     
 class LoginForm(FlaskForm):
+    def username_validation(form, username):
+        if check_username(form.username.data) is None:
+            raise ValidationError('User with such username does not exist')
+            
     username = StringField(
-        'username', validators=[DataRequired(), 
-                                Length(min=5, max=35, message="Username should be between 5 and 35 charachters long"), 
-                                InputRequired(message="This field is requried")])
+        'username', validators=[DataRequired(),
+                                Length(min=5, max=35, message="Username should be between 5 and 35 charachters long"),
+                                InputRequired(message="This field is requried"), username_validation])
     password = PasswordField(
         'password', validators=[
             DataRequired(), 
-            Length(min=5, max=35, message="Username should be between 5 and 35 charachters long"), 
             InputRequired(message="This field is requried")])

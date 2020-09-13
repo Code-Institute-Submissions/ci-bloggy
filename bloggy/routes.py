@@ -3,7 +3,7 @@ from flask import (
     request, session, url_for, flash)
 from bloggy import app, mongo, bcrypt
 from bloggy.forms import RegisterForm, LoginForm
-from bloggy.utilities import all_posts, featured_posts
+from bloggy.utilities import all_posts, featured_posts, check_username
 from slugify import slugify
 
 '''Define index route'''
@@ -15,6 +15,15 @@ def index():
 @app.route('/login', methods=("GET", "POST"))
 def login():
     form = LoginForm()
+    if form.validate_on_submit():
+        user = check_username(form.username.data)
+        user_password = user["password"]
+        input_password = form.password.data
+        if bcrypt.check_password_hash(user_password, input_password):
+            flash ("Your username and password DO match and you've been logged in")
+            return redirect(url_for('login'))
+        else:
+            flash ("Details incorrect")
     return render_template('login.html', form=form)
 
 '''Define register route'''
