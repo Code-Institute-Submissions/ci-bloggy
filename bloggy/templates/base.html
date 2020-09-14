@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  {% block external_css %} {% endblock external_css %}
   <title>{% block title %} {% endblock title %}</title>
 </head>
 
@@ -18,9 +19,9 @@
       <a href="#!" class="brand-logo"><img src="{{ url_for('static', filename='img/logo.svg') }}" alt=""></a>
       <a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="">Home</a></li>
-        <li><a href="">Blogs</a></li>
-        <li><a href="" class="login-register">Login</a></li>
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        <li><a href="{{ url_for('index') }}">Blogs</a></li>
+        <li><a href="{{ url_for('login') }}" class="login-register">Login</a></li>
       </ul>
     </div>
   </nav>
