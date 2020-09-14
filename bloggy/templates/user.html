@@ -3,5 +3,24 @@
 Bloggy | User
 {% endblock title %}
 {% block main %}
-
+<header>
+    <div class="row">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class="flashes center-align">
+          {% for message in messages %}
+          <li class="success-message">{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        </row>
+    <div class="login-hero center-align">
+      <div class="row">
+        <h3>Hi there {{ session["user"] }}!</h3>
+        <a class="waves-effect btn user-page-button" href="{{ url_for('new_post') }}">Write a new post</a>
+      </div>
+    </div>
+  </header>
+    
 {% endblock %}
