@@ -3,8 +3,8 @@ from bloggy import mongo
 # -------------------------------------- #
 #    Database filtering/query helpers    #
 # -------------------------------------- #
-all_posts = mongo.db.posts.find() # Fetch all posts from the database
-featured_posts = mongo.db.posts.find({"is_featured": True}) # Fetch featured posts from database
+all_posts = list(mongo.db.posts.find()) # Fetch all posts from the database
+featured_posts = list(mongo.db.posts.find({"is_featured": True})) # Fetch featured posts from database
 
 def check_username(username):
     return mongo.db.users.find_one({"username": username.lower()})
