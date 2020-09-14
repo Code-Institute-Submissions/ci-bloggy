@@ -14,14 +14,17 @@ def index():
 '''Define login route'''
 @app.route('/login', methods=("GET", "POST"))
 def login():
+    if "user" in session:
+        return redirect(url_for('user_page'))
     form = LoginForm()
     if form.validate_on_submit():
         user = check_username(form.username.data)
         user_password = user["password"]
         input_password = form.password.data
         if bcrypt.check_password_hash(user_password, input_password):
-            flash ("Your username and password DO match and you've been logged in")
-            return redirect(url_for('login'))
+            session["user"] = form.username.data.lower()
+            flash ("You've been logged in successfully")
+            return redirect(url_for('user_page'))
         else:
             flash ("Details incorrect")
     return render_template('login.html', form=form)
@@ -48,3 +51,7 @@ def register():
             flash("You have been sucessfully registered, you can now log in below")
             return redirect(url_for('login'))
     return render_template('register.html', form=form)
+
+@app.route('/user')
+def user_page():
+    return render_template('user.html')
