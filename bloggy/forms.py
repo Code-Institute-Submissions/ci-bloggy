@@ -1,7 +1,7 @@
 import re
 from flask_wtf import FlaskForm, RecaptchaField
 from wtforms import StringField, PasswordField
-from wtforms.validators import DataRequired, Length, InputRequired, Email, EqualTo, ValidationError
+from wtforms.validators import DataRequired, Length, InputRequired, Email, EqualTo, ValidationError, URL
 from bloggy.utilities import check_username, existing_email, existing_blog
 from slugify import slugify
 from bloggy import bcrypt
@@ -61,3 +61,12 @@ class LoginForm(FlaskForm):
         'password', validators=[
             DataRequired(), 
             InputRequired(message="This field is requried")])
+    
+class NewPostForm(FlaskForm):
+    title = StringField('title', validators=[DataRequired(),
+                                Length(min=5, max=150, message="Title should be at least 5 letters long"),
+                                InputRequired(message="This field is requried")])
+    image_url = StringField('image_url', validators=[DataRequired(),
+                                URL(message="Please input a valid URL"),
+                                InputRequired(message="This field is requried")])
+    
