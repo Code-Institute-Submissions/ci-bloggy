@@ -139,12 +139,14 @@ hr.sidemenu-hr {
   }
 
 .login-button,
-.register-button {
+.register-button,
+.user-page-button {
     background-color: #1585E2;
 }
 
 .login-button:hover,
-.register-button:hover {
+.register-button:hover
+.user-page-button:hover {
     background-color: #F1007C;
 }
 
@@ -160,6 +162,12 @@ p.small {
 
 .g-recaptcha {
     display: inline-block;
+}
+
+/* * User page styles */
+
+.new-post-title {
+    font-size: 32px !important;
 }
 
 /* * Custom media queries for smaller devices */

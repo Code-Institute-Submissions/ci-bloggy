@@ -48,8 +48,10 @@ Bloggy | Home
 <div class="row">
     <h4 class="recommended-blogs center-align">Blogs we love</h4>
     <hr class="recommended-hr">
+</div>
+<div class="row">
     {% for featured_post in featured_posts %}
-    <div class="col s12 m4">
+    <div class="col s12 l4">
         <div class="card card-panel hoverable">
             <div class="card-image center-align">
                 <img src="{{featured_post.image_url}}" class="card-img">
