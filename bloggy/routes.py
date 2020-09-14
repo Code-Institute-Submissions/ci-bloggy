@@ -2,9 +2,10 @@ from flask import (
     render_template, redirect,
     request, session, url_for, flash)
 from bloggy import app, mongo, bcrypt
-from bloggy.forms import RegisterForm, LoginForm
+from bloggy.forms import RegisterForm, LoginForm, NewPostForm
 from bloggy.utilities import all_posts, featured_posts, check_username
 from slugify import slugify
+from datetime import datetime
 
 '''Define index route'''
 @app.route('/')
@@ -55,3 +56,31 @@ def register():
 @app.route('/user')
 def user_page():
     return render_template('user.html')
+
+@app.route('/user/new_post', methods=("GET", "POST"))
+def new_post():
+    form = NewPostForm()
+    if session.get("user") != None:
+        current_user = session.get("user")
+        post_body = request.form.get('post_body')
+        datetimesting = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        user_id = str(mongo.db.users.find_one({"username": current_user})["_id"])
+        blog_id = mongo.db.blogs.find_one({"owner_id": user_id})["_id"]
+        if form.validate_on_submit():
+            if post_body != '':
+                new_post = {
+                    "blog_id": str(blog_id),
+                    "title": form.title.data,
+                    "body": post_body,
+                    "last_updated": datetimesting,
+                    "category": "Test",
+                    "read_time": "10 minutes",
+                    "is_featured": False,
+                    "image_url": form.image_url.data
+                }
+                mongo.db.posts.insert_one(new_post)
+                flash ("Your post has been submitted successfully.")
+                return redirect(url_for('user_page'))
+    return render_template('new_post.html', form=form)
+    flash('You must be logged in to create a new post')
+    return redirect(url_for('login'))
