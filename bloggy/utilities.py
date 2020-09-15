@@ -14,3 +14,9 @@ def existing_email(existing_email):
 
 def existing_blog(existing_blog_name):
     return mongo.db.blogs.find_one({"title-slug": existing_blog_name})
+
+def get_current_user_id(username):
+    return mongo.db.users.find_one({"username": username})["_id"]
+
+def get_users_posts(user_id):
+    return list(mongo.db.posts.find({"user_id": user_id}))
