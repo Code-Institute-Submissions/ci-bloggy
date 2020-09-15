@@ -6,7 +6,7 @@ Bloggy | Register
 <header>
   <div class="login-hero center-align">
     <div class="row">
-      <h3 class="login-greeting">Hey there creator! Let's get you started!</h1>
+      <h3>Hey there creator! Let's get you started!</h3>
     </div>
   </div>
 </header>
@@ -17,11 +17,15 @@ Bloggy | Register
       <div class="row">
         {% with messages = get_flashed_messages() %}
         {% if messages %}
-        <ul class=flashes>
-          {% for message in messages %}
-          <li>{{ message }}</li>
-          {% endfor %}
-        </ul>
+        <div class="row center-align">
+          <div class="col s12">
+              <ul class="flashes">
+                  {% for message in messages %}
+                  <li class="flash-message">{{ message }}</li>
+                  {% endfor %}
+              </ul>
+          </div>
+      </div>
         {% endif %}
         {% endwith %}
         <div class="input-field col s12">
@@ -59,7 +63,7 @@ Bloggy | Register
               style="font-size: small; color: #F1007C;">{{ error }}</li>{% endfor %}</ul>
           {% endif %}
           <label for="icon_prefix">Blog description</label>
-          <p class="small center-align">Give us a very brief description of what your blog's about</p>
+          <p class="center-align small">Give us a very brief description of what your blog's about</p>
         </div>
         <div class="input-field col s12">
           <i class="material-icons prefix">lock</i>

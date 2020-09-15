@@ -146,7 +146,7 @@ hr.sidemenu-hr {
 
 .login-button:hover,
 .register-button:hover
-.user-page-button:hover 
+.user-page-button:hover {
     background-color: #F1007C;
 }
 
@@ -156,7 +156,7 @@ p.small {
     margin: 0;
 }
 
-.success-message {
+.flash-message {
     text-align: center;
     color: #1585E2;
 }

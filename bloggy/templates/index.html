@@ -4,17 +4,19 @@ Bloggy | Home
 {% endblock title %}
 {% block main %}
 <header>
-    <div class="row">
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul class="flashes center-align">
-            {% for message in messages %}
-            <li class="success-message">{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-        </row>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="row center-align">
+        <div class="col s12">
+            <ul class="flashes">
+                {% for message in messages %}
+                <li class="flash-message">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+    {% endwith %}
         <div class="row index-hero">
             <div class="valign-wrapper">
                 <div class="col s12 m6 l7 hide-on-small-only">
@@ -73,7 +75,7 @@ Bloggy | Home
                     <p class="read-time">{{featured_post.read_time}}</p>
                 </div>
                 <div class="card-action">
-                    <a href="#" class="read-link">Read</a>
+                    <a href="#" class="card-link">Read</a>
                 </div>
             </div>
         </div>

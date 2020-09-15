@@ -11,17 +11,16 @@ Bloggy | Log in
   </div>
 </header>
 <main>
-  <div class="row">
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     <ul class="flashes center-align">
       {% for message in messages %}
-      <li class="success-message">{{ message }}</li>
+      <li class="flash-message">{{ message }}</li>
       {% endfor %}
     </ul>
     {% endif %}
     {% endwith %}
-    </row>
+    <div class="row">
     <form method="POST" action="{{ url_for('login') }}" class="col s12 m6 offset-m3 login-form">
       {{ form.csrf_token }}
       <div class="row">
@@ -49,6 +48,7 @@ Bloggy | Log in
         </div>
       </div>
     </form>
+  </div>
   </div>
 </main>
 {% endblock %}
