@@ -22,5 +22,24 @@ Bloggy | User
       </div>
     </div>
   </header>
+  <main>
+    {% for post in users_posts %}
+        <div class="col s12 l4">
+            <div class="card card-panel hoverable">
+                <div class="card-image center-align">
+                    <img src="{{post.image_url}}" class="card-img">
+                </div>
+                <div class="card-content">
+                    <h4 class="card-title">{{post.title}}</h4>
+                    <p>{{post.body|safe}}</p>
+                    <p class="read-time">{{post.read_time}}</p>
+                </div>
+                <div class="card-action">
+                    <a href="#" class="read-link">Read</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+  </main>
     
 {% endblock %}
