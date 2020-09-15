@@ -3,7 +3,7 @@ from flask import (
     request, session, url_for, flash)
 from bloggy import app, mongo, bcrypt
 from bloggy.forms import RegisterForm, LoginForm, NewPostForm
-from bloggy.utilities import all_posts, featured_posts, check_username
+from bloggy.utilities import all_posts, featured_posts, check_username, get_current_user_id, get_users_posts
 from slugify import slugify
 from datetime import datetime
 
@@ -30,6 +30,13 @@ def login():
             flash ("Details incorrect")
     return render_template('login.html', form=form)
 
+'''Define log out route'''
+@app.route('/logout')
+def logout():
+    session.pop("user")
+    flash("You have been logged out successfully")
+    return redirect(url_for('index'))
+
 '''Define register route'''
 @app.route('/register', methods=("GET", "POST"))
 def register():
@@ -55,7 +62,10 @@ def register():
 
 @app.route('/user')
 def user_page():
-    return render_template('user.html')
+    current_user = session.get("user")
+    current_user_id = str(get_current_user_id(current_user))
+    users_posts = get_users_posts(current_user_id)
+    return render_template('user.html', users_posts=users_posts)
 
 @app.route('/user/new_post', methods=("GET", "POST"))
 def new_post():
@@ -64,12 +74,13 @@ def new_post():
         current_user = session.get("user")
         post_body = request.form.get('post_body')
         datetimesting = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-        user_id = str(mongo.db.users.find_one({"username": current_user})["_id"])
-        blog_id = mongo.db.blogs.find_one({"owner_id": user_id})["_id"]
+        user_id = str(get_current_user_id(current_user))
+        blog_id = str(mongo.db.blogs.find_one({"owner_id": user_id})["_id"])
         if form.validate_on_submit():
             if post_body != '':
                 new_post = {
-                    "blog_id": str(blog_id),
+                    "blog_id": blog_id,
+                    "user_id": user_id,
                     "title": form.title.data,
                     "body": post_body,
                     "last_updated": datetimesting,
