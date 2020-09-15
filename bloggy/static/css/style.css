@@ -109,7 +109,7 @@ hr.sidemenu-hr {
     padding-top: 10px;
 }
 
-.card-action .read-link {
+.card-action .card-link {
     color: #1585E2 !important;
 }
 
@@ -146,7 +146,7 @@ hr.sidemenu-hr {
 
 .login-button:hover,
 .register-button:hover
-.user-page-button:hover {
+.user-page-button:hover 
     background-color: #F1007C;
 }
 
@@ -157,6 +157,7 @@ p.small {
 }
 
 .success-message {
+    text-align: center;
     color: #1585E2;
 }
 
@@ -168,6 +169,22 @@ p.small {
 
 .new-post-title {
     font-size: 32px !important;
+}
+
+/* * Single post page styles */
+
+.title,
+.post-content {
+    margin-bottom: 0;
+    margin-left: 10px
+}
+
+.image-container {
+    height: 50vh;
+    margin: 0;
+    overflow: hidden;
+    margin: 10px;
+    border-radius: 20px;
 }
 
 /* * Custom media queries for smaller devices */
