@@ -92,8 +92,10 @@ def new_post():
                 mongo.db.posts.insert_one(new_post)
                 flash ("Your post has been submitted successfully.")
                 return redirect(url_for('user_page'))
-    flash('You must be logged in to create a new post')
-    return redirect(url_for('login'))
+    else:
+        flash('You must be logged in to create a new post')
+        return redirect(url_for('login'))
+    return render_template('new_post.html', form=form)
 
 '''Define single post page route'''
 @app.route('/posts/<post_id>')
