@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+Bloggy | User
+{% endblock title %}
+{% block main %}
+<header>
+      <div class="row title">
+        <h2 class="post-title">{{post.title}}</h2>
+      </div>
+  </header>
+  <main>
+    <div class="row">
+      <div class="image-container">
+        <img class="materialboxed" width="100%" src="{{post.image_url}}" alt="Image for {{ post.title }}">
+      </div>
+      <div class="post-content">
+        {{post.body|safe}}
+      </div>
+    </div>
+  </main>
+    
+{% endblock %}

@@ -4,25 +4,27 @@ Bloggy | User
 {% endblock title %}
 {% block main %}
 <header>
-    <div class="row">
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul class="flashes center-align">
-          {% for message in messages %}
-          <li class="success-message">{{ message }}</li>
-          {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-        </row>
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <div class="row center-align">
+  <ul class="flashes">
+      {% for message in messages %}
+      <li class="success-message">{{ message }}</li>
+      {% endfor %}
+  </ul>
+  </div>
+  {% endif %}
+  {% endwith %}
     <div class="login-hero center-align">
       <div class="row">
         <h3>Hi there {{ session["user"] }}!</h3>
         <a class="waves-effect btn user-page-button" href="{{ url_for('new_post') }}">Write a new post</a>
+        <h4>These are your posts</h2>
       </div>
     </div>
   </header>
   <main>
+    <div class="row">
     {% for post in users_posts %}
         <div class="col s12 l4">
             <div class="card card-panel hoverable">
@@ -35,11 +37,14 @@ Bloggy | User
                     <p class="read-time">{{post.read_time}}</p>
                 </div>
                 <div class="card-action">
-                    <a href="#" class="read-link">Read</a>
+                    <a href="{{url_for('post_page', post_id=post._id)}}" class="card-link">Read</a>
+                    <a href="#" class="card-link">Edit</a>
+                    <a href="#" class="red-text text-darken-1">Delete</a>
                 </div>
             </div>
         </div>
         {% endfor %}
+        </div>
   </main>
     
 {% endblock %}
