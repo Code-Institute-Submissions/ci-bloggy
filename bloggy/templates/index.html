@@ -4,69 +4,80 @@ Bloggy | Home
 {% endblock title %}
 {% block main %}
 <header>
-<div class="row index-hero">
-    <div class="valign-wrapper">
-        <div class="col s12 m6 l7 hide-on-small-only">
-            <h1>Home of the blogs you love.</h1>
-            <form class="col s12">
-                <div class="row">
-                    <div class="input-field col s6 search-field">
-                        <input id="name" type="text" class="validate">
-                        <label for="name">Search for a blog...</label>
-                    </div>
-                    <div class="input-field col s6">
-                        <button class="btn-floating waves-effect waves-light z-depth-2 search-button" type="submit"
-                            name="action"><i class="large material-icons">search</i></button>
-                    </div>
+    <div class="row">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class="flashes center-align">
+            {% for message in messages %}
+            <li class="success-message">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        </row>
+        <div class="row index-hero">
+            <div class="valign-wrapper">
+                <div class="col s12 m6 l7 hide-on-small-only">
+                    <h1>Home of the blogs you love.</h1>
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s6 search-field">
+                                <input id="name" type="text" class="validate">
+                                <label for="name">Search for a blog...</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <button class="btn-floating waves-effect waves-light z-depth-2 search-button"
+                                    type="submit" name="action"><i class="large material-icons">search</i></button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </div>
-        <div class="col s12 m6 l5 hide-on-small-only">
-            <img src="{{ url_for('static', filename='img/index-background.svg') }}" alt="">
-        </div>
-    </div>
-</div>
-<div class="row hide-on-med-and-up mobile-hero">
-    <div class="col s12 show-on-small">
-        <h1>Home of the blogs you love.</h1>
-        <form>
-            <div class="row">
-                <div class="input-field col s12 search-field">
-                    <input id="name" type="text" class="validate">
-                    <label for="name">Search for a blog...</label>
-                </div>
-                <div class="input-field col s12 center-align">
-                    <button class="btn-floating waves-effect waves-light z-depth-2 search-button" type="submit"
-                        name="action"><i class="large material-icons">search</i></button>
+                <div class="col s12 m6 l5 hide-on-small-only">
+                    <img src="{{ url_for('static', filename='img/index-background.svg') }}" alt="">
                 </div>
             </div>
-        </form>
-    </div>
-</div>
+        </div>
+        <div class="row hide-on-med-and-up mobile-hero">
+            <div class="col s12 show-on-small">
+                <h1>Home of the blogs you love.</h1>
+                <form>
+                    <div class="row">
+                        <div class="input-field col s12 search-field">
+                            <input id="name" type="text" class="validate">
+                            <label for="name">Search for a blog...</label>
+                        </div>
+                        <div class="input-field col s12 center-align">
+                            <button class="btn-floating waves-effect waves-light z-depth-2 search-button" type="submit"
+                                name="action"><i class="large material-icons">search</i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
 </header>
 <main>
-<div class="row">
-    <h4 class="recommended-blogs center-align">Blogs we love</h4>
-    <hr class="recommended-hr">
-</div>
-<div class="row">
-    {% for featured_post in featured_posts %}
-    <div class="col s12 l4">
-        <div class="card card-panel hoverable">
-            <div class="card-image center-align">
-                <img src="{{featured_post.image_url}}" class="card-img">
-            </div>
-            <div class="card-content">
-                <h4 class="card-title">{{featured_post.title}}</h4>
-                <p>{{featured_post.body|safe}}</p>
-                <p class="read-time">{{featured_post.read_time}}</p>
-            </div>
-            <div class="card-action">
-                <a href="#" class="read-link">Read</a>
+    <div class="row">
+        <h4 class="recommended-blogs center-align">Blogs we love</h4>
+        <hr class="recommended-hr">
+    </div>
+    <div class="row">
+        {% for featured_post in featured_posts %}
+        <div class="col s12 l4">
+            <div class="card card-panel hoverable">
+                <div class="card-image center-align">
+                    <img src="{{featured_post.image_url}}" class="card-img">
+                </div>
+                <div class="card-content">
+                    <h4 class="card-title">{{featured_post.title}}</h4>
+                    <p>{{featured_post.body|safe}}</p>
+                    <p class="read-time">{{featured_post.read_time}}</p>
+                </div>
+                <div class="card-action">
+                    <a href="#" class="read-link">Read</a>
+                </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
 </main>
 {% endblock %}
