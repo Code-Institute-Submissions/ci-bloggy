@@ -1,7 +1,7 @@
 from flask import (
     render_template, redirect,
     request, session, url_for, flash)
-from bloggy import app, mongo, bcrypt
+from bloggy import app, mongo, bcrypt, ObjectId
 from bloggy.forms import RegisterForm, LoginForm, NewPostForm
 from bloggy.utilities import all_posts, featured_posts, check_username, get_current_user_id, get_users_posts
 from slugify import slugify
@@ -50,7 +50,7 @@ def register():
             }
             registered_usr_id = mongo.db.users.insert_one(register_user)
             register_blog = {
-                "owner_id": str(registered_usr_id.inserted_id),
+                "owner_id": ObjectId(registered_usr_id.inserted_id),
                 "title": form.blog_title.data,
                 "title-slug": slugify(form.blog_title.data),
                 "description": form.blog_description.data
@@ -63,7 +63,7 @@ def register():
 @app.route('/user')
 def user_page():
     current_user = session.get("user")
-    current_user_id = str(get_current_user_id(current_user))
+    current_user_id = ObjectId(get_current_user_id(current_user))
     users_posts = get_users_posts(current_user_id)
     return render_template('user.html', users_posts=users_posts)
 
@@ -74,8 +74,8 @@ def new_post():
         current_user = session.get("user")
         post_body = request.form.get('post_body')
         datetimesting = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-        user_id = str(get_current_user_id(current_user))
-        blog_id = str(mongo.db.blogs.find_one({"owner_id": user_id})["_id"])
+        user_id = ObjectId(get_current_user_id(current_user))
+        blog_id = ObjectId(mongo.db.blogs.find_one({"owner_id": user_id})["_id"])
         if form.validate_on_submit():
             if post_body != '':
                 new_post = {
@@ -95,3 +95,9 @@ def new_post():
     return render_template('new_post.html', form=form)
     flash('You must be logged in to create a new post')
     return redirect(url_for('login'))
+
+'''Define single post page route'''
+@app.route('/posts/<post_id>')
+def post_page(post_id):
+    post = mongo.db.posts.find_one({'_id': ObjectId(post_id)})
+    return render_template('post.html', post=post)
