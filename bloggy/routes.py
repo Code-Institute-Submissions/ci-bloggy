@@ -92,7 +92,6 @@ def new_post():
                 mongo.db.posts.insert_one(new_post)
                 flash ("Your post has been submitted successfully.")
                 return redirect(url_for('user_page'))
-    return render_template('new_post.html', form=form)
     flash('You must be logged in to create a new post')
     return redirect(url_for('login'))
 
