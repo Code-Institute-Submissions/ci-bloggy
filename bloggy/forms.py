@@ -1,7 +1,7 @@
 import re
 from flask_wtf import FlaskForm, RecaptchaField
 from wtforms import StringField, PasswordField
-from wtforms.validators import DataRequired, Length, InputRequired, Email, EqualTo, ValidationError, URL
+from wtforms.validators import DataRequired, Length, InputRequired, Email, EqualTo, ValidationError, URL, Regexp
 from bloggy.utilities import check_username, existing_email, existing_blog
 from slugify import slugify
 from bloggy import bcrypt
@@ -69,4 +69,9 @@ class PostForm(FlaskForm):
     image_url = StringField('image_url', validators=[DataRequired(),
                                 URL(message="Please input a valid URL"),
                                 InputRequired(message="This field is requried")])
-    
+    tags = StringField('tags', validators=[DataRequired(),
+                                Regexp("\w+, \w", message="Tags must be separated by commas, you must also have at least 2 tags"),
+                                InputRequired(message="This field is requried")])
+    read_time = StringField('read_time', validators=[DataRequired(),
+                                Length(min=1, max=3, message="Please input reading time between 1-999 minutes"),
+                                InputRequired(message="This field is requried")])

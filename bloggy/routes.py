@@ -84,8 +84,8 @@ def new_post():
                     "title": form.title.data,
                     "body": post_body,
                     "last_updated": datetimesting,
-                    "category": "Test",
-                    "read_time": "10 minutes",
+                    "tags": form.tags.data,
+                    "read_time": form.read_time.data + " minutes",
                     "is_featured": False,
                     "image_url": form.image_url.data
                 }
