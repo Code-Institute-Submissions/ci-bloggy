@@ -2,7 +2,7 @@ from flask import (
     render_template, redirect,
     request, session, url_for, flash)
 from bloggy import app, mongo, bcrypt, ObjectId
-from bloggy.forms import RegisterForm, LoginForm, NewPostForm
+from bloggy.forms import RegisterForm, LoginForm, PostForm
 from bloggy.utilities import all_posts, featured_posts, check_username, get_current_user_id, get_users_posts
 from slugify import slugify
 from datetime import datetime
@@ -69,7 +69,7 @@ def user_page():
 
 @app.route('/user/new_post', methods=("GET", "POST"))
 def new_post():
-    form = NewPostForm()
+    form = PostForm()
     if session.get("user") != None:
         current_user = session.get("user")
         post_body = request.form.get('post_body')

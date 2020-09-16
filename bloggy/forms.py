@@ -62,7 +62,7 @@ class LoginForm(FlaskForm):
             DataRequired(), 
             InputRequired(message="This field is requried")])
     
-class NewPostForm(FlaskForm):
+class PostForm(FlaskForm):
     title = StringField('title', validators=[DataRequired(),
                                 Length(min=5, max=150, message="Title should be at least 5 letters long"),
                                 InputRequired(message="This field is requried")])
