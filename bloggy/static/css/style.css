@@ -169,6 +169,7 @@ p.small {
 
 .new-post-title {
     font-size: 32px !important;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 /* * Single post page styles */
