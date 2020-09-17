@@ -32,6 +32,7 @@ nav ul a:hover {
 /* Push login/register futher right */
 nav ul a.login-register {
     margin-left: 50px;
+    font-size: ;
 }
 
 /* Change hamburger menu colour */
@@ -47,6 +48,10 @@ img.sidemenu-logo {
 
 hr.sidemenu-hr {
     width: 85%;
+}
+
+.search-field {
+    padding-top: 50px;
 }
 
 /* * Index.html syles */
@@ -138,15 +143,11 @@ hr.sidemenu-hr {
     color: #1585E2;
   }
 
-.login-button,
-.register-button,
-.user-page-button {
+.bloggy-button {
     background-color: #1585E2;
 }
 
-.login-button:hover,
-.register-button:hover
-.user-page-button:hover {
+.bloggy-button:hover {
     background-color: #F1007C;
 }
 
@@ -217,7 +218,11 @@ p.small {
         margin-top: 10px;
     }
     .search-field {
+        padding-top: 0;
         margin-bottom: 0;
+    }
+    h1 {
+        font-size: 3rem;
     }
 
 }
