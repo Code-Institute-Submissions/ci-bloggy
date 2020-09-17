@@ -102,3 +102,38 @@ def new_post():
 def post_page(post_id):
     post = mongo.db.posts.find_one({'_id': ObjectId(post_id)})
     return render_template('post.html', post=post)
+
+'''Define edit post route'''
+@app.route('/posts/<post_id>/edit', methods=("GET", "POST"))
+def edit_post(post_id):
+    form = PostForm()
+    post = mongo.db.posts.find_one({'_id': ObjectId(post_id)})
+    current_user = session.get("user")
+    if current_user == None:
+        flash("You don't have permission to edit this post")
+        return redirect(url_for('index'))
+    else:
+        current_user_id = ObjectId(get_current_user_id(current_user))
+    post_creator_id = mongo.db.posts.find_one({'_id': ObjectId(post_id)})["user_id"]
+    if current_user_id != post_creator_id:
+        flash("You don't have permission to edit this post")
+        return redirect(url_for('user_page'))
+    if current_user == None:
+        flash("You don't have permission to edit this post")
+        return redirect(url_for('user_page'))
+    if form.validate_on_submit():
+        datetimesting = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        post_body = request.form.get('post_body')
+        update_post = {
+                    "title": form.title.data,
+                    "body": post_body,
+                    "last_updated": datetimesting,
+                    "tags": form.tags.data,
+                    "read_time": form.read_time.data + " minutes",
+                    "is_featured": False,
+                    "image_url": form.image_url.data
+                }
+        mongo.db.posts.update(post, update_post)
+        flash("Post updated successfully")
+        return redirect(url_for('user_page'))
+    return render_template('edit_post.html', post=post, form=form)
