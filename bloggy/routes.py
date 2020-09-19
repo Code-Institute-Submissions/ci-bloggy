@@ -243,8 +243,7 @@ def delete_post(post_id):
         return redirect(url_for('user_page'))
     '''Else user is authorised to delete so
     proceed & redirect user back to home page'''
-    else:
-        mongo.db.posts.delete_one(post)
-        flash("Post deleted successfully")
-        return redirect(url_for('user_page'))
+    mongo.db.posts.delete_one(post)
+    flash("Post deleted successfully")
+    return redirect(url_for('user_page'))
     return render_template('user_page')
