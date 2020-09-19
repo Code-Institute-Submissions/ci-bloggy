@@ -9,11 +9,11 @@ featured_posts = list(mongo.db.posts.find({"is_featured": True})) # Fetch featur
 def check_username(username):
     return mongo.db.users.find_one({"username": username.lower()})
 
-def existing_email(existing_email):
-    return mongo.db.users.find_one({"email": existing_email})
+def check_email(email):
+    return mongo.db.users.find_one({"email": email})
 
-def existing_blog(existing_blog_name):
-    return mongo.db.blogs.find_one({"title-slug": existing_blog_name})
+def check_existing_blog(blog_name):
+    return mongo.db.blogs.find_one({"title-slug": blog_name})
 
 def get_current_user_id(username):
     return mongo.db.users.find_one({"username": username})["_id"]

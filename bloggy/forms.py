@@ -2,7 +2,7 @@ import re
 from flask_wtf import FlaskForm, RecaptchaField
 from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired, Length, InputRequired, Email, EqualTo, ValidationError, URL, Regexp
-from bloggy.utilities import check_username, existing_email, existing_blog
+from bloggy.utilities import check_username, check_email, check_existing_blog
 from slugify import slugify
 from bloggy import bcrypt
 
@@ -15,11 +15,11 @@ class RegisterForm(FlaskForm):
             raise ValidationError('User with such username already exists, please choose a different one')
         
     def check_existing_blog(form, blog_title):
-        if existing_blog(slugify(form.blog_title.data)):
+        if check_existing_blog(slugify(form.blog_title.data)):
             raise ValidationError('Great idea, but the blog whith such name already exists')
         
-    def check_existing_email(form, email):
-        if existing_email(form.email.data):
+    def check_check_existing_email(form, email):
+        if check_email(form.email.data):
             raise ValidationError("This email address is already in use, please choose a different one")
     
     username = StringField(
@@ -29,7 +29,7 @@ class RegisterForm(FlaskForm):
     email = StringField(
         'email', validators=[DataRequired(), 
                              Email(), 
-                             InputRequired(message="This field is requried"), check_existing_email])
+                             InputRequired(message="This field is requried"), check_check_existing_email])
     blog_title = StringField(
         'blog_title', validators=[DataRequired(), 
                                         Length(min=5, max=35), 
