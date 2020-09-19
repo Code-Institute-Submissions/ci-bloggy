@@ -65,10 +65,14 @@ For readers Bloggy is a way to read about their favourite topics and for creator
 
 ### Skeleton
 
+Balsamiq Wireframes has been used to develop wireframes for this website.
+
+Wireframes are available under links below and are stored within _wireframes_ folder inside _docs_ folder.
+
 
 ### Surface
 
-![Project colour scheme](./bloggy/static/img/docs/colour-scheme.png "Project colour scheme")
+![Project colour scheme](./bloggy/docs/colour-scheme.png "Project colour scheme")
 
 | Colour name       | Colour RGB Code    
 | -------------     |:-------------:| 
@@ -85,13 +89,38 @@ Font used on the website is Noto Sans KR from Google Fonts - https://fonts.googl
 
 🟢 **Home page**
 
+Home page displays all posts to the user and user is able to search for specific post based on ... tbc .... and is able to sort all posts by: Newest first, oldest first, title (A-Z) & title (Z-A).
+User can also click on 'Start creating' to either log in (if not already logged in) or to be redirected to 'New post' page.
+
 🟢 **Login/Register page**
+
+Anyone can register an user account and a blog for free.
+
+When registering user is prompted for their personal details - username, email address and password as well as details about their blog such as blog title and description.
+
+User can also log into their account which if successfull will bring them to the user page.
 
 🟢 **User page**
 
+User page (profile page) is where user view all their posts (in a card view), read the post, edit the post or delete the post.
+
 🟢 **New post page**
 
+Registered users can create new posts by clicking 'Start creating' on home page or by clicking 'New Post' on their user page.
+
+To create new post, users need to:
+1. Give the post a title, 
+2. Add some text to the body of the blog, 
+3. Add short description (blurb), 
+4. Provide a URL to an image to be used as a cover
+5. Provide at least 2 tags to the post 
+6. Add in approximate reading time
+
 🟢 **Edit post page**
+
+Only post creator (& superuser Admin) can edit a post.
+
+The form is exactly the same as outlined in [new post page](#new-post-page) section above.
 
 ### Features Left to Implement
 
