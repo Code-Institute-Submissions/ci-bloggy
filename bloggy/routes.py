@@ -114,7 +114,7 @@ def edit_post(post_id):
         return redirect(url_for('index'))
     else:
         current_user_id = ObjectId(get_current_user_id(current_user))
-    post_creator_id = mongo.db.posts.find_one({'_id': ObjectId(post_id)})["user_id"]
+        post_creator_id = mongo.db.posts.find_one({'_id': ObjectId(post_id)})["user_id"]
     if current_user_id != post_creator_id:
         flash("You don't have permission to edit this post")
         return redirect(url_for('user_page'))
@@ -124,7 +124,12 @@ def edit_post(post_id):
     if form.validate_on_submit():
         datetimesting = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
         post_body = request.form.get('post_body')
+        current_user = session.get("user")
+        user_id = ObjectId(get_current_user_id(current_user))
+        blog_id = ObjectId(mongo.db.blogs.find_one({"owner_id": user_id})["_id"])
         update_post = {
+                    "blog_id": blog_id,
+                    "user_id": user_id,
                     "title": form.title.data,
                     "body": post_body,
                     "last_updated": datetimesting,
@@ -137,3 +142,25 @@ def edit_post(post_id):
         flash("Post updated successfully")
         return redirect(url_for('user_page'))
     return render_template('edit_post.html', post=post, form=form)
+
+@app.route('/posts/<post_id>/delete', methods=("GET", "POST"))
+def delete_post(post_id):
+    post = mongo.db.posts.find_one({'_id': ObjectId(post_id)})
+    current_user = session.get("user")
+    if current_user == None:
+        flash("You don't have permission to delete this post")
+        return redirect(url_for('index'))
+    else:
+        current_user_id = ObjectId(get_current_user_id(current_user))
+        post_creator_id = mongo.db.posts.find_one({'_id': ObjectId(post_id)})["user_id"]
+    if current_user_id != post_creator_id:
+        flash("You don't have permission to delete this post")
+        return redirect(url_for('user_page'))
+    if current_user == None:
+        flash("You don't have permission to delete this post")
+        return redirect(url_for('user_page'))
+    else:
+        mongo.db.posts.delete_one(post)
+        flash ("Post deleted successfully")
+        return redirect(url_for('user_page'))
+    return render_template('user_page')
