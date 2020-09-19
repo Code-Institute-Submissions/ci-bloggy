@@ -21,7 +21,10 @@ Bloggy | User
     <div class="row">
       <h3>Hi there {{ session["user"] }}!</h3>
       <a class="waves-effect btn bloggy-button" href="{{ url_for('new_post') }}">Write a new post</a>
-      <h4>These are your posts</h2>
+      {% if users_posts.count("_id") > 0 %}
+      <h4>These are your posts</h4>
+      {% endif %}
+      <h4>You've no published posts</h4>
     </div>
   </div>
 </header>
