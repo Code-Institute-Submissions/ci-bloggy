@@ -205,8 +205,16 @@ p.small {
     padding: .1em .25em;
     font-size: 150%;
 }
-li.active {
+
+.pagination>ul>li.active {
     background-color: #F1007C;
+}
+
+ul.select-dropdown>li>span {
+    color: #1585E2;
+}
+.select-wrapper input.select-dropdown:focus {
+    border-bottom: 1px solid #1585E2; 
 }
 
 /* * Custom media queries for smaller devices */

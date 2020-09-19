@@ -37,25 +37,20 @@ Bloggy | Home
         <div class="col s12 m6 l7">
             <h1>Home of the blogs you love.</h1>
             {% if session.user != Null %}
-                <a class="waves-effect btn-large bloggy-button" href="{{ url_for('new_post') }}">Write a new post</a>
-                {% endif %}
-                {% if session.user == Null %}
-                <a class="waves-effect btn-large bloggy-button" href="{{ url_for('login') }}">Start creating</a>
-                {% endif %}
+            <a class="waves-effect btn-large bloggy-button" href="{{ url_for('new_post') }}">Write a new post</a>
+            {% endif %}
+            {% if session.user == Null %}
+            <a class="waves-effect btn-large bloggy-button" href="{{ url_for('login') }}">Start creating</a>
+            {% endif %}
         </div>
 </header>
 <main>
-    <div class="row search-field">
-        <form class="col s12 l6 offset-s3 offset-l4">
-            <div class="row">
-                <div class="input-field col s6">
-                    <input id="name" type="text" class="validate">
-                    <label for="name">Search for a blog...</label>
-                </div>
-                <div class="input-field col s6">
-                    <button class="btn-floating waves-effect waves-light z-depth-2 search-button" type="submit"
-                        name="action"><i class="large material-icons">search</i></button>
-                </div>
+    <div class="row search-field center-align">
+        <form class="col s12 l6 offset-l3">
+            <div class="input-field">
+                <input id="search" type="search" required>
+                <label class="label" for="search">Search for blog posts...</label>
+                <a class="waves-effect waves-light btn bloggy-button">Search</a>
             </div>
         </form>
     </div>
@@ -65,7 +60,20 @@ Bloggy | Home
         {% endif %}
         {{ pagination.links }}
     </div>
-        {% for post in all_posts %}
+    <div class="row">
+        <div class="col s12 l4 offset-l4">
+            <form action="">
+                <select name="sort">
+                    <option value="" disabled selected>Sort posts by:</option>
+                    <option value="1">Most recent first</option>
+                    <option value="2">Oldest first</option>
+                    <option value="3">Title (A-Z)</option>
+                    <option value="3">Title (Z-A)</option>
+                </select>
+            </form>
+        </div>
+    </div>
+    {% for post in all_posts %}
     <div class="row">
         <div class="col s12 l4">
             <div class="card card-panel hoverable">
