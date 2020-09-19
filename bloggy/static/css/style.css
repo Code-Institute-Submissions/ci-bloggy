@@ -81,12 +81,19 @@ hr.sidemenu-hr {
     box-shadow: 0 1px 0 0 #000;
   }
 
-.search-button {
+.page-footer {
     background-color: #1585E2;
+    color: white;
+    padding: 20px 0 20px 0;
 }
 
-.search-button:hover {
-    background-color: #F1007C;
+.page-footer .footer-copyright {
+    background-color: transparent;
+}
+
+.page-footer .fab {
+    font-size: 2rem;
+    padding: 10px
 }
 
 /* * Blog posts styles */

@@ -3,6 +3,9 @@
 Bloggy | Home
 {% endblock title %}
 {% block main %}
+{% block external_css %} 
+<script src="https://kit.fontawesome.com/2f59828723.js" crossorigin="anonymous"></script>
+{% endblock external_css %}
 <header>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -94,3 +97,15 @@ Bloggy | Home
     </div>
 </main>
 {% endblock %}
+{% block footer %}
+<footer class="page-footer center-align">
+    <div class="footer-copyright">
+      <div class="container">
+      © 2020 Ivan Branimir Skoric
+      <br>
+      <a class="grey-text text-lighten-4" href="https://www.linkedin.com/in/ivan-branimir-skoric-2804b2123/"><i class="fab fa-linkedin"></i></a>
+      <a class="grey-text text-lighten-4" href="https://github.com/ib-skoric"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+  </footer>
+{% endblock footer %}
