@@ -1,3 +1,6 @@
+// Initialise Materialize JS
+M.AutoInit();
+
 // Initialise summernote editor
 $('#summernote').summernote({
     tabsize: 2,
