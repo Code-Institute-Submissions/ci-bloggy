@@ -57,12 +57,6 @@ Bloggy | Home
             </div>
         </form>
     </div>
-    <div class="row center-align">
-        {% if all_posts.count() > 1 %}
-        {{ pagination.info }}
-        {% endif %}
-        {{ pagination.links }}
-    </div>
     <div class="row">
         <div class="col s12 l4 offset-l4">
             <form action="">
@@ -76,8 +70,8 @@ Bloggy | Home
             </form>
         </div>
     </div>
-    {% for post in all_posts %}
     <div class="row">
+    {% for post in all_posts %}
         <div class="col s12 l4">
             <div class="card card-panel hoverable">
                 <div class="card-image center-align">
@@ -89,11 +83,17 @@ Bloggy | Home
                     <p class="read-time">{{post.read_time}}</p>
                 </div>
                 <div class="card-action">
-                    <a href="#" class="card-link">Read</a>
+                    <a href="{{url_for('post_page', post_id=post._id)}}" class="card-link">Read</a>
                 </div>
             </div>
         </div>
         {% endfor %}
+    </div>
+    <div class="row center-align">
+        {% if all_posts.count() > 1 %}
+        {{ pagination.info }}
+        {% endif %}
+        {{ pagination.links }}
     </div>
 </main>
 {% endblock %}
