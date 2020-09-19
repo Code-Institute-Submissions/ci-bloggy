@@ -4,10 +4,12 @@ Bloggy | {{post.title}}
 {% endblock title %}
 {% block main %}
 <header>
+  <!-- Post title -->
       <div class="row title">
         <h2 class="post-title">{{post.title}}</h2>
       </div>
   </header>
+  <!-- Post content -->
   <main>
     <div class="row">
       <div class="image-container">
@@ -18,5 +20,4 @@ Bloggy | {{post.title}}
       </div>
     </div>
   </main>
-    
 {% endblock %}

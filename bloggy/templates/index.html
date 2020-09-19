@@ -4,9 +4,12 @@ Bloggy | Home
 {% endblock title %}
 {% block main %}
 {% block external_css %} 
+<!-- Fontawesome CDN only used for footer icons -->
 <script src="https://kit.fontawesome.com/2f59828723.js" crossorigin="anonymous"></script>
 {% endblock external_css %}
+<!-- Page header -->
 <header>
+    <!-- Flash messages section -->
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     <div class="row center-align">
@@ -20,6 +23,7 @@ Bloggy | Home
     </div>
     {% endif %}
     {% endwith %}
+    <!-- Hero/Jumbotron section -->
     <div class="row index-hero">
         <div class="valign-wrapper">
             <div class="col s12 m6 l7 hide-on-small-only">
@@ -48,6 +52,7 @@ Bloggy | Home
         </div>
 </header>
 <main>
+    <!-- Search and filter -->
     <div class="row search-field center-align">
         <form class="col s12 l6 offset-l3">
             <div class="input-field">
@@ -70,6 +75,7 @@ Bloggy | Home
             </form>
         </div>
     </div>
+    <!-- All posts cards section -->
     <div class="row">
     {% for post in all_posts %}
         <div class="col s12 l4">
@@ -89,6 +95,7 @@ Bloggy | Home
         </div>
         {% endfor %}
     </div>
+    <!-- Pagination -->
     <div class="row center-align">
         {% if all_posts.count() > 1 %}
         {{ pagination.info }}
@@ -97,6 +104,7 @@ Bloggy | Home
     </div>
 </main>
 {% endblock %}
+<!-- Footer -->
 {% block footer %}
 <footer class="page-footer center-align">
     <div class="footer-copyright">

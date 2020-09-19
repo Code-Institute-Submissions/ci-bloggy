@@ -10,7 +10,9 @@ Bloggy | New Post
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 {% endblock external_css %}
 {% block main %}
+<!-- Page header -->
 <header>
+    <!-- Flash messages section -->
     <div class="row">
         {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -29,6 +31,7 @@ Bloggy | New Post
         </div>
 </header>
 <main>
+    <!-- Register form -->
     <div class="row">
         <form class="col s12" method="POST" action="{{ url_for('new_post') }}">
             {{ form.csrf_token }}
@@ -94,7 +97,6 @@ Bloggy | New Post
             </div>
     </form>
 </div>
-
 </main>
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 {% endblock %}

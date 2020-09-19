@@ -3,6 +3,7 @@
 Bloggy | Register
 {% endblock title %}
 {% block main %}
+<!-- Page header -->
 <header>
   <div class="login-hero center-align">
     <div class="row">
@@ -11,6 +12,7 @@ Bloggy | Register
   </div>
 </header>
 <main>
+  <!-- Register form -->
   <div class="row">
     <form method="POST" action="{{ url_for('register') }}" class="col s12 m6 offset-m3 login-form">
       {{ form.csrf_token }}

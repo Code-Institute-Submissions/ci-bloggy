@@ -45,17 +45,15 @@
     <div class="center-align"><img src="{{ url_for('static', filename='img/logo_greyscale.svg') }}" alt=""
         class="sidemenu-logo"></div>
   </ul>
+  <!-- Main content from other tempaltes -->
   {% block main %}
 
   {% endblock main %}
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script>
-    M.AutoInit();
-  </script>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
   {% block footer %}
 
   {% endblock footer %}
 </body>
-
 </html>

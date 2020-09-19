@@ -4,6 +4,7 @@ Bloggy | User
 {% endblock title %}
 {% block main %}
 <header>
+  <!-- Flash messages section -->
   {% with messages = get_flashed_messages() %}
   {% if messages %}
   <div class="row center-align">
@@ -17,6 +18,7 @@ Bloggy | User
   </div>
   {% endif %}
   {% endwith %}
+  <!-- Header section -->
   <div class="login-hero center-align">
     <div class="row">
       <h3>Hi there {{ session["user"] }}!</h3>
@@ -28,6 +30,7 @@ Bloggy | User
     </div>
   </div>
 </header>
+<!-- User's posts cards section -->
 <main>
   <div class="row">
     {% for post in users_posts %}

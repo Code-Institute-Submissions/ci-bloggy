@@ -3,6 +3,7 @@
 Bloggy | Log in
 {% endblock title %}
 {% block main %}
+<!-- Page header -->
 <header>
   <div class="login-hero center-align">
     <div class="row">
@@ -11,6 +12,7 @@ Bloggy | Log in
   </div>
 </header>
 <main>
+  <!-- Flash messages section -->
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     <ul class="flashes center-align">
@@ -20,6 +22,7 @@ Bloggy | Log in
     </ul>
     {% endif %}
     {% endwith %}
+    <!-- Login form -->
     <div class="row">
     <form method="POST" action="{{ url_for('login') }}" class="col s12 m6 offset-m3 login-form">
       {{ form.csrf_token }}
