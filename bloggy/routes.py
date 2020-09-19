@@ -6,11 +6,16 @@ from bloggy.forms import RegisterForm, LoginForm, PostForm
 from bloggy.utilities import all_posts, featured_posts, check_username, get_current_user_id, get_users_posts
 from slugify import slugify
 from datetime import datetime
+from flask_paginate import Pagination, get_page_parameter
 
 '''Define index route'''
 @app.route('/')
 def index():
-    return render_template('index.html', all_posts=all_posts, featured_posts=featured_posts)
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page=6
+    all_posts = mongo.db.posts.find().skip((page-1) * per_page).limit(per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=all_posts.count(), record_name='posts')
+    return render_template('index.html', all_posts=all_posts, pagination=pagination)
 
 '''Define login route'''
 @app.route('/login', methods=("GET", "POST"))

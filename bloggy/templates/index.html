@@ -17,26 +17,32 @@ Bloggy | Home
     </div>
     {% endif %}
     {% endwith %}
-        <div class="row index-hero">
-            <div class="valign-wrapper">
-                <div class="col s12 m6 l7 hide-on-small-only">
-                    <h1>Home of the blogs you love.</h1>
-                    {% if session.user != Null %}
-                    <a class="waves-effect btn-large bloggy-button" href="{{ url_for('new_post') }}">Write a new post</a>
-                    {% endif %}
-                    {% if session.user == Null %}
-                    <a class="waves-effect btn-large bloggy-button" href="{{ url_for('login') }}">Start creating</a>
-                    {% endif %}
-                </div>
-                <div class="col s12 m6 l5 hide-on-small-only">
-                    <img src="{{ url_for('static', filename='img/index-background.svg') }}" alt="">
-                </div>
+    <div class="row index-hero">
+        <div class="valign-wrapper">
+            <div class="col s12 m6 l7 hide-on-small-only">
+                <h1>Home of the blogs you love.</h1>
+                {% if session.user != Null %}
+                <a class="waves-effect btn-large bloggy-button" href="{{ url_for('new_post') }}">Write a new post</a>
+                {% endif %}
+                {% if session.user == Null %}
+                <a class="waves-effect btn-large bloggy-button" href="{{ url_for('login') }}">Start creating</a>
+                {% endif %}
+            </div>
+            <div class="col s12 m6 l5 hide-on-small-only">
+                <img src="{{ url_for('static', filename='img/index-background.svg') }}" alt="">
             </div>
         </div>
-        <div class="row show-on-small hide-on-med-and-up center-align">
-            <div class="col s12 m6 l7">
-                <h1>Home of the blogs you love.</h1>
-            </div>
+    </div>
+    <div class="row show-on-small hide-on-med-and-up center-align">
+        <div class="col s12 m6 l7">
+            <h1>Home of the blogs you love.</h1>
+            {% if session.user != Null %}
+                <a class="waves-effect btn-large bloggy-button" href="{{ url_for('new_post') }}">Write a new post</a>
+                {% endif %}
+                {% if session.user == Null %}
+                <a class="waves-effect btn-large bloggy-button" href="{{ url_for('login') }}">Start creating</a>
+                {% endif %}
+        </div>
 </header>
 <main>
     <div class="row search-field">
@@ -47,23 +53,29 @@ Bloggy | Home
                     <label for="name">Search for a blog...</label>
                 </div>
                 <div class="input-field col s6">
-                    <button class="btn-floating waves-effect waves-light z-depth-2 search-button"
-                        type="submit" name="action"><i class="large material-icons">search</i></button>
+                    <button class="btn-floating waves-effect waves-light z-depth-2 search-button" type="submit"
+                        name="action"><i class="large material-icons">search</i></button>
                 </div>
             </div>
         </form>
     </div>
+    <div class="row center-align">
+        {% if all_posts.count() > 1 %}
+        {{ pagination.info }}
+        {% endif %}
+        {{ pagination.links }}
+    </div>
+        {% for post in all_posts %}
     <div class="row">
-        {% for featured_post in featured_posts %}
         <div class="col s12 l4">
             <div class="card card-panel hoverable">
                 <div class="card-image center-align">
-                    <img src="{{featured_post.image_url}}" class="card-img">
+                    <img src="{{post.image_url}}" class="card-img">
                 </div>
                 <div class="card-content">
-                    <h4 class="card-title">{{featured_post.title}}</h4>
-                    <p>{{featured_post.body|safe}}</p>
-                    <p class="read-time">{{featured_post.read_time}}</p>
+                    <h4 class="card-title">{{post.title}}</h4>
+                    <p>{{post.body|safe}}</p>
+                    <p class="read-time">{{post.read_time}}</p>
                 </div>
                 <div class="card-action">
                     <a href="#" class="card-link">Read</a>

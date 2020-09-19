@@ -52,6 +52,7 @@ hr.sidemenu-hr {
 
 .search-field {
     padding-top: 50px;
+    margin-bottom: 0;
 }
 
 /* * Index.html syles */
@@ -187,6 +188,25 @@ p.small {
     overflow: hidden;
     margin: 10px;
     border-radius: 20px;
+}
+
+/* ! Required CSS For Flask-paginate */
+
+.pagination-page-info {
+    padding: .6em;
+    padding-left: 0;
+    margin: .5em;
+    margin-left: 0;
+    font-size: 12px;
+}
+.pagination-page-info b {
+    color: black;
+    padding-left: 2px;
+    padding: .1em .25em;
+    font-size: 150%;
+}
+li.active {
+    background-color: #F1007C;
 }
 
 /* * Custom media queries for smaller devices */
