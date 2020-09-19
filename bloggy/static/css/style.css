@@ -25,14 +25,13 @@ nav ul a {
 }
 
 nav ul a:hover {
-    color: 1585E2;
+    color: #1585E2;
     background-color: white;
 }
 
 /* Push login/register futher right */
 nav ul a.login-register {
     margin-left: 50px;
-    font-size: ;
 }
 
 /* Change hamburger menu colour */
