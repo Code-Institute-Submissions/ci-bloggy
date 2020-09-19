@@ -25,7 +25,6 @@
         <li><a href="{{ url_for('logout') }}" class="login-register">Log out</a></li>
         {% endif %}
         {% if session.user == Null %}
-        <li><a href="{{ url_for('login') }}">Discover</a></li>
         <li><a href="{{ url_for('login') }}" class="login-register">Log in/Register</a></li>
         {% endif %}
       </ul>
@@ -39,7 +38,6 @@
         <li><a href="{{ url_for('logout') }}" class="login-register">Log out</a></li>
         {% endif %}
         {% if session.user == Null %}
-        <li><a href="{{ url_for('login') }}">Discover</a></li>
         <li><a href="{{ url_for('login') }}" class="login-register">Log in/Register</a></li>
         {% endif %}
     <hr class="sidemenu-hr">
