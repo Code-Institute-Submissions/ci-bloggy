@@ -32,6 +32,18 @@ def index():
         pagination=pagination)
 
 
+@app.route('/search', methods=("GET", "POST"))
+def search():
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 6
+    search_request = request.form.get("search")
+    posts = mongo.db.posts.find({"$text": {"$search": search_request}}).skip((page-1) * per_page).limit(per_page)
+    pagination = Pagination(
+        page=page, per_page=per_page,
+        total=posts.count(), record_name='posts')
+    return render_template('search.html', posts=posts, pagination=pagination)
+
+
 @app.route('/login', methods=("GET", "POST"))
 def login():
     '''Define login route'''

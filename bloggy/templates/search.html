@@ -77,7 +77,8 @@ Bloggy | Home
     </div>
     <!-- All posts cards section -->
     <div class="row">
-    {% for post in all_posts %}
+    {% if posts.count() > 1%}
+    {% for post in posts %}
         <div class="col s12 l4">
             <div class="card card-panel hoverable">
                 <div class="card-image center-align">
@@ -94,10 +95,16 @@ Bloggy | Home
             </div>
         </div>
         {% endfor %}
+        {% endif %}
+        {% if posts.count() == 0 %}
+        <div class="center-align">
+            <h3>No posts found</h3>
+        </div>
+        {% endif %}
     </div>
     <!-- Pagination -->
     <div class="row center-align">
-        {% if all_posts.count() > 1 %}
+        {% if posts.count() > 1%}
         {{ pagination.info }}
         {% endif %}
         {{ pagination.links }}
