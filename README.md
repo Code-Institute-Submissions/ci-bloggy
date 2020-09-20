@@ -89,7 +89,7 @@ Font used on the website is Noto Sans KR from Google Fonts - https://fonts.googl
 
 🟢 **Home page**
 
-Home page displays all posts to the user and user is able to search for specific post based on ... tbc .... and is able to sort all posts by: Newest first, oldest first, title (A-Z) & title (Z-A).
+Home page displays all posts to the user and user is able to search for specific post based on title, description or body of the post and is able to sort all posts by: Newest first, oldest first, title (A-Z), title (Z-A) & popularity (based on number of views).
 User can also click on 'Start creating' to either log in (if not already logged in) or to be redirected to 'New post' page.
 
 🟢 **Login/Register page**
@@ -98,7 +98,7 @@ Anyone can register an user account and a blog for free.
 
 When registering user is prompted for their personal details - username, email address and password as well as details about their blog such as blog title and description.
 
-User can also log into their account which if successfull will bring them to the user page.
+User can also log into their account which if successful will bring them to the user page.
 
 🟢 **User page**
 
@@ -120,7 +120,7 @@ To create new post, users need to:
 
 Only post creator (& superuser Admin) can edit a post.
 
-The form is exactly the same as outlined in [new post page](#new-post-page) section above.
+The form is exactly the same as outlined in [new post page](#new-post-page) section above but it is pre-filled with post data pulled from the database.
 
 ### Features Left to Implement
 
@@ -147,6 +147,25 @@ The form is exactly the same as outlined in [new post page](#new-post-page) sect
 
 
 ## Deployment
+
+### To deploy locally
+
+Pre-requirements to deploy this project are:
+1. You must have [Python3](https://www.python.org/downloads/) installed as well as [PIP](https://pip.pypa.io/en/stable/installing/) to install all dependencies
+2. A code editor of your choice such as [VSCode](https://code.visualstudio.com/) or [Atom](https://atom.io/). 
+3. [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) to pull data from github
+4. [MongoDB](https://www.mongodb.com/) to store data into the database (note you'll need to create one on your own using details provided below)
+
+Once all this is in place follow the steps below:
+1. Clone this git repo using GIT CLI:
+    *  `git clone https://github.com/ib-skoric/ci-bloggy.git`
+2. Create `env.py` file that contains correct MONGO_URI and login credentials as well as all SECRET KEY values required for CAPTCHA & other modules
+3. Run `FLASK_APP=run.py` & `FLASK_ENV=development` or alternatively create a `flaskenv` file with these commands
+4. Install all required modules from the `requirements.txt` file:
+    * `sudo -H pip3 -r requirements.txt`
+5. Sign up for a free MongoDB account via this [link](https://www.mongodb.com/) and create a new collection called __bloggy__ (note all lowercase letters)
+
+#### Collection structure 
 
 
 ## Credits
