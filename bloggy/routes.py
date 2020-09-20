@@ -11,7 +11,7 @@ from bloggy.utilities import (all_posts, featured_posts,
                               get_users_posts)
 
 
-@app.route('/')
+@app.route('/', methods=("GET", "POST"))
 def index():
     '''Define index/home page route'''
     page = request.args.get(get_page_parameter(), type=int, default=1)
@@ -22,14 +22,25 @@ def index():
     Solution for this was found here:
     https://stackoverflow.com/questions/54053873/implementation-of-pagination-using-flask-paginate-pymongo
     '''
-    all_posts = mongo.db.posts.find().skip((page-1) * per_page).limit(per_page)
+    get_all_posts_pagination = mongo.db.posts.find().skip((page-1) * per_page).limit(per_page)
+    if request.form.get('sort') == "1":
+        all_posts = get_all_posts_pagination.sort("last_updated", -1)
+    if request.form.get('sort') == "2":
+        all_posts = get_all_posts_pagination.sort("last_updated", 1)
+    if request.form.get('sort') == "3":
+        all_posts = get_all_posts_pagination.sort("title", 1)
+    if request.form.get('sort') == "4":
+        all_posts = get_all_posts_pagination.sort("title", -1)
+    if request.form.get('sort') is None:
+        all_posts = get_all_posts_pagination
+    sorting_value = request.form.get('sort')
     # Define pagination
     pagination = Pagination(
         page=page, per_page=per_page,
         total=all_posts.count(), record_name='posts')
     return render_template(
         'index.html', all_posts=all_posts,
-        pagination=pagination)
+        pagination=pagination, sorting_value=sorting_value)
 
 
 @app.route('/search', methods=("GET", "POST"))
@@ -37,11 +48,11 @@ def search():
     page = request.args.get(get_page_parameter(), type=int, default=1)
     per_page = 6
     search_request = request.form.get("search")
-    posts = mongo.db.posts.find({"$text": {"$search": search_request}}).skip((page-1) * per_page).limit(per_page)
+    all_posts = mongo.db.posts.find({"$text": {"$search": search_request}}).skip((page-1) * per_page).limit(per_page)
     pagination = Pagination(
         page=page, per_page=per_page,
-        total=posts.count(), record_name='posts')
-    return render_template('search.html', posts=posts, pagination=pagination)
+        total=all_posts.count(), record_name='all_posts')
+    return render_template('index.html', all_posts=all_posts, pagination=pagination, search_request=search_request)
 
 
 @app.route('/login', methods=("GET", "POST"))
