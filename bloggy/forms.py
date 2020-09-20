@@ -108,6 +108,13 @@ class PostForm(FlaskForm):
             message="Title should be at least 5 letters long"),
         InputRequired(
             message="This field is requried")])
+    description = StringField('description', validators=[
+        DataRequired(),
+        Length(
+            min=10, max=200, message="Description should be"
+            "between 10 and 200 characters long"),
+        InputRequired(
+            message="This field is requried")])
     image_url = StringField('image_url', validators=[
         DataRequired(),
         URL(message="Please input a valid URL"),
