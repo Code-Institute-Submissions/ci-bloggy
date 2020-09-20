@@ -45,8 +45,19 @@ Bloggy | New Post
                     {% endif %}
                     <label for="title">Your post title</label>
                 </div>
-            </div>
-            <textarea id="summernote" name="post_body"></textarea>
+                <div class="input-field col s12">
+                    {{ form.description }}
+                    {% if form.title.errors %}
+                    <ul class="center-align">{% for error in form.description.errors %}<li
+                            style="font-size: small; color: #F1007C;">
+                            {{ error }}</li>{% endfor %}</ul>
+                    {% endif %}
+                    <label for="title">Your post description</label>
+                    <p class="small center-align">Please provide a short description such as: Part 5 of my USA travel blog</p>
+                </div>
+                <div class="input-field col s12">
+                    <textarea id="summernote" name="post_body"></textarea>
+                </div>
             <div class="input-field col s12">
                 {{ form.image_url }}
                 {% if form.image_url.errors %}
@@ -95,7 +106,9 @@ Bloggy | New Post
                     <button class="btn waves-effect bloggy-button" type="submit" name="action">Submit post</button>
                 </div>
             </div>
-    </form>
+            </div>
+        </form>
+    </div>
 </div>
 </main>
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
