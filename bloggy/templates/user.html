@@ -38,7 +38,7 @@ Bloggy | User
         <div class="card-content">
           <h4 class="card-title">{{post.title}}</h4>
           <p>{{post.description}}</p>
-          <p class="read-time">{{post.read_time}}</p>
+          <p class="read-time">{{post.read_time}}, {{post.views}} views</p>
         </div>
         <div class="card-action">
           <a href="{{url_for('post_page', post_id=post._id)}}" class="card-link">Read</a>

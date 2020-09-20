@@ -23,6 +23,7 @@ def index():
     https://stackoverflow.com/questions/54053873/implementation-of-pagination-using-flask-paginate-pymongo
     '''
     get_all_posts_pagination = mongo.db.posts.find().skip((page-1) * per_page).limit(per_page)
+    # Handle sorting if value is X sort by Y
     if request.form.get('sort') == "1":
         all_posts = get_all_posts_pagination.sort("last_updated", -1)
     if request.form.get('sort') == "2":
@@ -169,7 +170,8 @@ def new_post():
                     "tags": form.tags.data,
                     "read_time": form.read_time.data + " minutes",
                     "is_featured": False,
-                    "image_url": form.image_url.data
+                    "image_url": form.image_url.data,
+                    "views": 0
                 }
                 mongo.db.posts.insert_one(new_post)
                 # All goes well flash the message and
@@ -188,6 +190,9 @@ def post_page(post_id):
     '''Define single post page route'''
     # Get the post ID
     post = mongo.db.posts.find_one({'_id': ObjectId(post_id)})
+    current_views = post["views"]
+    # Increment views by 1
+    mongo.db.posts.update_one({"_id": ObjectId(post_id)}, {"$inc": {"views": 1}})
     return render_template('post.html', post=post)
 
 
@@ -224,6 +229,7 @@ def edit_post(post_id):
         # Get data - refer to new post function above
         datetimesting = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
         post_body = request.form.get('post_body')
+        current_views = post["views"]
         current_user = session.get("user")
         user_id = ObjectId(get_current_user_id(current_user))
         blog_id = ObjectId(
@@ -239,7 +245,8 @@ def edit_post(post_id):
                     "tags": form.tags.data,
                     "read_time": form.read_time.data + " minutes",
                     "is_featured": False,
-                    "image_url": form.image_url.data
+                    "image_url": form.image_url.data,
+                    "views": current_views
                 }
         mongo.db.posts.update(post, update_post)
         flash("Post updated successfully")
