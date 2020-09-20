@@ -14,86 +14,94 @@ Bloggy | Register
 <main>
   <!-- Register form -->
   <div class="row">
-    <form method="POST" action="{{ url_for('register') }}" class="col s12 m6 offset-m3 login-form">
-      {{ form.csrf_token }}
-      <div class="row">
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <div class="row center-align">
-          <div class="col s12">
+    <div class="col s12 l6 center-align">
+      <h3>About you:</h3>
+      <form method="POST" action="{{ url_for('register') }}" class="login-form">
+        {{ form.csrf_token }}
+        <div class="row">
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+          <div class="row center-align">
+            <div class="col s12">
               <ul class="flashes">
-                  {% for message in messages %}
-                  <li class="flash-message">{{ message }}</li>
-                  {% endfor %}
+                {% for message in messages %}
+                <li class="flash-message">{{ message }}</li>
+                {% endfor %}
               </ul>
+            </div>
           </div>
-      </div>
+          {% endif %}
+          {% endwith %}
+          <div class="input-field col s12">
+            <i class="material-icons prefix">account_circle</i>
+            {{ form.username }}
+            {% if form.username.errors %}
+            <ul class="center-align">{% for error in form.username.errors %}<li
+                style="font-size: small; color: #F1007C;">
+                {{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+            <label for="icon_prefix">Username</label>
+          </div>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">mail</i>
+            {{ form.email }}
+            {% if form.email.errors %}
+            <ul class="center-align">{% for error in form.email.errors %}<li style="font-size: small; color: #F1007C;">
+                {{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+            <label for="icon_prefix">Email</label>
+          </div>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">lock</i>
+            {{ form.password }}
+            {% if form.password.errors %}
+            <ul class="center-align">{% for error in form.password.errors %}<li
+                style="font-size: small; color: #F1007C;">
+                {{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+            <label for="password">Password</label>
+          </div>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">lock</i>
+            {{ form.confirm_password }}
+            {% if form.confirm_password.errors %}
+            <ul class="center-align">{% for error in form.confirm_password.errors %}<li
+                style="font-size: small; color: #F1007C;">{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+            <label for="confirm_password">Repeat Password</label>
+          </div>
+        </div>
+    </div>
+    <div class="col s12 l6 center-align login-form">
+      <h3>About your blog:</h3>
+      <div class="input-field col s12">
+        <i class="material-icons prefix">description</i>
+        {{ form.blog_title }}
+        {% if form.blog_title.errors %}
+        <ul class="center-align">{% for error in form.blog_title.errors %}<li style="font-size: small; color: #F1007C;">
+            {{ error }}</li>{% endfor %}</ul>
         {% endif %}
-        {% endwith %}
-        <div class="input-field col s12">
-          <i class="material-icons prefix">account_circle</i>
-          {{ form.username }}
-          {% if form.username.errors %}
-          <ul class="center-align">{% for error in form.username.errors %}<li style="font-size: small; color: #F1007C;">
-              {{ error }}</li>{% endfor %}</ul>
-          {% endif %}
-          <label for="icon_prefix">Username</label>
-        </div>
-        <div class="input-field col s12">
-          <i class="material-icons prefix">mail</i>
-          {{ form.email }}
-          {% if form.email.errors %}
-          <ul class="center-align">{% for error in form.email.errors %}<li style="font-size: small; color: #F1007C;">
-              {{ error }}</li>{% endfor %}</ul>
-          {% endif %}
-          <label for="icon_prefix">Email</label>
-        </div>
-        <div class="input-field col s12">
-          <i class="material-icons prefix">description</i>
-          {{ form.blog_title }}
-          {% if form.blog_title.errors %}
-          <ul class="center-align">{% for error in form.blog_title.errors %}<li
-              style="font-size: small; color: #F1007C;">{{ error }}</li>{% endfor %}</ul>
-          {% endif %}
-          <label for="icon_prefix">Blog title</label>
-        </div>
-        <div class="input-field col s12">
-          <i class="material-icons prefix">description</i>
-          {{ form.blog_description }}
-          {% if form.blog_description.errors %}
-          <ul class="center-align">{% for error in form.blog_description.errors %}<li
-              style="font-size: small; color: #F1007C;">{{ error }}</li>{% endfor %}</ul>
-          {% endif %}
-          <label for="icon_prefix">Blog description</label>
-          <p class="center-align small">Give us a very brief description of what your blog's about</p>
-        </div>
-        <div class="input-field col s12">
-          <i class="material-icons prefix">lock</i>
-          {{ form.password }}
-          {% if form.password.errors %}
-          <ul class="center-align">{% for error in form.password.errors %}<li style="font-size: small; color: #F1007C;">
-              {{ error }}</li>{% endfor %}</ul>
-          {% endif %}
-          <label for="password">Password</label>
-        </div>
-        <div class="input-field col s12">
-          <i class="material-icons prefix">lock</i>
-          {{ form.confirm_password }}
-          {% if form.confirm_password.errors %}
-          <ul class="center-align">{% for error in form.confirm_password.errors %}<li
-              style="font-size: small; color: #F1007C;">{{ error }}</li>{% endfor %}</ul>
-          {% endif %}
-          <label for="confirm_password">Repeat Password</label>
-        </div>
-        <div class="input-field col s12 center-align">
-          {{ form.recaptcha }}
-        </div>
-        <div class="col s12 center-align">
-          <button class="btn waves-effect register-button" type="submit" name="action">Register account</button>
-          <p>Already registered with us? Click <a href="{{ url_for('login') }}">here</a> to log in</p>
-        </div>
+        <label for="icon_prefix">Blog title</label>
       </div>
-    </form>
+      <div class="input-field col s12">
+        <i class="material-icons prefix">description</i>
+        {{ form.blog_description }}
+        {% if form.blog_description.errors %}
+        <ul class="center-align">{% for error in form.blog_description.errors %}<li
+            style="font-size: small; color: #F1007C;">{{ error }}</li>{% endfor %}</ul>
+        {% endif %}
+        <label for="icon_prefix">Blog description</label>
+        <p class="center-align small">Give us a very brief description of what your blog's about</p>
+      </div>
+    </div>
   </div>
+  <div class="input-field col s12 center-align">
+    {{ form.recaptcha }}
+  </div>
+  <div class="col s12 center-align">
+    <button class="btn waves-effect bloggy-button" type="submit" name="action">Register account</button>
+    <p>Already registered with us? Click <a href="{{ url_for('login') }}">here</a> to log in</p>
+  </div>
+</form>
 </main>
 {% endblock %}
