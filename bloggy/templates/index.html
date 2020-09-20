@@ -56,7 +56,7 @@ Bloggy | Home
     <div class="row search-field center-align">
         <form class="col s12 l6 offset-l3" method="POST" action="{{url_for('search')}}">
             <div class="input-field">
-                <input id="search" type="search" name="search" required>
+                <input id="search" type="search" name="search" required value="{{search_request}}">
                 <label class="label" for="search">Search for blog posts...</label>
                 <button class="waves-effect waves-light btn bloggy-button" type="submit">Search</button>
             </div>
@@ -64,13 +64,13 @@ Bloggy | Home
     </div>
     <div class="row">
         <div class="col s12 l4 offset-l4">
-            <form action="">
-                <select name="sort">
-                    <option value="" disabled selected onchange="this.form.submit()>Sort posts by:</option>
-                    <option value="1">Most recent first</option>
-                    <option value="2">Oldest first</option>
-                    <option value="3">Title (A-Z)</option>
-                    <option value="4">Title (Z-A)</option>
+            <form action="{{url_for('index')}}", method="POST">
+                <select name="sort" onchange="this.form.submit()">
+                    <option value="" disabled {% if sorting_value == None %}selected{% endif %}>Sort posts by:</option>
+                    <option value="1" {% if sorting_value == "1" %}selected{% endif %}>Most recent first</option>
+                    <option value="2" {% if sorting_value == "2" %}selected{% endif %}>Oldest first</option>
+                    <option value="3" {% if sorting_value == "3" %}selected{% endif %}>Title (A-Z)</option>
+                    <option value="4" {% if sorting_value == "4" %}selected{% endif %}>Title (Z-A)</option>
                 </select>
             </form>
         </div>
@@ -94,6 +94,11 @@ Bloggy | Home
             </div>
         </div>
         {% endfor %}
+        {% if all_posts.count() == 0 %}
+        <div class="center-align">
+            <h3>No posts found</h3>
+        </div>
+        {% endif %}
     </div>
     <!-- Pagination -->
     <div class="row center-align">
