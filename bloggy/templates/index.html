@@ -71,6 +71,7 @@ Bloggy | Home
                     <option value="2" {% if sorting_value == "2" %}selected{% endif %}>Oldest first</option>
                     <option value="3" {% if sorting_value == "3" %}selected{% endif %}>Title (A-Z)</option>
                     <option value="4" {% if sorting_value == "4" %}selected{% endif %}>Title (Z-A)</option>
+                    <option value="5" {% if sorting_value == "5" %}selected{% endif %}>Popularity</option>
                 </select>
             </form>
         </div>
@@ -86,7 +87,7 @@ Bloggy | Home
                 <div class="card-content">
                     <h4 class="card-title">{{post.title}}</h4>
                     <p>{{post.description}}</p>
-                    <p class="read-time">{{post.read_time}}, {{post.views}} views</p>
+                    <p class="read-time">{{post.read_time}} minutes, {{post.views}} views</p>
                 </div>
                 <div class="card-action">
                     <a href="{{url_for('post_page', post_id=post._id)}}" class="card-link">Read</a>

@@ -47,7 +47,7 @@ Bloggy | Edit {{post.title}}
                     <label for="title">Your post title</label>
                 </div>
                 <div class="input-field col s12">
-                    {{ form.description }}
+                    {{ form.description(value=post.description)}}
                     {% if form.title.errors %}
                     <ul class="center-align">{% for error in form.description.errors %}<li
                             style="font-size: small; color: #F1007C;">
