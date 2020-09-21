@@ -53,7 +53,7 @@ def search():
     pagination = Pagination(
         page=page, per_page=per_page,
         total=all_posts.count(), record_name='all_posts')
-    return render_template('index.html', all_posts=all_posts, pagination=pagination, search_request=search_request)
+    return render_template('search.html', all_posts=all_posts, pagination=pagination, search_request=search_request)
 
 
 @app.route('/login', methods=("GET", "POST"))
@@ -203,6 +203,7 @@ def edit_post(post_id):
     form = PostForm()
     # Get post ID
     post = mongo.db.posts.find_one({'_id': ObjectId(post_id)})
+    post_body = request.form.get('post_body')
     # Get current user ID
     current_user = session.get("user")
     # Check if logged in, if not flash message and redirect to home page
@@ -225,10 +226,20 @@ def edit_post(post_id):
     if current_user is None:
         flash("You don't have permission to edit this post")
         return redirect(url_for('index'))
+    if request.method == 'POST' and not form.validate():
+        '''Form a fake post dict to pass onto the template and preserve already edited data'''
+        post = {
+            "title" : form.title.data,
+            "description" : form.description.data,
+            "body" : post_body,
+            "tags" : form.tags.data,
+            "read_time" : form.read_time.data,
+            "image_url" : form.image_url.data
+        }
+        return render_template('edit_post.html', post_id=post_id, post=post, form=form)
     if form.validate_on_submit():
         # Get data - refer to new post function above
         datetimesting = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-        post_body = request.form.get('post_body')
         current_views = post["views"]
         current_user = session.get("user")
         user_id = ObjectId(get_current_user_id(current_user))
