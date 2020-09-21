@@ -32,6 +32,8 @@ def index():
         all_posts = get_all_posts_pagination.sort("title", 1)
     if request.form.get('sort') == "4":
         all_posts = get_all_posts_pagination.sort("title", -1)
+    if request.form.get('sort') == "5":
+        all_posts = get_all_posts_pagination.sort("view", -1)
     if request.form.get('sort') is None:
         all_posts = get_all_posts_pagination
     sorting_value = request.form.get('sort')
@@ -168,7 +170,7 @@ def new_post():
                     "body": post_body,
                     "last_updated": datetimesting,
                     "tags": form.tags.data,
-                    "read_time": form.read_time.data + " minutes",
+                    "read_time": form.read_time.data,
                     "is_featured": False,
                     "image_url": form.image_url.data,
                     "views": 0
@@ -196,7 +198,7 @@ def post_page(post_id):
     return render_template('post.html', post=post)
 
 
-@app.route('/posts/<post_id>/edit', methods=("GET", "POST"))
+@app.route('/posts/<post_id>/edit/', methods=("GET", "POST"))
 def edit_post(post_id):
     '''Define edit post route'''
     # Define WTForms form
@@ -226,9 +228,11 @@ def edit_post(post_id):
     if current_user is None:
         flash("You don't have permission to edit this post")
         return redirect(url_for('index'))
-    if request.method == 'POST' and not form.validate():
+    if form.is_submitted() and form.validate() == False:
         '''Form a fake post dict to pass onto the template and preserve already edited data'''
+        post_id = mongo.db.posts.find_one({'_id': ObjectId(post_id)})["_id"]
         post = {
+            "_id": post_id,
             "title" : form.title.data,
             "description" : form.description.data,
             "body" : post_body,
@@ -236,7 +240,7 @@ def edit_post(post_id):
             "read_time" : form.read_time.data,
             "image_url" : form.image_url.data
         }
-        return render_template('edit_post.html', post_id=post_id, post=post, form=form)
+        return render_template('edit_post.html', post=post, form=form, post_id=post_id)
     if form.validate_on_submit():
         # Get data - refer to new post function above
         datetimesting = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
@@ -254,7 +258,7 @@ def edit_post(post_id):
                     "body": post_body,
                     "last_updated": datetimesting,
                     "tags": form.tags.data,
-                    "read_time": form.read_time.data + " minutes",
+                    "read_time": form.read_time.data,
                     "is_featured": False,
                     "image_url": form.image_url.data,
                     "views": current_views
