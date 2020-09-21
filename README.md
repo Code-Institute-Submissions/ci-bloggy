@@ -165,7 +165,42 @@ Once all this is in place follow the steps below:
     * `sudo -H pip3 -r requirements.txt`
 5. Sign up for a free MongoDB account via this [link](https://www.mongodb.com/) and create a new collection called __bloggy__ (note all lowercase letters)
 
-#### Collection structure 
+### Collections structure 
+
+**blogs structure**
+
+| Field name       | Data type   
+| -------------     |:-------------:| 
+| _id               | ObjectId()
+| owner_id          | ObjectId()
+| title             | String
+| description       | String
+
+**posts structure**
+
+| Field name       | Data type   
+| -------------     |:-------------:| 
+| _id               | ObjectId()
+| blog_id           | ObjectId()
+| user_id           | ObjectId()
+| title             | String
+| description       | String
+| body       | String
+| last_updated       | String
+| tags       | String
+| read_time       | Int32
+| is_featured       | Boolean
+| img_url       | String
+| views       | Int32
+
+
+**user structure**
+| Field name       | Data type   
+| -------------     |:-------------:| 
+| _id               | ObjectId()
+| username          | String
+| email             | String
+| password          | String
 
 
 ## Credits
