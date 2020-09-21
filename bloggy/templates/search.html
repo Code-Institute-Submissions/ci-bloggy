@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}
+Bloggy | Home
+{% endblock title %}
+{% block main %}
+{% block external_css %}
+<!-- Fontawesome CDN only used for footer icons -->
+<script src="https://kit.fontawesome.com/2f59828723.js" crossorigin="anonymous"></script>
+{% endblock external_css %}
+<!-- Page header -->
+<header>
+    <!-- Flash messages section -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="row center-align">
+        <div class="col s12">
+            <ul class="flashes">
+                {% for message in messages %}
+                <li class="flash-message">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+    {% endwith %}
+    <!-- Search and filter -->
+    <div class="row search-field center-align">
+        <form class="col s12 l6 offset-l3" method="POST" action="{{url_for('search')}}">
+            <div class="input-field">
+                <input id="search" type="search" name="search" required value="{{search_request}}">
+                <label class="label" for="search">Search for blog posts...</label>
+                <button class="waves-effect waves-light btn bloggy-button" type="submit">Search</button>
+                <a class="waves-effect waves-light btn red" href="{{url_for('index')}}">Cancel</a>
+            </div>
+        </form>
+    </div>
+    <!-- All posts cards section -->
+    <div class="row">
+        {% for post in all_posts %}
+        <div class="col s12 l4">
+            <div class="card card-panel hoverable">
+                <div class="card-image center-align">
+                    <img src="{{post.image_url}}" class="card-img">
+                </div>
+                <div class="card-content">
+                    <h4 class="card-title">{{post.title}}</h4>
+                    <p>{{post.description}}</p>
+                    <p class="read-time">{{post.read_time}}, {{post.views}} views</p>
+                </div>
+                <div class="card-action">
+                    <a href="{{url_for('post_page', post_id=post._id)}}" class="card-link">Read</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% if all_posts.count() == 0 %}
+        <div class="center-align">
+            <h3>No posts found</h3>
+        </div>
+        {% endif %}
+    </div>
+    <!-- Pagination -->
+    <div class="row center-align">
+        {% if all_posts.count() > 1 %}
+        {{ pagination.info }}
+        {% endif %}
+        {{ pagination.links }}
+    </div>
+</main>
+{% endblock %}
+<!-- Footer -->
