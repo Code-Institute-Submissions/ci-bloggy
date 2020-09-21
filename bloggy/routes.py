@@ -33,7 +33,7 @@ def index():
     if request.form.get('sort') == "4":
         all_posts = get_all_posts_pagination.sort("title", -1)
     if request.form.get('sort') == "5":
-        all_posts = get_all_posts_pagination.sort("view", -1)
+        all_posts = get_all_posts_pagination.sort("views", -1)
     if request.form.get('sort') is None:
         all_posts = get_all_posts_pagination
     sorting_value = request.form.get('sort')
