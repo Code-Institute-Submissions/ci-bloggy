@@ -97,21 +97,6 @@ hr.sidemenu-hr {
 
 /* * Blog posts styles */
 
-.recommended-blogs {
-    margin-top: 3rem;
-    margin-bottom: 1rem
-}
-
-.recommended-hr {
-    width: 50%;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    height: 1px;
-    background-color: #1585E2
-}
-
-/* * Recommended blogs cards width */
-
 .card .card-content h4 {
     font-weight: 700;
 }
@@ -124,6 +109,7 @@ hr.sidemenu-hr {
 .card-action .card-link {
     color: #1585E2 !important;
 }
+
 
 /* * Login/register page styles */
 
