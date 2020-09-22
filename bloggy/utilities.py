@@ -38,4 +38,4 @@ def get_current_user_id(username):
 
 def get_users_posts(user_id):
     '''Helper for getting all users' posts using their id'''
-    return list(mongo.db.posts.find({"user_id": user_id}))
+    return mongo.db.posts.find({"user_id": user_id})
