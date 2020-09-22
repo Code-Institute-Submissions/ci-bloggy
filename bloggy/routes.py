@@ -128,19 +128,24 @@ def register():
 
 
 @app.route('/user')
-def user_page():
+def user_page():    
     '''Define user page route'''
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 6
     # Get current user
     current_user = session.get("user")
     # Check if user is admin if it is, display all posts
     if current_user == 'admin':
-        users_posts = list(mongo.db.posts.find())
+        users_posts = mongo.db.posts.find().skip((page-1) * per_page).limit(per_page)
     if current_user != 'admin':
     # Get current user ID
         current_user_id = ObjectId(get_current_user_id(current_user))
         # Get current user's posts
-        users_posts = get_users_posts(current_user_id)
-    return render_template('user.html', users_posts=users_posts)
+        users_posts = get_users_posts(current_user_id).skip((page-1) * per_page).limit(per_page)
+    pagination = Pagination(
+        page=page, per_page=per_page, total=users_posts.count(),
+        record_name='users_posts')
+    return render_template('user.html', users_posts=users_posts, pagination=pagination)
 
 
 @app.route('/user/new_post', methods=("GET", "POST"))

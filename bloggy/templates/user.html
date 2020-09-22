@@ -58,6 +58,13 @@ Bloggy | User
     </div>
     {% endfor %}
   </div>
+  <!-- Pagination -->
+  <div class="row center-align">
+    {% if users_posts.count() > 1 %}
+    {{ pagination.info }}
+    {% endif %}
+    {{ pagination.links }}
+</div>
 </main>
 
 {% endblock %}
