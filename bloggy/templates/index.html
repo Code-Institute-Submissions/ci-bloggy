@@ -77,13 +77,11 @@ Bloggy | Home
         </div>
     </div>
     <!-- All posts cards section -->
-    <div class="row">
+    <div class="row cards">
     {% for post in all_posts %}
         <div class="col s12 l4">
             <div class="card card-panel hoverable">
-                <div class="card-image center-align">
-                    <img src="{{post.image_url}}" class="card-img">
-                </div>
+                
                 <div class="card-content">
                     <h4 class="card-title">{{post.title}}</h4>
                     <p>{{post.description}}</p>
