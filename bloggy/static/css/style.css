@@ -110,6 +110,10 @@ hr.sidemenu-hr {
     color: #1585E2 !important;
 }
 
+.card-image img {
+    object-fit: cover;
+    height: 20vw;
+}
 
 /* * Login/register page styles */
 
