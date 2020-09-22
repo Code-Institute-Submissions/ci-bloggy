@@ -132,10 +132,14 @@ def user_page():
     '''Define user page route'''
     # Get current user
     current_user = session.get("user")
+    # Check if user is admin if it is, display all posts
+    if current_user == 'admin':
+        users_posts = list(mongo.db.posts.find())
+    if current_user != 'admin':
     # Get current user ID
-    current_user_id = ObjectId(get_current_user_id(current_user))
-    # Get current user's posts
-    users_posts = get_users_posts(current_user_id)
+        current_user_id = ObjectId(get_current_user_id(current_user))
+        # Get current user's posts
+        users_posts = get_users_posts(current_user_id)
     return render_template('user.html', users_posts=users_posts)
 
 
@@ -212,7 +216,14 @@ def edit_post(post_id):
     if current_user is None:
         flash("You don't have permission to edit this post")
         return redirect(url_for('index'))
-    else:
+    # Check if user is admin if it is, inject correct user id based
+    # on the post to allow editing
+    if current_user == 'admin':
+        current_user_id = mongo.db.posts.find_one(
+            {'_id': ObjectId(post_id)})["user_id"]
+        post_creator_id = mongo.db.posts.find_one(
+            {'_id': ObjectId(post_id)})["user_id"]
+    if current_user != 'admin':
         '''Check what are current user ID and post creator IDs
         (ie.AssertionError if the user is post owner)'''
         current_user_id = ObjectId(get_current_user_id(current_user))
@@ -280,7 +291,15 @@ def delete_post(post_id):
     if current_user is None:
         flash("You don't have permission to delete this post")
         return redirect(url_for('index'))
-    else:
+    # Check if user is admin if it is, inject 
+    # correct user id based
+    # on the post to allow deletion
+    if current_user == 'admin':
+        current_user_id = mongo.db.posts.find_one(
+            {'_id': ObjectId(post_id)})["user_id"]
+        post_creator_id = mongo.db.posts.find_one(
+            {'_id': ObjectId(post_id)})["user_id"]
+    if current_user != 'admin':
         current_user_id = ObjectId(get_current_user_id(current_user))
         post_creator_id = mongo.db.posts.find_one(
             {'_id': ObjectId(post_id)})["user_id"]
