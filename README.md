@@ -80,7 +80,7 @@ Wireframes are available under links below and are stored within _wireframes_ fo
 | Flickr Pink       |#F1007C
 | White             |#FFFFF
 
-Font used on the website is Noto Sans KR from Google Fonts - https://fonts.google.com/specimen/Noto+Sans+KR?query=noto+sans+kr
+Font used on the website is [Noto Sans KR from Google Fonts](https://fonts.google.com/specimen/Noto+Sans+KR?query=noto+sans+kr)
 
 ## Features
 
@@ -122,6 +122,14 @@ Only post creator (& superuser Admin) can edit a post.
 
 The form is exactly the same as outlined in [new post page](#new-post-page) section above but it is pre-filled with post data pulled from the database.
 
+🟢 **Search**
+
+Users are able to search for posts based on post title, description or tags. 
+
+🟢 **Administrative features**
+
+'admin' user is registered by myself and is able to edit and delete all posts for the database. 
+
 ### Features Left to Implement
 
 🔴 **Feature left to implement**
@@ -130,21 +138,24 @@ The form is exactly the same as outlined in [new post page](#new-post-page) sect
 
 1. HTML5
 2. CSS3
-5. JavaScript
-3. Python 
-4. [Flask v1.1.2](https://flask.palletsprojects.com/en/1.1.x/changelog/#version-1-1-x)
+3. JavaScript
+4. Python 
+5. [Flask v1.1.2](https://flask.palletsprojects.com/en/1.1.x/changelog/#version-1-1-x)
   * WTForms 
   * PyMongo
-  * Slugify
-  * Bcrypt
-5. [Summernote WYSIWYG Editor](https://summernote.org/)
-5. MongoDB 
-3. [Materialize CSS](https://materializecss.com/)
-4. [Materialize Icons](https://materializecss.com/icons.html)
-7. [Google Fonts](https://fonts.google.com/)
+  * slugify
+  * bcrypt
+  * flask-paginate
+6. MongoDB 
+7. [Summernote WYSIWYG Editor](https://summernote.org/)
+8. [reCAPTCHA](https://www.google.com/recaptcha/about/) 
+9. [Materialize CSS](https://materializecss.com/)
+10. [Materialize Icons](https://materializecss.com/icons.html)
+11. [Google Fonts](https://fonts.google.com/)
 
 ## Testing
 
+Please refer to [TESTING.md](bloggy/docs/TESTING.md) for testing documentation
 
 ## Deployment
 
@@ -189,7 +200,6 @@ Once all this is in place follow the steps below:
 | last_updated       | String
 | tags       | String
 | read_time       | Int32
-| is_featured       | Boolean
 | img_url       | String
 | views       | Int32
 
@@ -202,6 +212,32 @@ Once all this is in place follow the steps below:
 | email             | String
 | password          | String
 
+
+### To deploy remotely
+
+I've personally used [Heroku](https://heroku.com/) to deploy this project for submission. The below steps explain how I deployed my app to Heroku. If you're using a different platform to deploy your app, please check and follow relevant documentation.
+
+1. Register for a free account on [Heroku](https://heroku.com/)
+2. Create requirements.txt file so they can be installed on Heroku once deployed
+* `pip3 freeze --local > requirements.txt`
+3. Create Procfile (case sensitive) to inform Heroku what type of application is being deployed
+* `echo web: python run.py > Procfile` or alternatively create a Procfile with this line of code using your GUI/IDE.
+4. Log into your Heroku account and choose New -> Create new app
+5. Input your name (must be unique) and choose region closest to you.
+6. After app is created, Heroku will automatically bring you to *Deploy* tab. Under *Deployment Method* choose Github. If you haven't already log into your GitHub account and grant Heroku access to your GitHub data.
+7. Type in your repository name and click search, once found, click *Connect*
+8. Very imporant part is to declare Config Vars for your app under *Settings* -> *Reveal config vars*
+9. Config Vars for this app are:
+
+    | Config Var       | Value   
+    | -------------     |:-------------:| 
+    | IP               | 0.0.0.0
+    | PORT           | 5000
+    | MONGO_URI        | Your unique Mongo URI goes here
+    | MONGO_DBNAME        | bloggy
+    | SECRET_KEY       | Your unique secret key
+    | RECAPTCHA_PUBLIC_KEY | Your unique public key supplied by Google
+    | RECAPTCHA_PRIVATE_KEY | Your unique private key supplied by Google
 
 ## Credits
 
