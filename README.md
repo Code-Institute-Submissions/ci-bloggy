@@ -113,8 +113,7 @@ To create new post, users need to:
 2. Add some text to the body of the blog, 
 3. Add short description (blurb), 
 4. Provide a URL to an image to be used as a cover
-5. Provide at least 2 tags to the post 
-6. Add in approximate reading time
+5. Add in approximate reading time
 
 🟢 **Edit post page**
 
@@ -124,7 +123,7 @@ The form is exactly the same as outlined in [new post page](#new-post-page) sect
 
 🟢 **Search**
 
-Users are able to search for posts based on post title, description or tags. 
+Users are able to search for posts based on post title, description or text within the body. 
 
 🟢 **Administrative features**
 
@@ -198,7 +197,6 @@ Once all this is in place follow the steps below:
 | description       | String
 | body       | String
 | last_updated       | String
-| tags       | String
 | read_time       | Int32
 | img_url       | String
 | views       | Int32
