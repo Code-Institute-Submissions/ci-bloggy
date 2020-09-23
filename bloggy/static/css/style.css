@@ -170,6 +170,10 @@ p.small {
     font-family: 'Noto Sans KR', sans-serif;
 }
 
+.profile-controls {
+    margin-top: 20px;
+}
+
 /* * Single post page styles */
 
 .title,
@@ -184,6 +188,10 @@ p.small {
     overflow: hidden;
     margin: 10px;
     border-radius: 20px;
+}
+
+.author-info {
+    margin-top: 50px;
 }
 
 /* ! Required CSS For Flask-paginate */
@@ -251,5 +259,12 @@ ul.select-dropdown>li>span {
     .card-image img {
         object-fit: cover;
         height: 50vw;
+    }
+    .login-hero>.row>.greeting,
+    .login-hero>.row>.controls {
+        text-align: center;
+    }
+    .image-container {
+        height: 30vh;
     }
 }

@@ -19,10 +19,14 @@ Bloggy | User
   {% endif %}
   {% endwith %}
   <!-- Header section -->
-  <div class="login-hero center-align">
+  <div class="login-hero">
     <div class="row">
-      <h3>Hi there {{ session["user"] }}!</h3>
-      <a class="waves-effect btn bloggy-button" href="{{ url_for('new_post') }}">Write a new post</a>
+      <div class="col s12 m6 left-align greeting">
+        <h3>Hi there {{ session["user"] }}!</h3>
+      </div>
+      <div class="col s12 m6 right-align controls">
+        <a class="waves-effect btn bloggy-button right-align profile-controls" href="{{ url_for('new_post') }}">Write a new post</a>
+      </div>
     </div>
   </div>
 </header>
