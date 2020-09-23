@@ -77,21 +77,6 @@ Bloggy | Edit {{post.title}}
                         similar</p>
                 </div>
                 <div class="input-field col s12">
-                    {{ form.tags(value=post.tags) }}
-                    {% if form.tags.errors %}
-                    <ul class="center-align">
-                        {% for error in form.tags.errors %}
-                        <li style="font-size: small; color: #F1007C;">
-                            {{ error }}
-                        </li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                    <label for="title">Post Tags</label>
-                    <p class="small center-align">Please use at least 2 tags spearated by a comma - ie. travel, Ireland
-                    </p>
-                </div>
-                <div class="input-field col s12">
                     {{ form.read_time(value=post.read_time) }}
                     {% if form.read_time.errors %}
                     <ul class="center-align">

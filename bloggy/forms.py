@@ -119,11 +119,6 @@ class PostForm(FlaskForm):
         DataRequired(),
         URL(message="Please input a valid URL"),
         InputRequired(message="This field is requried")])
-    tags = StringField('tags', validators=[
-        DataRequired(),
-        Regexp("\w+, \w", message="Tags must be separated by commas, "
-                                  "you must also have at least 2 tags"),
-        InputRequired(message="This field is requried")])
     read_time = StringField('read_time', validators=[
         DataRequired(),
         Length(min=1, max=3, message="Please input reading time"
