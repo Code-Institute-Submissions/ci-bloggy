@@ -248,5 +248,8 @@ ul.select-dropdown>li>span {
     h1 {
         font-size: 3rem;
     }
-
+    .card-image img {
+        object-fit: cover;
+        height: 50vw;
+    }
 }
