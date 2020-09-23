@@ -6,9 +6,8 @@ from bloggy.forms import RegisterForm, LoginForm, PostForm
 from slugify import slugify
 from datetime import datetime
 from flask_paginate import Pagination, get_page_parameter
-from bloggy.utilities import (all_posts, featured_posts,
-                              check_username, get_current_user_id,
-                              get_users_posts)
+from bloggy.utilities import (all_posts, check_username,
+                              get_current_user_id, get_users_posts)
 
 
 @app.route('/', methods=("GET", "POST"))
