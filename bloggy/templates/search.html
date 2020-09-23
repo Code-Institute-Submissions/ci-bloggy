@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}
-Bloggy | Home
+Bloggy | Search
 {% endblock title %}
 {% block main %}
 {% block external_css %}
@@ -30,6 +30,7 @@ Bloggy | Home
                 <input id="search" type="search" name="search" required value="{{search_request}}">
                 <label class="label" for="search">Search for blog posts...</label>
                 <button class="waves-effect waves-light btn bloggy-button" type="submit">Search</button>
+                <i class="material-icons">close</i>
                 <a class="waves-effect waves-light btn red" href="{{url_for('index')}}">Cancel</a>
             </div>
         </form>
@@ -45,7 +46,7 @@ Bloggy | Home
                 <div class="card-content">
                     <h4 class="card-title">{{post.title}}</h4>
                     <p>{{post.description}}</p>
-                    <p class="read-time">{{post.read_time}}, {{post.views}} views</p>
+                    <p class="read-time">{{post.read_time}} minute(s), {{post.views}} views</p>
                 </div>
                 <div class="card-action">
                     <a href="{{url_for('post_page', post_id=post._id)}}" class="card-link">Read</a>
