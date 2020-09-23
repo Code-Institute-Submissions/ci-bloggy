@@ -18,6 +18,22 @@ Bloggy | {{post.title}}
       <div class="post-content">
         {{post.body|safe}}
       </div>
+      <div class="col s12 l6 offset-l3 author-info">
+        <div class="card-panel">
+          <div class="row valign-wrapper">
+            <div class="col s2 center-align">
+              <img src="{{ url_for('static', filename='img/profile_image.svg') }}" alt="" class="responsive-img"> <!-- notice the "circle" class -->
+            </div>
+            <div class="col s10">
+              <h5>
+                Author:
+                {{creator.username}}
+              </h5>
+              <a href="">Visit their profile</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 {% endblock %}

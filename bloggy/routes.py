@@ -7,7 +7,8 @@ from slugify import slugify
 from datetime import datetime
 from flask_paginate import Pagination, get_page_parameter
 from bloggy.utilities import (all_posts, check_username,
-                              get_current_user_id, get_users_posts)
+                              get_current_user_id, get_users_posts,
+                              get_user_from_id, get_blog_from_user_id)
 
 
 @app.route('/', methods=("GET", "POST"))
@@ -199,10 +200,12 @@ def post_page(post_id):
     '''Define single post page route'''
     # Get the post ID
     post = mongo.db.posts.find_one({'_id': ObjectId(post_id)})
+    # Get the creator
+    creator = get_user_from_id(post["user_id"])
     current_views = post["views"]
     # Increment views by 1
     mongo.db.posts.update_one({"_id": ObjectId(post_id)}, {"$inc": {"views": 1}})
-    return render_template('post.html', post=post)
+    return render_template('post.html', post=post, creator=creator)
 
 
 @app.route('/posts/<post_id>/edit/', methods=("GET", "POST"))
