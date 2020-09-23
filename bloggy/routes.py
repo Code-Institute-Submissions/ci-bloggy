@@ -180,7 +180,6 @@ def new_post():
                     "last_updated": datetimesting,
                     "tags": form.tags.data,
                     "read_time": form.read_time.data,
-                    "is_featured": False,
                     "image_url": form.image_url.data,
                     "views": 0
                 }
@@ -275,7 +274,6 @@ def edit_post(post_id):
                     "last_updated": datetimesting,
                     "tags": form.tags.data,
                     "read_time": form.read_time.data,
-                    "is_featured": False,
                     "image_url": form.image_url.data,
                     "views": current_views
                 }
