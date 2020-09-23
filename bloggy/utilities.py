@@ -36,3 +36,13 @@ def get_current_user_id(username):
 def get_users_posts(user_id):
     '''Helper for getting all users' posts using their id'''
     return mongo.db.posts.find({"user_id": user_id})
+
+
+def get_user_from_id(user_id):
+    '''Helper for getting user based on their ID'''
+    return mongo.db.users.find_one({"_id": user_id})
+
+
+def get_blog_from_user_id(user_id):
+    '''Helper for getting blogs using creators id'''
+    return mongo.db.blogs.find_one({"owner_id": user_id})
