@@ -91,6 +91,19 @@ Bloggy | Home
                 </div>
                 <div class="card-action">
                     <a href="{{url_for('post_page', post_id=post._id)}}" class="card-link">Read</a>
+                    {% if current_user_id == post.user_id %}
+                    <a href="{{url_for('edit_post', post_id=post._id)}}" class="card-link">Edit</a>
+                    <a href="#modal1" class="red-text text-darken-1 modal-trigger">Delete</a>
+                    <div id="modal1" class="modal">
+                        <div class="modal-content">
+                          <h4>Are you sure?</h4>
+                          <p>Once you delete this post, you will not be able to restore it again</p>
+                        </div>
+                        <div class="modal-footer">
+                          <a href="{{url_for('delete_post', post_id=post._id)}}" class="modal-close red-text text-darken-1 ">Delete</a>
+                        </div>
+                      </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
