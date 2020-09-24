@@ -37,13 +37,16 @@ def index():
     if request.form.get('sort') is None:
         all_posts = get_all_posts_pagination
     sorting_value = request.form.get('sort')
+    # Get current user's id
+    current_user = session.get("user")
+    current_user_id = get_current_user_id(current_user)
     # Define pagination
     pagination = Pagination(
         page=page, per_page=per_page,
         total=all_posts.count(), record_name='posts')
     return render_template(
         'index.html', all_posts=all_posts,
-        pagination=pagination, sorting_value=sorting_value)
+        pagination=pagination, sorting_value=sorting_value, current_user_id=current_user_id)
 
 
 @app.route('/search', methods=("GET", "POST"))
@@ -178,7 +181,6 @@ def new_post():
                     "description": form.description.data,
                     "body": post_body,
                     "last_updated": datetimesting,
-                    "tags": form.tags.data,
                     "read_time": form.read_time.data,
                     "image_url": form.image_url.data,
                     "views": 0
@@ -274,7 +276,6 @@ def edit_post(post_id):
                     "description": form.description.data,
                     "body": post_body,
                     "last_updated": datetimesting,
-                    "tags": form.tags.data,
                     "read_time": form.read_time.data,
                     "image_url": form.image_url.data,
                     "views": current_views
@@ -295,7 +296,7 @@ def delete_post(post_id):
     # Check if user is logged in, if not flash message & redirect to index
     if current_user is None:
         flash("You don't have permission to delete this post")
-        return redirect(url_for('index'))
+        return redirect(request.url)
     # Check if user is admin if it is, inject 
     # correct user id based
     # on the post to allow deletion
@@ -311,10 +312,10 @@ def delete_post(post_id):
     # Check if user id and post creator Id match
     if current_user_id != post_creator_id:
         flash("You don't have permission to delete this post")
-        return redirect(url_for('user_page'))
+        return redirect(url_for(request.url))
     '''Else user is authorised to delete so
     proceed & redirect user back to home page'''
     mongo.db.posts.delete_one(post)
     flash("Post deleted successfully")
-    return redirect(url_for('user_page'))
-    return render_template('user_page')
+    return redirect(url_for(request.url))
+    return render_template(request.url)
