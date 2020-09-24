@@ -265,6 +265,6 @@ ul.select-dropdown>li>span {
         text-align: center;
     }
     .image-container {
-        height: 30vh;
+        height: 100%;
     }
 }
