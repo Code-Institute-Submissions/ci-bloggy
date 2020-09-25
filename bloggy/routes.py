@@ -37,16 +37,20 @@ def index():
     if request.form.get('sort') is None:
         all_posts = get_all_posts_pagination
     sorting_value = request.form.get('sort')
-    # Get current user's id
-    current_user = session.get("user")
-    current_user_id = get_current_user_id(current_user)
     # Define pagination
     pagination = Pagination(
         page=page, per_page=per_page,
         total=all_posts.count(), record_name='posts')
-    return render_template(
+    # Get current user's id
+    current_user = session.get("user")
+    if current_user == None: 
+        return render_template(
         'index.html', all_posts=all_posts,
-        pagination=pagination, sorting_value=sorting_value, current_user_id=current_user_id)
+        pagination=pagination, sorting_value=sorting_value)
+    current_user_id = get_current_user_id(current_user)
+    return render_template(
+    'index.html', all_posts=all_posts,
+    pagination=pagination, sorting_value=sorting_value, current_user_id=current_user_id)
 
 
 @app.route('/search', methods=("GET", "POST"))
@@ -111,6 +115,7 @@ def register():
                 "username": form.username.data,
                 "password": hashed_password,
                 "email": form.email.data,
+                "profile_img_url": form.profile_img_url.data
             }
             # Get the inserted user's ID
             registered_usr_id = mongo.db.users.insert_one(register_user)
