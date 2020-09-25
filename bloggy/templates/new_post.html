@@ -35,7 +35,6 @@ Bloggy | New Post
     <div class="row">
         <form class="col s12" method="POST" action="{{ url_for('new_post') }}">
             {{ form.csrf_token }}
-            <div class="row">
                 <div class="input-field col s12">
                     {{ form.title(class_="new-post-title") }}
                     {% if form.title.errors %}
@@ -70,8 +69,8 @@ Bloggy | New Post
                 </ul>
                 {% endif %}
                 <label for="title">Post Image URL</label>
-                <p class="small center-align">Please use only direct image links - ie. they must end in *.jpg/*.png or
-                    similar</p>
+                <p class="small center-align">Please paste direct image links - ie. they must end in *.jpg/*.png or
+                    similar. We suggest you use Imgur or similar service to host your images</p>
             </div>
             <div class="input-field col s12">
                 {{ form.read_time }}
@@ -91,7 +90,6 @@ Bloggy | New Post
                 <div class="col 12">
                     <button class="btn waves-effect bloggy-button" type="submit" name="action">Submit post</button>
                 </div>
-            </div>
             </div>
         </form>
     </div>
