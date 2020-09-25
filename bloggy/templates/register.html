@@ -40,6 +40,17 @@ Bloggy | Register
           <label for="icon_prefix">Username</label>
         </div>
         <div class="input-field col s12">
+          <i class="material-icons prefix">image</i>
+          {{ form.profile_image_url }}
+          {% if form.profile_image_url.errors %}
+          <ul class="center-align">{% for error in form.profile_image_url.errors %}<li style="font-size: small; color: #F1007C;">
+              {{ error }}</li>{% endfor %}</ul>
+          {% endif %}
+          <label for="icon_prefix">Your profile picture/avatar</label>
+          <p class="small center-align">Please paste direct image links - ie. they must end in *.jpg/*.png or
+            similar. We suggest you use Imgur or similar service to host your images</p>
+        </div>
+        <div class="input-field col s12">
           <i class="material-icons prefix">mail</i>
           {{ form.email }}
           {% if form.email.errors %}

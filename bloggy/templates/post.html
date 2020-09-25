@@ -6,7 +6,26 @@ Bloggy | {{post.title}}
 <header>
   <!-- Post title -->
       <div class="row title">
-        <h2 class="post-title">{{post.title}}</h2>
+        <div class="col s12 l9">
+          <h2 class="post-title">{{post.title}}</h2>
+        </div>
+        <div class="col s12 l3 hide-on-med-and-down">
+          <div class="card-panel author-card">
+            <div class="row valign-wrapper">
+              <div class="col s4 center-align">
+                <img src="{{creator.profile_img_url}}" alt="" class="circle responsive-img">
+              </div>
+              <div class="col s8">
+                <h5>
+                  Author: {{creator.username}}
+                </h5>
+                <a href="">Visit their profile</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
       </div>
   </header>
   <!-- Post content -->
@@ -15,25 +34,28 @@ Bloggy | {{post.title}}
       <div class="image-container">
         <img class="materialboxed" width="100%" src="{{post.image_url}}" alt="Image for {{ post.title }}">
       </div>
+    </div>
+    <div class="row">
       <div class="post-content">
         {{post.body|safe}}
       </div>
-      <div class="col s12 l6 offset-l3 author-info">
-        <div class="card-panel">
+    </div>
+    <div class="row center-align hide-on-large-only">
+      <div class="col s12 l3">
+        <div class="card-panel author-card">
           <div class="row valign-wrapper">
-            <div class="col s2 center-align">
-              <img src="{{ url_for('static', filename='img/profile_image.svg') }}" alt="" class="responsive-img"> <!-- notice the "circle" class -->
+            <div class="col s3 center-align">
+              <img src="{{creator.profile_img_url}}" alt="" class="circle responsive-img">
             </div>
-            <div class="col s10">
+            <div class="col s9">
               <h5>
-                Author:
-                {{creator.username}}
+                Author: {{creator.username}}
               </h5>
               <a href="">Visit their profile</a>
             </div>
           </div>
         </div>
-      </div>
     </div>
+  </div>
   </main>
 {% endblock %}
