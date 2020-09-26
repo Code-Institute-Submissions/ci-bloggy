@@ -182,6 +182,7 @@ def new_post():
                 new_post = {
                     "blog_id": blog_id,
                     "user_id": user_id,
+                    "username": current_user,
                     "title": form.title.data,
                     "description": form.description.data,
                     "body": post_body,
@@ -277,6 +278,7 @@ def edit_post(post_id):
         update_post = {
                     "blog_id": blog_id,
                     "user_id": user_id,
+                    "username": current_user,
                     "title": form.title.data,
                     "description": form.description.data,
                     "body": post_body,
@@ -324,3 +326,4 @@ def delete_post(post_id):
     flash("Post deleted successfully")
     return redirect(url_for(request.url))
     return render_template(request.url)
+
