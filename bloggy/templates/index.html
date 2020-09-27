@@ -29,10 +29,10 @@ Bloggy | Home
             <div class="col s12 m6 l7 hide-on-small-only">
                 <h1>Home of the blogs you love.</h1>
                 {% if session.user != Null %}
-                <a class="waves-effect btn-large bloggy-button" href="{{ url_for('new_post') }}">Write a new post</a>
+                <a class="waves-effect btn-large bloggy-button" href="{{ url_for('post.new_post') }}">Write a new post</a>
                 {% endif %}
                 {% if session.user == Null %}
-                <a class="waves-effect btn-large bloggy-button" href="{{ url_for('login') }}">Start creating</a>
+                <a class="waves-effect btn-large bloggy-button" href="{{ url_for('user.login') }}">Start creating</a>
                 {% endif %}
             </div>
             <div class="col s12 m6 l5 hide-on-small-only">
@@ -44,17 +44,17 @@ Bloggy | Home
         <div class="col s12 m6 l7">
             <h1>Home of the blogs you love.</h1>
             {% if session.user != Null %}
-            <a class="waves-effect btn-large bloggy-button" href="{{ url_for('new_post') }}">Write a new post</a>
+            <a class="waves-effect btn-large bloggy-button" href="{{ url_for('post.new_post') }}">Write a new post</a>
             {% endif %}
             {% if session.user == Null %}
-            <a class="waves-effect btn-large bloggy-button" href="{{ url_for('login') }}">Start creating</a>
+            <a class="waves-effect btn-large bloggy-button" href="{{ url_for('user.login') }}">Start creating</a>
             {% endif %}
         </div>
 </header>
 <main>
     <!-- Search and filter -->
     <div class="row search-field center-align">
-        <form class="col s12 l6 offset-l3" method="POST" action="{{url_for('search')}}">
+        <form class="col s12 l6 offset-l3" method="POST" action="{{url_for('main.search')}}">
             <div class="input-field">
                 <input id="search" type="search" name="search" required value="{{search_request}}">
                 <label class="label" for="search">Search for blog posts by title, description or text within</label>
@@ -64,7 +64,7 @@ Bloggy | Home
     </div>
     <div class="row">
         <div class="col s12 l4 offset-l4">
-            <form action="{{url_for('index')}}", method="POST">
+            <form action="{{url_for('main.index')}}", method="POST">
                 <select name="sort" onchange="this.form.submit()">
                     <option value="" disabled {% if sorting_value == None %}selected{% endif %}>Sort posts by:</option>
                     <option value="1" {% if sorting_value == "1" %}selected{% endif %}>Most recent first</option>
@@ -90,9 +90,9 @@ Bloggy | Home
                     <p class="read-time">{{post.read_time}} minute(s), {{post.views}} views, by {{post.username}}</p>
                 </div>
                 <div class="card-action">
-                    <a href="{{url_for('post_page', post_id=post._id)}}" class="card-link">Read</a>
+                    <a href="{{url_for('post.post_page', post_id=post._id)}}" class="card-link">Read</a>
                     {% if current_user_id == post.user_id %}
-                    <a href="{{url_for('edit_post', post_id=post._id)}}" class="card-link">Edit</a>
+                    <a href="{{url_for('post.edit_post', post_id=post._id)}}" class="card-link">Edit</a>
                     <a href="#modal1" class="red-text text-darken-1 modal-trigger">Delete</a>
                     <div id="modal1" class="modal">
                         <div class="modal-content">
@@ -100,7 +100,7 @@ Bloggy | Home
                           <p>Once you delete this post, you will not be able to restore it again</p>
                         </div>
                         <div class="modal-footer">
-                          <a href="{{url_for('delete_post', post_id=post._id)}}" class="modal-close red-text text-darken-1 ">Delete</a>
+                          <a href="{{url_for('post.delete_post', post_id=post._id)}}" class="modal-close red-text text-darken-1 ">Delete</a>
                         </div>
                       </div>
                     {% endif %}

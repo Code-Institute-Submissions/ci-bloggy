@@ -24,7 +24,7 @@ Bloggy | Log in
     {% endwith %}
     <!-- Login form -->
     <div class="row">
-    <form method="POST" action="{{ url_for('login') }}" class="col s12 m6 offset-m3 login-form">
+    <form method="POST" action="{{ url_for('user.login') }}" class="col s12 m6 offset-m3 login-form">
       {{ form.csrf_token }}
       <div class="row">
         <div class="input-field col s12">
@@ -47,7 +47,7 @@ Bloggy | Log in
         </div>
         <div class="col s12 center-align">
           <button class="btn waves-effect bloggy-button" type="submit" name="action">Log in</button>
-          <p>Not registered with us yet? You can sign up by clicking <a href="{{ url_for('register') }}">here</a></p>
+          <p>Not registered with us yet? You can sign up by clicking <a href="{{ url_for('user.register') }}">here</a></p>
         </div>
       </div>
     </form>

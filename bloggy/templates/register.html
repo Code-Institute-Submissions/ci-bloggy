@@ -14,7 +14,7 @@ Bloggy | Register
 <main>
   <!-- Register form -->
   <div class="row">
-    <form method="POST" action="{{ url_for('register') }}" class="col s12 m6 offset-m3 login-form">
+    <form method="POST" action="{{ url_for('user.register') }}" class="col s12 m6 offset-m3 login-form">
       {{ form.csrf_token }}
       <div class="row">
         {% with messages = get_flashed_messages() %}
@@ -101,7 +101,7 @@ Bloggy | Register
         </div>
         <div class="col s12 center-align">
           <button class="btn waves-effect bloggy-button" type="submit" name="action">Register account</button>
-          <p>Already registered with us? Click <a href="{{ url_for('login') }}">here</a> to log in</p>
+          <p>Already registered with us? Click <a href="{{ url_for('user.login') }}">here</a> to log in</p>
         </div>
       </div>
     </form>

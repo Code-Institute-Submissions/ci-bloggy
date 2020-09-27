@@ -212,6 +212,20 @@ img.circle {
     height: 75px;
 }
 
+/* * Blog/profile page styles */
+
+.profile {
+    margin: 0;
+    padding: 0;
+}
+
+.profile-card {
+    background-color: white;
+    border: none;
+    box-shadow: none;
+    margin: 10px 0 0 0;
+    padding: 24px 0 0 0;
+}
 
 /* ! Required CSS For Flask-paginate */
 

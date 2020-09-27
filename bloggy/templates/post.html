@@ -19,7 +19,7 @@ Bloggy | {{post.title}}
                 <h5>
                   Author: {{creator.username}}
                 </h5>
-                <a href="{{url_for('profile_page', username=creator.username)}}">Visit their profile</a>
+                <a href="{{url_for('profile.profile_page', username=creator.username)}}">Visit their profile</a>
               </div>
             </div>
           </div>
@@ -51,7 +51,7 @@ Bloggy | {{post.title}}
               <h5>
                 Author: {{creator.username}}
               </h5>
-              <a href="">Visit their profile</a>
+              <a href="{{url_for('profile.profile_page', username=creator.username)}}">Visit their profile</a>
             </div>
           </div>
         </div>

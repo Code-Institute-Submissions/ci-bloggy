@@ -25,13 +25,13 @@ Bloggy | Search
     {% endwith %}
     <!-- Search and filter -->
     <div class="row search-field center-align">
-        <form class="col s12 l6 offset-l3" method="POST" action="{{url_for('search')}}">
+        <form class="col s12 l6 offset-l3" method="POST" action="{{url_for('main.search')}}">
             <div class="input-field">
                 <input id="search" type="search" name="search" required value="{{search_request}}">
                 <label class="label" for="search">Search for blog posts by title, description or text within</label>
                 <button class="waves-effect waves-light btn bloggy-button" type="submit">Search</button>
                 <i class="material-icons">close</i>
-                <a class="waves-effect waves-light btn red" href="{{url_for('index')}}">Cancel</a>
+                <a class="waves-effect waves-light btn red" href="{{url_for('main.index')}}">Cancel</a>
             </div>
         </form>
     </div>

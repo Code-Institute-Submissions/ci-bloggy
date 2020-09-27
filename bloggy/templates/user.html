@@ -25,7 +25,7 @@ Bloggy | User
         <h3>Hi there {{ session["user"] }}!</h3>
       </div>
       <div class="col s12 m6 right-align controls">
-        <a class="waves-effect btn bloggy-button right-align profile-controls" href="{{ url_for('new_post') }}">Write a new post</a>
+        <a class="waves-effect btn bloggy-button right-align profile-controls" href="{{ url_for('post.new_post') }}">Write a new post</a>
       </div>
     </div>
   </div>
@@ -45,8 +45,8 @@ Bloggy | User
               <p class="read-time">{{post.read_time}} minute(s), {{post.views}} views</p>
           </div>
         <div class="card-action">
-          <a href="{{url_for('post_page', post_id=post._id)}}" class="card-link">Read</a>
-          <a href="{{url_for('edit_post', post_id=post._id)}}" class="card-link">Edit</a>
+          <a href="{{url_for('post.post_page', post_id=post._id)}}" class="card-link">Read</a>
+          <a href="{{url_for('post.edit_post', post_id=post._id)}}" class="card-link">Edit</a>
           <a href="#modal1" class="red-text text-darken-1 modal-trigger">Delete</a>
           <div id="modal1" class="modal">
             <div class="modal-content">
@@ -54,7 +54,7 @@ Bloggy | User
               <p>Once you delete this post, you will not be able to restore it again</p>
             </div>
             <div class="modal-footer">
-              <a href="{{url_for('delete_post', post_id=post._id)}}" class="modal-close red-text text-darken-1 ">Delete</a>
+              <a href="{{url_for('post.delete_post', post_id=post._id)}}" class="modal-close red-text text-darken-1 ">Delete</a>
             </div>
           </div>
         </div>

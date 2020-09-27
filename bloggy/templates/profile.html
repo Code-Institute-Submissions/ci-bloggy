@@ -20,10 +20,19 @@ Bloggy | Profile
   {% endwith %}
   <!-- Header section -->
   <div class="login-hero">
-    <div class="row">
-      <div class="col s12 m12 left-align greeting">
-        <h3>{{profile.username}}'s blog</h3>
-        <p>{{profile_blog.description}}</p>
+    <div class="row profile">
+      <div class="card-panel profile-card">
+        <div class="row valign-wrapper">
+          <div class="col s4 m2 l1 center-align">
+            <img src="{{profile.profile_img_url}}" alt="" class="circle responsive-img">
+          </div>
+          <div class="col s8 m10 l11">
+            <h4>
+              {{profile.username}}'s blog
+            </h4>
+            <p>{{profile_blog.description}}</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -43,7 +52,7 @@ Bloggy | Profile
               <p class="read-time">{{post.read_time}} minute(s), {{post.views}} views</p>
           </div>
         <div class="card-action">
-          <a href="{{url_for('post_page', post_id=post._id)}}" class="card-link">Read</a>
+          <a href="{{url_for('post.post_page', post_id=post._id)}}" class="card-link">Read</a>
         </div>
       </div>
     </div>
