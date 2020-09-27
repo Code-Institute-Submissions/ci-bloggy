@@ -28,7 +28,7 @@ def check_existing_blog(blog_name):
     return mongo.db.blogs.find_one({"title-slug": blog_name})
 
 
-def get_current_user_id(username):
+def get_user_id_from_username(username):
     '''Helper for getting users id using their username'''
     return mongo.db.users.find_one({"username": username})["_id"]
 
@@ -46,3 +46,7 @@ def get_user_from_id(user_id):
 def get_blog_from_user_id(user_id):
     '''Helper for getting blogs using creators id'''
     return mongo.db.blogs.find_one({"owner_id": user_id})
+
+def get_user_from_username(username):
+    '''Helper for getting user based on their username'''
+    return mongo.db.users.find_one({"username": username})
