@@ -41,9 +41,9 @@ Bloggy | Register
         </div>
         <div class="input-field col s12">
           <i class="material-icons prefix">image</i>
-          {{ form.profile_image_url }}
-          {% if form.profile_image_url.errors %}
-          <ul class="center-align">{% for error in form.profile_image_url.errors %}<li style="font-size: small; color: #F1007C;">
+          {{ form.profile_img_url }}
+          {% if form.profile_img_url.errors %}
+          <ul class="center-align">{% for error in form.profile_img_url.errors %}<li style="font-size: small; color: #F1007C;">
               {{ error }}</li>{% endfor %}</ul>
           {% endif %}
           <label for="icon_prefix">Your profile picture/avatar</label>

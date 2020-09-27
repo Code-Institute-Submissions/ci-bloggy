@@ -43,7 +43,7 @@ class RegisterForm(FlaskForm):
                                 InputRequired(
                                 message="This field is requried"),
                                 username_check])
-    profile_image_url = StringField('image_url', validators=[
+    profile_img_url = StringField('image_url', validators=[
         DataRequired(),
         URL(message="Please input a valid URL"),
         InputRequired(message="This field is requried")])
