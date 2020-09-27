@@ -4,6 +4,18 @@
 
 ## Testing
 
+## Table of Contents
+1. [**Testing**](#testing)
+    - [**Home page and posts displaying**](#🛠-home-page-and-posts-displaying)
+    - [**Home page and posts searching**](#🛠-home-page-and-posts-searching)
+    - [**Home page posts sorting**](##🛠-home-page-posts-sorting)
+    - [**Registration form**](#🛠-registration-gorm)
+    - [**Login form**](#🛠-login-form)
+    - [**Write a new post form**](#🛠-write-a-new-post-form)
+    - [**Read a single post**](#🛠-read-a-single-post)
+    - [**Edit a post**](#🛠-edit-a-post)
+    - [**Delete a post**](#🛠-delete-a-post)
+
 ### 🛠 Home page and posts displaying
 
 Once home page loads, users are presented with all posts on Bloggy. First 6 posts are present on page with pagination displayed at the bottom of the page for navigation to more posts.
@@ -23,6 +35,63 @@ If users chooses to sort by most recent first, filter on database query is utili
 Similarly for oldest first, database query is utilised to filter it by *last_updated* in ascending order.
 
 To sort by popularity, database query is used to filter results by *views* which is also displaying on post cards next to read time.
+
+### 🛠 Registration form
+
+WTForms validators are used to validate all forms on the site along some custom checks (ie. if the username exists in the database or not etc.)
+
+All validators used in the registration form can be seen in `forms.py` file and more about WTForms validators can be read about [here](https://wtforms.readthedocs.io/en/2.3.x/validators/)
+
+If the validation of any of the fields fails on submit, a message will be displayed under the field in red text. 
+
+If the validation is successful user's details - username, email, password and profile picture are stored in the users collection & their blog title and description are stored in the blogs collection.
+
+Once user is successfully registered they are redirected to the login form with a flash message informing them they've been successfully registered.
+
+### 🛠 Login form
+
+Similarly to the [registration form](#registration-form), WTForms is used to preform validation checks of the form. 
+
+All validators used in the registration form can be seen in `forms.py` file.
+
+If the validation of any of the fields fails on submit, a message will be displayed under the field in red text. 
+
+Users details - username and password are compared to the ones in the database (password hash is checked using [bcrypt](https://flask-bcrypt.readthedocs.io/en/latest/)). If the details match user will be brought to their user page with flash message informing them they've been successfully logged in. If the details do not match, flash message will display "Details incorrect".
+
+### 🛠 Write a new post form
+
+Once again, WTForms is used to validate form on this page, all validators used in the registration form can be seen in `forms.py` file.
+
+If the validation of any of the fields fails on submit, a message will be displayed under the field in red text. 
+
+Should an anonymous user try and access the `/user/new_post` page, they will be redirected to the login page with a flash message reading *You must be logged in to create a new post*
+
+### 🛠 Read a single post
+
+By clicking *Read* on the post card user will be brought to the `/post/<post_id>` page where, by using post ID, post title, image, body and author details will be pulled from the database. Reader is able to visit author's profile by clicking on *Visit their profile* link under the author's name.
+
+### 🛠 Edit a post
+
+*Edit* option will only appear on the post card if the user is logged in as the creator of the post or if the logged in user is admin. By clicking on the edit link user is essentially brought back to the pre-populated 'New post" page where they are able to edit any post data they like. 
+
+WTForms is used to validate form on this page, all validators used in the registration form can be seen in `forms.py` file.
+
+If the validation of any of the fields fails on submit, a message will be displayed under the field in red text. 
+
+Should an anonymous user try and access the `/post/<post_id>/edit` page, they will be redirected to the home page with a flash message reading *You don't have permission to edit this post*
+
+### 🛠 Delete a post
+
+*Delete* option will only appear on the post card if the user is logged in as the creator of the post or if the logged in user is admin. By clicking on the delete link, a modal is displayed to the user prompting them to confirm the deletion of the post and warning them that that action cannot be undone. 
+
+If the user click's *Delete* the modal will disappear and the post will be deleted. If the user click's cancel, the modal will disappear but the post will not get deleted. 
+
+Should an anonymous user try and access the `/post/<post_id>/delete` page, they will be redirected to the home page with a flash message reading *You don't have permission to delete this post*
+
+
+
+
+
 
 
 
