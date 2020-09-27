@@ -7,8 +7,8 @@ from slugify import slugify
 from datetime import datetime
 from flask_paginate import Pagination, get_page_parameter
 from bloggy.utilities import (all_posts, check_username,
-                              get_current_user_id, get_users_posts,
-                              get_user_from_id, get_blog_from_user_id)
+                              get_user_id_from_username, get_users_posts,
+                              get_user_from_id, get_blog_from_user_id, get_user_from_username)
 
 
 @app.route('/', methods=("GET", "POST"))
@@ -47,7 +47,7 @@ def index():
         return render_template(
         'index.html', all_posts=all_posts,
         pagination=pagination, sorting_value=sorting_value)
-    current_user_id = get_current_user_id(current_user)
+    current_user_id = get_user_id_from_username(current_user)
     return render_template(
     'index.html', all_posts=all_posts,
     pagination=pagination, sorting_value=sorting_value, current_user_id=current_user_id)
@@ -147,13 +147,36 @@ def user_page():
         users_posts = mongo.db.posts.find().skip((page-1) * per_page).limit(per_page)
     if current_user != 'admin':
     # Get current user ID
-        current_user_id = ObjectId(get_current_user_id(current_user))
+        current_user_id = ObjectId(get_user_id_from_username(current_user))
         # Get current user's posts
         users_posts = get_users_posts(current_user_id).skip((page-1) * per_page).limit(per_page)
     pagination = Pagination(
         page=page, per_page=per_page, total=users_posts.count(),
         record_name='users_posts')
     return render_template('user.html', users_posts=users_posts, pagination=pagination)
+
+
+
+@app.route('/profile/<username>')
+def profile_page(username):
+    '''Define user profile page route'''
+    # Define per page posts number
+    per_page = 6
+    # Define page arg
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    # Get user from the database
+    profile = get_user_from_username(username)
+    # Get user ID from database
+    profile_id = profile["_id"]
+    # Get user's blog
+    profile_blog = get_blog_from_user_id(profile_id)
+    # Get users posts from database
+    profile_posts = get_users_posts(profile_id).skip((page-1) * per_page).limit(per_page)
+    # Define pagination
+    pagination = Pagination(
+        page=page, per_page=per_page, total=profile_posts.count(),
+        record_name='posts')
+    return render_template('profile.html', profile=profile, profile_posts=profile_posts, profile_blog=profile_blog, pagination=pagination)
 
 
 @app.route('/user/new_post', methods=("GET", "POST"))
@@ -170,7 +193,7 @@ def new_post():
         # Get current date and time
         datetimesting = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
         # Get current user ID
-        user_id = ObjectId(get_current_user_id(current_user))
+        user_id = ObjectId(get_user_id_from_username(current_user))
         # Get current user's blog's ID
         blog_id = ObjectId(
             mongo.db.blogs.find_one(
@@ -240,7 +263,7 @@ def edit_post(post_id):
     if current_user != 'admin':
         '''Check what are current user ID and post creator IDs
         (ie.AssertionError if the user is post owner)'''
-        current_user_id = ObjectId(get_current_user_id(current_user))
+        current_user_id = ObjectId(get_user_id_from_username(current_user))
         post_creator_id = mongo.db.posts.find_one(
             {'_id': ObjectId(post_id)})["user_id"]
     '''Check if user is allowed to edit the post
@@ -271,7 +294,7 @@ def edit_post(post_id):
         datetimesting = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
         current_views = post["views"]
         current_user = session.get("user")
-        user_id = ObjectId(get_current_user_id(current_user))
+        user_id = ObjectId(get_user_id_from_username(current_user))
         blog_id = ObjectId(
             mongo.db.blogs.find_one(
                 {"owner_id": user_id})["_id"])
@@ -313,7 +336,7 @@ def delete_post(post_id):
         post_creator_id = mongo.db.posts.find_one(
             {'_id': ObjectId(post_id)})["user_id"]
     if current_user != 'admin':
-        current_user_id = ObjectId(get_current_user_id(current_user))
+        current_user_id = ObjectId(get_user_id_from_username(current_user))
         post_creator_id = mongo.db.posts.find_one(
             {'_id': ObjectId(post_id)})["user_id"]
     # Check if user id and post creator Id match

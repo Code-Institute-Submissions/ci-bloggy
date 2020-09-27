@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}
+Bloggy | Profile
+{% endblock title %}
+{% block main %}
+<header>
+  <!-- Flash messages section -->
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <div class="row center-align">
+    <div class="col s12">
+      <ul class="flashes">
+        {% for message in messages %}
+        <li class="flash-message">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% endif %}
+  {% endwith %}
+  <!-- Header section -->
+  <div class="login-hero">
+    <div class="row">
+      <div class="col s12 m12 left-align greeting">
+        <h3>{{profile.username}}'s blog</h3>
+        <p>{{profile_blog.description}}</p>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- User's posts cards section -->
+<main>
+  <div class="row">
+    {% for post in profile_posts %}
+    <div class="col s12 l4">
+      <div class="card card-panel hoverable">
+          <div class="card-image center-align" style:"background-image: url({{post.image_url}})">
+              <img src="{{post.image_url}}" class="card-img">
+          </div>
+          <div class="card-content">
+              <h4 class="card-title">{{post.title}}</h4>
+              <p>{{post.description}}</p>
+              <p class="read-time">{{post.read_time}} minute(s), {{post.views}} views</p>
+          </div>
+        <div class="card-action">
+          <a href="{{url_for('post_page', post_id=post._id)}}" class="card-link">Read</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <!-- Pagination -->
+  <div class="row center-align">
+    {% if profile_posts.count() > 1 %}
+    {{ pagination.info }}
+    {% endif %}
+    {{ pagination.links }}
+</div>
+</main>
+
+{% endblock %}
