@@ -157,7 +157,7 @@ def delete_post(post_id):
     # Check if user is logged in, if not flash message & redirect to index
     if current_user is None:
         flash("You don't have permission to delete this post")
-        return redirect(request.url)
+        return redirect(url_for('main.index'))
     # Check if user is admin if it is, inject 
     # correct user id based
     # on the post to allow deletion
