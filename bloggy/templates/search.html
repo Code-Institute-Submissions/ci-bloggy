@@ -27,7 +27,7 @@ Bloggy | Search
     <div class="row search-field center-align">
         <form class="col s12 l6 offset-l3" method="POST" action="{{url_for('main.search')}}">
             <div class="input-field">
-                <input id="search" type="search" name="search" required value="{{search_request}}">
+                <input id="search" type="search" name="search" required value="{{session.get("search")}}">
                 <label class="label" for="search">Search for blog posts by title, description or text within</label>
                 <button class="waves-effect waves-light btn bloggy-button" type="submit">Search</button>
                 <i class="material-icons">close</i>
