@@ -45,7 +45,7 @@ def index():
     current_user_id = get_user_id_from_username(current_user)
     return render_template(
     'index.html', all_posts=all_posts,
-    pagination=pagination, sorting_value=sorting_value, current_user_id=current_user_id)
+    pagination=pagination, sorting_value=sorting_value, current_user_id=current_user_id, current_user=current_user)
 
 
 @main.route('/search', methods=("GET", "POST"))

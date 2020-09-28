@@ -91,7 +91,7 @@ Bloggy | Home
                 </div>
                 <div class="card-action">
                     <a href="{{url_for('post.post_page', post_id=post._id)}}" class="card-link">Read</a>
-                    {% if current_user_id == post.user_id %}
+                    {% if (current_user == 'admin' or current_user_id == post.user_id) %}
                     <a href="{{url_for('post.edit_post', post_id=post._id)}}" class="card-link">Edit</a>
                     <a href="#modal1" class="red-text text-darken-1 modal-trigger">Delete</a>
                     <div id="modal1" class="modal">
