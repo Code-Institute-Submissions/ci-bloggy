@@ -306,3 +306,11 @@ ul.select-dropdown>li>span {
         margin: 0
     }
 }
+
+/* * Custom media queries for tablet devices */
+@media only screen and (max-width: 992px) {
+    .card-image img {
+        object-fit: cover;
+        height: 50vw;
+    }
+}
