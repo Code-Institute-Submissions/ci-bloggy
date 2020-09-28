@@ -113,12 +113,12 @@ Font used on the website is [Noto Sans KR from Google Fonts](https://fonts.googl
 
 ### Existing Features
 
-🟢 **Home page**
+🟢 **Home page** (C**R**UD)
 
 Home page displays all posts to the user and user is able to search for specific post based on title, description or body of the post and is able to sort all posts by: Newest first, oldest first, title (A-Z), title (Z-A) & popularity (based on number of views).
 User can also click on 'Start creating' to either log in (if not already logged in) or to be redirected to 'New post' page.
 
-🟢 **Login/Register page**
+🟢 **Login/Register page** (**CR**UD)
 
 Anyone can register an user account and a blog for free.
 
@@ -126,15 +126,15 @@ When registering user is prompted for their personal details - username, email a
 
 User can also log into their account which if successful will bring them to the user page.
 
-🟢 **User page**
+🟢 **User page** (**CR**UD)
 
 User's page is where logged in user's are able view all their posts (in a card view), read the post, edit the post or delete the post.
 
-🟢 **Profile/Blog page**
+🟢 **Profile/Blog page** (C**R**UD)
 
 Profile page/Blog page is where anyone can view one user's blog, it's description and all their posts. 
 
-🟢 **New post page**
+🟢 **New post page** (**C**RUD)
 
 Registered users can create new posts by clicking 'Start creating' on home page or by clicking 'New Post' on their user page.
 
@@ -145,17 +145,21 @@ To create new post, users need to:
 4. Provide a URL to an image to be used as a cover
 5. Add in approximate reading time
 
-🟢 **Edit post page**
+🟢 **Edit post page** (CR**U**D)
 
 Only post creator (& superuser Admin) can edit a post.
 
 The form is exactly the same as outlined in [new post page](#new-post-page) section above but it is pre-filled with post data pulled from the database.
 
-🟢 **Search**
+🟢 **Delete post page** (CRU**D**)
+
+Only post creator (& superuser Admin) can delete a post.
+
+🟢 **Search** (C**R**UD)
 
 Users are able to search for posts based on post title, description or text within the body. 
 
-🟢 **Administrative features**
+🟢 **Administrative features** (**CRUD**)
 
 'admin' user is registered by myself and is able to edit and delete all posts for the database. 
 
