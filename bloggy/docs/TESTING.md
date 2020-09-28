@@ -20,9 +20,13 @@
 
 Once home page loads, users are presented with all posts on Bloggy. First 6 posts are present on page with pagination displayed at the bottom of the page for navigation to more posts.
 
+If the user is logged in, underneath their posts, alongside read link, edit and delete links will be displayed. Similarly if admin user is logged in, edit and delete links will display for all posts.
+
 ### 🛠 Home page and posts searching
 
 MongoDB text search is utilised to search the database based on user's query. Indexes are set up for *title*, *description* & *body* fields - hence, users can search for posts based on title, description or tags. 
+
+If the user is logged in, underneath their posts, alongside read link, edit and delete links will be displayed. Similarly if admin user is logged in, edit and delete links will display for all posts.
 
 Note that MongoDB is automatically ignoring 'stop' words, more on which can be read [here](https://docs.mongodb.com/manual/reference/operator/query/text/#stop-words). These can be disabled by creating an index but I've chosen not to disable them.
 
@@ -57,6 +61,14 @@ All validators used in the registration form can be seen in `forms.py` file.
 If the validation of any of the fields fails on submit, a message will be displayed under the field in red text. 
 
 Users details - username and password are compared to the ones in the database (password hash is checked using [bcrypt](https://flask-bcrypt.readthedocs.io/en/latest/)). If the details match user will be brought to their user page with flash message informing them they've been successfully logged in. If the details do not match, flash message will display "Details incorrect".
+
+### 🛠 User/profile page 
+
+User/profile page displays user's profile photo, blog title and blog description. Underneath that, user's posts are displayed. 
+
+Users are able to sort posts - refer to [**Home page posts sorting**](##🛠-home-page-posts-sorting) section for explanation and details.
+
+If the user that's logged in is viewing their own profile, underneath their posts, alongside read link, edit and delete links will be displayed. Similarly if admin user is logged in, edit and delete links will be displayed.
 
 ### 🛠 Write a new post form
 
