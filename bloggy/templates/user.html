@@ -20,15 +20,28 @@ Bloggy | User
   {% endwith %}
   <!-- Header section -->
   <div class="login-hero">
-    <div class="row">
-      <div class="col s12 m6 left-align greeting">
-        <h3>Hi there {{ session["user"] }}!</h3>
-      </div>
-      <div class="col s12 m6 right-align controls">
-        <a class="waves-effect btn bloggy-button right-align profile-controls" href="{{ url_for('post.new_post') }}">Write a new post</a>
+    <div class="row profile">
+      <div class="card-panel profile-card">
+        <div class="row valign-wrapper">
+          <div class="col s12 m2 l1 center-align">
+            <img src="{{user.profile_img_url}}" alt="" class="circle responsive-img">
+          </div>
+          <div class="col s12 m16 l11">
+            <h4>
+              {{blog.title}}
+            </h4>
+            <p>{{blog.description}}</p>
+          </div>
+          <div class="col s12 m4 right-align controls hide-on-small-only">
+            <a class="waves-effect btn bloggy-button right-align profile-controls" href="{{ url_for('post.new_post') }}">Start writing</a>
+        </div>
       </div>
     </div>
-  </div>
+    <div class="row show-on-small hide-on-med-and-up">
+      <div class="col s12 center-align">
+        <a class="waves-effect btn bloggy-button center-align profile-controls" href="{{ url_for('post.new_post') }}">Start writing</a>
+      </div>
+    </div>
 </header>
 <!-- User's posts cards section -->
 <main>

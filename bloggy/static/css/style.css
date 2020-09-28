@@ -172,6 +172,7 @@ p.small {
 
 .profile-controls {
     margin-top: 20px;
+    display: inline-block;
 }
 
 /* * Single post page styles */

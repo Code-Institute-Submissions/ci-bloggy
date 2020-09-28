@@ -6,7 +6,8 @@ from bloggy.forms import RegisterForm, LoginForm
 from slugify import slugify
 from flask_paginate import Pagination, get_page_parameter
 from bloggy.utilities import (check_username,
-                              get_user_id_from_username, get_users_posts)
+                              get_user_id_from_username, get_users_posts,
+                              get_blog_from_user_id, get_user_from_username)
 
 user = Blueprint("user", __name__)
 
@@ -87,18 +88,20 @@ def user_page():
     per_page = 6
     # Get current user
     current_user = session.get("user")
+    # Get current user, ID & blog
+    user = get_user_from_username(current_user)
+    current_user_id = user["_id"]
+    current_blog = get_blog_from_user_id(current_user_id)
     # Check if user is admin if it is, display all posts
     if current_user == 'admin':
         users_posts = mongo.db.posts.find().skip((page-1) * per_page).limit(per_page)
     if current_user != 'admin':
-    # Get current user ID
-        current_user_id = ObjectId(get_user_id_from_username(current_user))
         # Get current user's posts
         users_posts = get_users_posts(current_user_id).skip((page-1) * per_page).limit(per_page)
     pagination = Pagination(
         page=page, per_page=per_page, total=users_posts.count(),
-        record_name='users_posts')
-    return render_template('user.html', users_posts=users_posts, pagination=pagination)
+        record_name='posts')
+    return render_template('user.html', users_posts=users_posts, pagination=pagination, blog=current_blog, user=user)
 
 
 
