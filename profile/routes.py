@@ -1,5 +1,5 @@
 from flask import (
-    Blueprint, render_template, request)
+    Blueprint, render_template, request, session)
 from bloggy import app, mongo
 from flask_paginate import Pagination, get_page_parameter
 from bloggy.utilities import (get_users_posts, get_blog_from_user_id, get_user_from_username)
@@ -38,10 +38,13 @@ def profile_page(username):
     if request.form.get('sort') is None:
         profile_posts = get_profile_posts_pagination
     sorting_value = request.form.get('sort')
+    # Get current user 
+    current_user = session.get("user")
     # Define pagination
     pagination = Pagination(
         page=page, per_page=per_page, total=profile_posts.count(),
         record_name='posts')
     return render_template('profile.html', profile=profile,
                            profile_posts=profile_posts, profile_blog=profile_blog,
-                           pagination=pagination, profile_username=profile_username)
+                           pagination=pagination, profile_username=profile_username,
+                           current_user=current_user)
