@@ -6,7 +6,6 @@ Bloggy | Edit {{post.title}}
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
 </script>
-<!-- Summernote Editor CSS & JS -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 {% endblock external_css %}
@@ -31,12 +30,11 @@ Bloggy | Edit {{post.title}}
             </div>
         </div>
 </header>
-<!-- Main content area -->
 <main>
+    <!-- Register form -->
     <div class="row">
         <form class="col s12" method="POST" action="{{ url_for('post.edit_post', post_id=post._id)}}">
             {{ form.csrf_token }}
-            <div class="row">
                 <div class="input-field col s12">
                     {{ form.title(class_="new-post-title", value=post.title) }}
                     {% if form.title.errors %}
@@ -47,56 +45,55 @@ Bloggy | Edit {{post.title}}
                     <label for="title">Your post title</label>
                 </div>
                 <div class="input-field col s12">
-                    {{ form.description(value=post.description)}}
+                    {{ form.description(value=post.description) }}
                     {% if form.title.errors %}
                     <ul class="center-align">{% for error in form.description.errors %}<li
                             style="font-size: small; color: #F1007C;">
                             {{ error }}</li>{% endfor %}</ul>
                     {% endif %}
                     <label for="title">Your post description</label>
-                    <p class="small center-align">Please provide a short description such as: Part 5 of my USA travel
-                        blog</p>
+                    <p class="small center-align">Please provide a short description such as: Part 5 of my USA travel blog</p>
                 </div>
                 <div class="input-field col s12">
                     <textarea id="summernote" name="post_body">{{ post.body }}</textarea>
                 </div>
-                <div class="input-field col s12">
-                    {{ form.image_url(value=post.image_url) }}
-                    {% if form.image_url.errors %}
-                    <ul class="center-align">
-                        {% for error in form.image_url.errors %}
-                        <li style="font-size: small; color: #F1007C;">
-                            {{ error }}
-                        </li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                    <label for="title">Post Image URL</label>
-                    <p class="small center-align">Please use only direct image links - ie. they must end in *.jpg/*.png
-                        or
-                        similar</p>
+            <div class="input-field col s12">
+                {{ form.image_url(value=post.image_url) }}
+                {% if form.image_url.errors %}
+                <ul class="center-align">
+                    {% for error in form.image_url.errors %}
+                    <li style="font-size: small; color: #F1007C;">
+                        {{ error }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <label for="title">Post Image URL</label>
+                <p class="small center-align">Please paste direct image links - ie. they must end in *.jpg/*.png or
+                    similar. We suggest you use Imgur or similar service to host your images</p>
+            </div>
+            <div class="input-field col s12">
+                {{ form.read_time(value=post.read_time) }}
+                {% if form.read_time.errors %}
+                <ul class="center-align">
+                    {% for error in form.read_time.errors %}
+                    <li style="font-size: small; color: #F1007C;">
+                        {{ error }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <label for="title">Read time</label>
+                <p class="small center-align">Please specify required reading time in minutes</p>
+            </div>
+            <div class="row">
+                <div class="col 12">
+                    <button class="btn waves-effect bloggy-button" type="submit" name="action">Submit post</button>
                 </div>
-                <div class="input-field col s12">
-                    {{ form.read_time(value=post.read_time) }}
-                    {% if form.read_time.errors %}
-                    <ul class="center-align">
-                        {% for error in form.read_time.errors %}
-                        <li style="font-size: small; color: #F1007C;">
-                            {{ error }}
-                        </li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                    <label for="title">Read time</label>
-                    <p class="small center-align">Please specify required reading time in minutes</p>
-                </div>
-                <div class="row">
-                    <div class="col 12">
-                        <button class="btn waves-effect bloggy-button" type="submit" name="action">Submit post</button>
-                    </div>
-                </div>
+            </div>
         </form>
     </div>
+</div>
 </main>
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 {% endblock %}
