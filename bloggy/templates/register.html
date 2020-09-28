@@ -21,13 +21,13 @@ Bloggy | Register
         {% if messages %}
         <div class="row center-align">
           <div class="col s12">
-              <ul class="flashes">
-                  {% for message in messages %}
-                  <li class="flash-message">{{ message }}</li>
-                  {% endfor %}
-              </ul>
+            <ul class="flashes">
+              {% for message in messages %}
+              <li class="flash-message">{{ message }}</li>
+              {% endfor %}
+            </ul>
           </div>
-      </div>
+        </div>
         {% endif %}
         {% endwith %}
         <div class="input-field col s12">
@@ -43,7 +43,8 @@ Bloggy | Register
           <i class="material-icons prefix">image</i>
           {{ form.profile_img_url }}
           {% if form.profile_img_url.errors %}
-          <ul class="center-align">{% for error in form.profile_img_url.errors %}<li style="font-size: small; color: #F1007C;">
+          <ul class="center-align">{% for error in form.profile_img_url.errors %}<li
+              style="font-size: small; color: #F1007C;">
               {{ error }}</li>{% endfor %}</ul>
           {% endif %}
           <label for="icon_prefix">Your profile picture/avatar</label>

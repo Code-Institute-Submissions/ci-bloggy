@@ -33,15 +33,17 @@ Bloggy | User
             <p>{{blog.description}}</p>
           </div>
           <div class="col s12 m4 right-align controls hide-on-small-only">
-            <a class="waves-effect btn bloggy-button right-align profile-controls" href="{{ url_for('post.new_post') }}">Start writing</a>
+            <a class="waves-effect btn bloggy-button right-align profile-controls"
+              href="{{ url_for('post.new_post') }}">Start writing</a>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="row show-on-small hide-on-med-and-up">
-      <div class="col s12 center-align">
-        <a class="waves-effect btn bloggy-button center-align profile-controls" href="{{ url_for('post.new_post') }}">Start writing</a>
+      <div class="row show-on-small hide-on-med-and-up">
+        <div class="col s12 center-align">
+          <a class="waves-effect btn bloggy-button center-align profile-controls"
+            href="{{ url_for('post.new_post') }}">Start writing</a>
+        </div>
       </div>
-    </div>
 </header>
 <!-- User's posts cards section -->
 <main>
@@ -49,14 +51,14 @@ Bloggy | User
     {% for post in users_posts %}
     <div class="col s12 l4">
       <div class="card card-panel hoverable">
-          <div class="card-image center-align" style:"background-image: url({{post.image_url}})">
-              <img src="{{post.image_url}}" class="card-img">
-          </div>
-          <div class="card-content">
-              <h4 class="card-title">{{post.title}}</h4>
-              <p>{{post.description}}</p>
-              <p class="read-time">{{post.read_time}} minute(s), {{post.views}} views</p>
-          </div>
+        <div class="card-image center-align" style:"background-image: url({{post.image_url}})">
+          <img src="{{post.image_url}}" class="card-img">
+        </div>
+        <div class="card-content">
+          <h4 class="card-title">{{post.title}}</h4>
+          <p>{{post.description}}</p>
+          <p class="read-time">{{post.read_time}} minute(s), {{post.views}} views</p>
+        </div>
         <div class="card-action">
           <a href="{{url_for('post.post_page', post_id=post._id)}}" class="card-link">Read</a>
           <a href="{{url_for('post.edit_post', post_id=post._id)}}" class="card-link">Edit</a>
@@ -67,7 +69,8 @@ Bloggy | User
               <p>Once you delete this post, you will not be able to restore it again</p>
             </div>
             <div class="modal-footer">
-              <a href="{{url_for('post.delete_post', post_id=post._id)}}" class="modal-close red-text text-darken-1 ">Delete</a>
+              <a href="{{url_for('post.delete_post', post_id=post._id)}}"
+                class="modal-close red-text text-darken-1 ">Delete</a>
               <a href="" class="modal-close card-link">Cancel</a>
             </div>
           </div>
@@ -82,7 +85,7 @@ Bloggy | User
     {{ pagination.info }}
     {% endif %}
     {{ pagination.links }}
-</div>
+  </div>
 </main>
 
 {% endblock %}

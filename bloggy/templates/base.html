@@ -16,7 +16,8 @@
   <!-- * Nav bar -->
   <nav>
     <div class="nav-wrapper">
-      <a href="{{ url_for('main.index') }}" class="brand-logo"><img src="{{ url_for('static', filename='img/logo.svg') }}" alt=""></a>
+      <a href="{{ url_for('main.index') }}" class="brand-logo"><img
+          src="{{ url_for('static', filename='img/logo.svg') }}" alt=""></a>
       <a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
         <li><a href="{{ url_for('main.index') }}">Home</a></li>
@@ -33,13 +34,13 @@
   <!-- * Mobile side nav bar -->
   <ul class="sidenav" id="mobile">
     <li><a href="{{ url_for('main.index') }}">Home</a></li>
-        {% if session.user %}
-        <li><a href="{{ url_for('main.index') }}">Profile</a></li>
-        <li><a href="{{ url_for('user.logout') }}" class="login-register">Log out</a></li>
-        {% endif %}
-        {% if session.user == Null %}
-        <li><a href="{{ url_for('user.login') }}" class="login-register">Log in/Register</a></li>
-        {% endif %}
+    {% if session.user %}
+    <li><a href="{{ url_for('main.index') }}">Profile</a></li>
+    <li><a href="{{ url_for('user.logout') }}" class="login-register">Log out</a></li>
+    {% endif %}
+    {% if session.user == Null %}
+    <li><a href="{{ url_for('user.login') }}" class="login-register">Log in/Register</a></li>
+    {% endif %}
     <hr class="sidemenu-hr">
     <br>
     <div class="center-align"><img src="{{ url_for('static', filename='img/logo_greyscale.svg') }}" alt=""
@@ -56,4 +57,5 @@
 
   {% endblock footer %}
 </body>
+
 </html>

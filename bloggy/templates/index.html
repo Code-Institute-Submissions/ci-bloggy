@@ -3,7 +3,7 @@
 Bloggy | Home
 {% endblock title %}
 {% block main %}
-{% block external_css %} 
+{% block external_css %}
 <!-- Fontawesome CDN only used for footer icons -->
 <script src="https://kit.fontawesome.com/2f59828723.js" crossorigin="anonymous"></script>
 {% endblock external_css %}
@@ -29,7 +29,8 @@ Bloggy | Home
             <div class="col s12 m6 l7 hide-on-small-only">
                 <h1>Home of the blogs you love.</h1>
                 {% if session.user != Null %}
-                <a class="waves-effect btn-large bloggy-button" href="{{ url_for('post.new_post') }}">Write a new post</a>
+                <a class="waves-effect btn-large bloggy-button" href="{{ url_for('post.new_post') }}">Write a new
+                    post</a>
                 {% endif %}
                 {% if session.user == Null %}
                 <a class="waves-effect btn-large bloggy-button" href="{{ url_for('user.login') }}">Start creating</a>
@@ -64,7 +65,7 @@ Bloggy | Home
     </div>
     <div class="row">
         <div class="col s12 l4 offset-l4">
-            <form action="{{url_for('main.index')}}", method="POST">
+            <form action="{{url_for('main.index')}}" , method="POST">
                 <select name="sort" onchange="this.form.submit()">
                     <option value="" disabled {% if sorting_value == None %}selected{% endif %}>Sort posts by:</option>
                     <option value="1" {% if sorting_value == "1" %}selected{% endif %}>Most recent first</option>
@@ -78,7 +79,7 @@ Bloggy | Home
     </div>
     <!-- All posts cards section -->
     <div class="row cards">
-    {% for post in all_posts %}
+        {% for post in all_posts %}
         <div class="col s12 l4">
             <div class="card card-panel hoverable">
                 <div class="card-image center-align" style:"background-image: url({{post.image_url}})">
@@ -96,14 +97,15 @@ Bloggy | Home
                     <a href="#modal1" class="red-text text-darken-1 modal-trigger">Delete</a>
                     <div id="modal1" class="modal">
                         <div class="modal-content">
-                          <h4>Are you sure?</h4>
-                          <p>Once you delete this post, you will not be able to restore it again</p>
+                            <h4>Are you sure?</h4>
+                            <p>Once you delete this post, you will not be able to restore it again</p>
                         </div>
                         <div class="modal-footer">
-                          <a href="{{url_for('post.delete_post', post_id=post._id)}}" class="modal-close red-text text-darken-1 ">Delete</a>
-                          <a href="" class="modal-close card-link">Cancel</a>
+                            <a href="{{url_for('post.delete_post', post_id=post._id)}}"
+                                class="modal-close red-text text-darken-1 ">Delete</a>
+                            <a href="" class="modal-close card-link">Cancel</a>
                         </div>
-                      </div>
+                    </div>
                     {% endif %}
                 </div>
             </div>
@@ -128,12 +130,13 @@ Bloggy | Home
 {% block footer %}
 <footer class="page-footer center-align">
     <div class="footer-copyright">
-      <div class="container">
-      © 2020 Ivan Branimir Skoric
-      <br>
-      <a class="grey-text text-lighten-4" href="https://www.linkedin.com/in/ivan-branimir-skoric-2804b2123/"><i class="fab fa-linkedin"></i></a>
-      <a class="grey-text text-lighten-4" href="https://github.com/ib-skoric"><i class="fab fa-github"></i></a>
-      </div>
+        <div class="container">
+            © 2020 Ivan Branimir Skoric
+            <br>
+            <a class="grey-text text-lighten-4" href="https://www.linkedin.com/in/ivan-branimir-skoric-2804b2123/"><i
+                    class="fab fa-linkedin"></i></a>
+            <a class="grey-text text-lighten-4" href="https://github.com/ib-skoric"><i class="fab fa-github"></i></a>
+        </div>
     </div>
-  </footer>
+</footer>
 {% endblock footer %}

@@ -38,18 +38,18 @@ Bloggy | Profile
   </div>
   <div class="row">
     <div class="col s12 l4 offset-l4">
-        <form action="{{url_for('profile.profile_page', username=profile_username)}}", method="POST">
-            <select name="sort" onchange="this.form.submit()">
-                <option value="" disabled {% if sorting_value == None %}selected{% endif %}>Sort posts by:</option>
-                <option value="1" {% if sorting_value == "1" %}selected{% endif %}>Most recent first</option>
-                <option value="2" {% if sorting_value == "2" %}selected{% endif %}>Oldest first</option>
-                <option value="3" {% if sorting_value == "3" %}selected{% endif %}>Title (A-Z)</option>
-                <option value="4" {% if sorting_value == "4" %}selected{% endif %}>Title (Z-A)</option>
-                <option value="5" {% if sorting_value == "5" %}selected{% endif %}>Popularity</option>
-            </select>
-        </form>
+      <form action="{{url_for('profile.profile_page', username=profile_username)}}" , method="POST">
+        <select name="sort" onchange="this.form.submit()">
+          <option value="" disabled {% if sorting_value == None %}selected{% endif %}>Sort posts by:</option>
+          <option value="1" {% if sorting_value == "1" %}selected{% endif %}>Most recent first</option>
+          <option value="2" {% if sorting_value == "2" %}selected{% endif %}>Oldest first</option>
+          <option value="3" {% if sorting_value == "3" %}selected{% endif %}>Title (A-Z)</option>
+          <option value="4" {% if sorting_value == "4" %}selected{% endif %}>Title (Z-A)</option>
+          <option value="5" {% if sorting_value == "5" %}selected{% endif %}>Popularity</option>
+        </select>
+      </form>
     </div>
-</div>
+  </div>
 </header>
 <!-- User's posts cards section -->
 <main>
@@ -57,30 +57,31 @@ Bloggy | Profile
     {% for post in profile_posts %}
     <div class="col s12 l4">
       <div class="card card-panel hoverable">
-          <div class="card-image center-align" style:"background-image: url({{post.image_url}})">
-              <img src="{{post.image_url}}" class="card-img">
-          </div>
-          <div class="card-content">
-              <h4 class="card-title">{{post.title}}</h4>
-              <p>{{post.description}}</p>
-              <p class="read-time">{{post.read_time}} minute(s), {{post.views}} views</p>
-          </div>
+        <div class="card-image center-align" style:"background-image: url({{post.image_url}})">
+          <img src="{{post.image_url}}" class="card-img">
+        </div>
+        <div class="card-content">
+          <h4 class="card-title">{{post.title}}</h4>
+          <p>{{post.description}}</p>
+          <p class="read-time">{{post.read_time}} minute(s), {{post.views}} views</p>
+        </div>
         <div class="card-action">
           <a href="{{url_for('post.post_page', post_id=post._id)}}" class="card-link">Read</a>
           {% if (current_user == 'admin' or current_user == username) %}
-                    <a href="{{url_for('post.edit_post', post_id=post._id)}}" class="card-link">Edit</a>
-                    <a href="#modal1" class="red-text text-darken-1 modal-trigger">Delete</a>
-                    <div id="modal1" class="modal">
-                        <div class="modal-content">
-                          <h4>Are you sure?</h4>
-                          <p>Once you delete this post, you will not be able to restore it again</p>
-                        </div>
-                        <div class="modal-footer">
-                          <a href="{{url_for('post.delete_post', post_id=post._id)}}" class="modal-close red-text text-darken-1 ">Delete</a>
-                          <a href="" class="modal-close card-link">Cancel</a>
-                        </div>
-                      </div>
-                    {% endif %}
+          <a href="{{url_for('post.edit_post', post_id=post._id)}}" class="card-link">Edit</a>
+          <a href="#modal1" class="red-text text-darken-1 modal-trigger">Delete</a>
+          <div id="modal1" class="modal">
+            <div class="modal-content">
+              <h4>Are you sure?</h4>
+              <p>Once you delete this post, you will not be able to restore it again</p>
+            </div>
+            <div class="modal-footer">
+              <a href="{{url_for('post.delete_post', post_id=post._id)}}"
+                class="modal-close red-text text-darken-1 ">Delete</a>
+              <a href="" class="modal-close card-link">Cancel</a>
+            </div>
+          </div>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -92,7 +93,7 @@ Bloggy | Profile
     {{ pagination.info }}
     {% endif %}
     {{ pagination.links }}
-</div>
+  </div>
 </main>
 
 {% endblock %}
