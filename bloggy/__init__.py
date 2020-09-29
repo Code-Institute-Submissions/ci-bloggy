@@ -19,10 +19,10 @@ bcrypt = Bcrypt(app)
 
 
 # Import routes and register blueprints
-from main.routes import main
-from profile.routes import profile
-from user.routes import user
-from post.routes import post
+from bloggy.main.routes import main
+from bloggy.profile.routes import profile
+from bloggy.user.routes import user
+from bloggy.post.routes import post
 app.register_blueprint(main)
 app.register_blueprint(profile)
 app.register_blueprint(user)
