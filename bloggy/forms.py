@@ -81,7 +81,7 @@ class RegisterForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    '''Define login fomr'''
+    '''Define login form'''
     def username_validation(form, username):
         '''Define check if username is in database check'''
         if check_username(form.username.data) is None:
@@ -127,3 +127,15 @@ class PostForm(FlaskForm):
         Length(min=1, max=3, message="Please input reading time"
                                      "between 1-999 minutes"),
         InputRequired(message="This field is requried")])
+
+
+class EditProfileForm(FlaskForm):
+    existing_password = PasswordField(
+        'password')
+    new_password = PasswordField(
+        'password')
+    confirm_new_password = PasswordField(
+        'confirm_password')
+    blog_description = StringField(
+        'blog_description', validators=[
+            Length(min=5, max=200)])

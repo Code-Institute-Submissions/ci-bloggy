@@ -34,6 +34,8 @@ Bloggy | User
           </div>
           <div class="col s12 m4 right-align controls hide-on-small-only">
             <a class="waves-effect btn bloggy-button right-align profile-controls"
+              href="{{ url_for('user.edit_user') }}">Edit profile</a>
+            <a class="waves-effect btn bloggy-button right-align profile-controls"
               href="{{ url_for('post.new_post') }}">Write new post</a>
           </div>
         </div>
