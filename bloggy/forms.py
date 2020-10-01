@@ -137,5 +137,4 @@ class EditProfileForm(FlaskForm):
     confirm_new_password = PasswordField(
         'confirm_password')
     blog_description = StringField(
-        'blog_description', validators=[
-            Length(min=5, max=200)])
+        'blog_description')
