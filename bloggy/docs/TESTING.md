@@ -26,6 +26,8 @@ If the user is logged in, underneath their posts, alongside read link, edit and 
 
 MongoDB text search is utilised to search the database based on user's query. Indexes are set up for *title*, *description* & *body* fields - hence, users can search for posts based on title, description or tags. 
 
+By clicking on the cancel button, user is returned back to the index page.
+
 If the user is logged in, underneath their posts, alongside read link, edit and delete links will be displayed. Similarly if admin user is logged in, edit and delete links will display for all posts.
 
 Note that MongoDB is automatically ignoring 'stop' words, more on which can be read [here](https://docs.mongodb.com/manual/reference/operator/query/text/#stop-words). These can be disabled by creating an index but I've chosen not to disable them.
