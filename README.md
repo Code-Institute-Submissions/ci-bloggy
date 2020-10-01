@@ -99,6 +99,13 @@ Balsamiq Wireframes has been used to develop wireframes for this website.
 
 Wireframes are available under links below and are stored within _wireframes_ folder inside _docs_ folder.
 
+[Home page wireframe](bloggy/docs/landing-page.png)
+
+[Blog page wireframe](bloggy/docs/blog-page.png)
+
+[Post page wireframe](bloggy/docs/single-post-page.png)
+
+[Login page wireframe](bloggy/docs/login-page.png)
 
 ### Surface
 
