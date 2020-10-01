@@ -301,10 +301,6 @@ ul.select-dropdown>li>span {
     .image-container {
         height: 100%;
     }
-    .post-content {
-        padding: 0 20px 0 20px;
-        margin: 0
-    }
 }
 
 /* * Custom media queries for tablet devices */
