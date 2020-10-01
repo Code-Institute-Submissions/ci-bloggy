@@ -35,7 +35,7 @@
   <ul class="sidenav" id="mobile">
     <li><a href="{{ url_for('main.index') }}">Home</a></li>
     {% if session.user %}
-    <li><a href="{{ url_for('main.index') }}">Profile</a></li>
+    <li><a href="{{ url_for('user.user_page') }}">Profile</a></li>
     <li><a href="{{ url_for('user.logout') }}" class="login-register">Log out</a></li>
     {% endif %}
     {% if session.user == Null %}
