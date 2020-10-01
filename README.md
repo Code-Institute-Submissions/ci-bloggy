@@ -47,6 +47,8 @@ Bloggy is a blogging platform where users can create their own blog and post to 
 
 📌 As a user I want to register and create my own blog
 
+📌 As a user I want to be able to change my blog description and password
+
 📌 As a user I want to post posts to my blog
 
 📌 As a user I want to be able to edit and delete my own posts
@@ -63,13 +65,15 @@ For readers Bloggy is a way to read about their favourite topics and for creator
 
 Index page features a jumbotron with a slogan of "Home of the blogs you love" and a action button. This action button will either bring the user to the login/register page if they're not logged in or it will read 'Write a new post' if the user is authenticated and will bring them to a page where user is able to write a new post. Underneath the jumbotron, users are able to search for posts by title, description or text within, and are able to sort all the posts visible on the home page by: Newest first, oldest first, title (A-Z), title (Z-A) & popularity (based on number of views).
 
-**SEARCH PAGE STRUCTURE TO BE ADDED IN HERE**
+Search page contains a search bar with search and cancel buttons underneath which found posts are displayed.
 
 Single post page contains the post title & post author details at the top with creator's profile picture and a link to visit their profile/blog. Underneath that is the post image supplied by the user and finally the body of the post.
 
 Profile page/Blog page displays user's blog title & description as well as user's profile picture. Underneath that, all of user's posts are displayed. 
 
-Login page contains simple login form that prompts user for their username and password. Users that aren't registerd yet are invited to register underneath the form.
+Edit profile page features a form where user is asked for their current password, new password and confirmation of the new password (if they wish to change their password), and a field where they can edit their blog description.
+
+Login page contains simple login form that prompts user for their username and password. Users that aren't registered yet are invited to register underneath the form.
 
 Register form contains seven form fields that asks user for:
 1. Username
