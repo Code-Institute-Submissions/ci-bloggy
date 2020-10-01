@@ -50,15 +50,8 @@ def index():
 
 @main.route('/search', methods=("GET", "POST"))
 def search():
-    page = request.args.get(get_page_parameter(), type=int, default=1)
-    per_page = 6
     search_request= request.form.get("search")
-    search_request_string = str(search_request)
-    session["search"] = search_request_string 
-    all_posts = mongo.db.posts.find({"$text": {"$search": session.get("search")}}).skip((page-1) * per_page).limit(per_page)
-    pagination = Pagination(
-        page=page, per_page=per_page,
-        total=all_posts.count(), record_name='all_posts')
-    return render_template('search.html', all_posts=all_posts, pagination=pagination, search_request_string=search_request_string)
+    all_posts = mongo.db.posts.find({"$text": {"$search": search_request}})
+    return render_template('search.html', all_posts=all_posts, search_request=search_request)
 
 
