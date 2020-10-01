@@ -70,6 +70,21 @@ Users are able to sort posts - refer to [**Home page posts sorting**](##🛠-hom
 
 If the user that's logged in is viewing their own profile, underneath their posts, alongside read link, edit and delete links will be displayed. Similarly if admin user is logged in, edit and delete links will be displayed.
 
+### 🛠 Edit profile
+
+Logged in users are able to edit their profiles - more specifically their password and their blog description. 
+
+Users are able to access this page by clicking *Edit Profile* button on their profile page. 
+
+Should an anonymous user try and access the `/user/edit` page, they will be redirected to the home page with a flash message reading *You must be logged in to access this page*
+
+In this case, WTForms is used to create the form but the form itself is validated manually to give the user to either just change the blog description, just the password or both at one time. 
+
+If the user's current password doesn't match one stored in the database a message reading *Current password is not correct* will be displayed. 
+
+If the user inputs correct password but leaves the new password fields empty, a message reading *You entered your existing password but not the new password. Please check your fields and try again.*
+
+
 ### 🛠 Write a new post form
 
 Once again, WTForms is used to validate form on this page, all validators used in the registration form can be seen in `forms.py` file.
