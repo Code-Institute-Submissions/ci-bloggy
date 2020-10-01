@@ -124,28 +124,35 @@ def edit_user():
         if form.validate_on_submit():
             # Check that existing password is not empty
             if form.existing_password.data != '':
-                # Check that new password and confirm new password match
-                if form.new_password.data == form.confirm_new_password.data:
-                    # check that existing password matches the db entry
-                    if bcrypt.check_password_hash(user["password"], password_to_check):
-                        new_password = bcrypt.generate_password_hash(
-                form.new_password.data).decode('utf-8')
-                        update_password = { "$set": { "password": new_password } }
-                        mongo.db.users.update(user, update_password)
-                        flash("Profile successfully updated")
-                        return redirect(url_for('user.user_page'))
-                    else:
-                        flash("Current password is not correct")
+                    if form.new_password.data and form.confirm_new_password.data != '':
+                    # Check that new password and confirm new password match
+                        if form.new_password.data == form.confirm_new_password.data:
+                            # check that existing password matches the db entry
+                            if bcrypt.check_password_hash(user["password"], password_to_check):
+                                new_password = bcrypt.generate_password_hash(
+                                    form.new_password.data).decode('utf-8')
+                                update_password = { "$set": { "password": new_password } }
+                                mongo.db.users.update(user, update_password)
+                                flash("Profile successfully updated")
+                                return redirect(url_for('user.user_page'))
+                            else:
+                                flash("Current password is not correct")
+                                return redirect(url_for('user.edit_user'))
+                        else: 
+                            flash("Passwords must match")
+                            return redirect(url_for('user.edit_user'))
+                    else: 
+                        flash("You entered your existing password but not the new password. Please check your fields and try again")
                         return redirect(url_for('user.edit_user'))
-                else: 
-                    flash("Passwords must match")
-                    return redirect(url_for('user.edit_user'))
             if form.blog_description.data != '':
                     new_description = form.blog_description.data
                     update_description = { "$set": { "description": new_description } }
                     mongo.db.blogs.update(blog, update_description)
                     flash("Profile successfully updated")
                     return redirect(url_for('user.user_page'))
+            else:
+                flash("Description field can't be empty")
+                return redirect(url_for('user.edit_user'))
         return render_template('edit_user.html', user=user, current_blog_description=current_blog_description, form=form, current_user=current_user)
     flash("You must be logged in to access this page")
     return redirect(url_for('main.index'))
