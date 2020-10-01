@@ -287,6 +287,9 @@ ul.select-dropdown>li>span {
         padding-top: 0;
         margin-bottom: 0;
     }
+    .input-field>label {
+        font-size: 0.9em;
+    }
     h1 {
         font-size: 3rem;
     }
