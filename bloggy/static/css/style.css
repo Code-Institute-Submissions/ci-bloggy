@@ -176,6 +176,10 @@ p.small {
     display: inline-block;
 }
 
+.no-posts-found {
+    color: #7d7d7e65;
+}
+
 /* * Single post page styles */
 
 .title,

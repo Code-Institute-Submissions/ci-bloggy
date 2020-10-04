@@ -43,9 +43,9 @@ Bloggy | User
       <div class="row show-on-small hide-on-med-and-up">
         <div class="col s12 center-align">
           <a class="waves-effect btn bloggy-button right-align profile-controls"
-              href="{{ url_for('post.new_post') }}">Write new post</a>
-            <a class="waves-effect btn bloggy-button right-align profile-controls"
-              href="{{ url_for('user.edit_user') }}">Edit profile</a>
+            href="{{ url_for('post.new_post') }}">Write new post</a>
+          <a class="waves-effect btn bloggy-button right-align profile-controls"
+            href="{{ url_for('user.edit_user') }}">Edit profile</a>
         </div>
       </div>
 </header>
@@ -82,6 +82,11 @@ Bloggy | User
       </div>
     </div>
     {% endfor %}
+    {% if users_posts.count() == 0 %}
+    <div class="center-align no-posts-found">
+      <h3>No posts found</h3>
+    </div>
+    {% endif %}
   </div>
   <!-- Pagination -->
   <div class="row center-align">
