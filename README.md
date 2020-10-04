@@ -153,8 +153,9 @@ To create new post, users need to:
 1. Give the post a title, 
 2. Add some text to the body of the blog, 
 3. Add short description (blurb), 
-4. Provide a URL to an image to be used as a cover
 5. Add in approximate reading time
+
+Post image URL is optional and a default image will be assigned should the user decide not to fill out this field.
 
 🟢 **Edit post page** (CR**U**D)
 
@@ -176,7 +177,9 @@ Users are able to search for posts based on post title, description or text with
 
 ### Features Left to Implement
 
-🔴 **Feature left to implement**
+🔴 **Likes/favourites feature**
+
+It would be good to implement a feature that allows users to favourite/like posts and save them to their 'favourites' library.
 
 ## Technologies Used
 
@@ -294,6 +297,8 @@ __All posts posted on Bloggy are under sole copyright of their respective creato
 __All images posted on Bloggy are under sole copyright of their respective creators and the creator application (Ivan Branimir Skoric) is not responsible for any copyright breaches that could be commited by other users__
 
 SVG Illustration used in jumbotron have been sourced from [Undraw](https://undraw.co/illustrations). 
+
+Default profile image & default post image sourced from [Pixaby](pixabay.com)
 
 ### Acknowledgements
 
