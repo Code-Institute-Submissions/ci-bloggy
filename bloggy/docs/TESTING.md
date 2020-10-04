@@ -52,6 +52,8 @@ If the validation of any of the fields fails on submit, a message will be displa
 
 If the validation is successful user's details - username, email, password and profile picture are stored in the users collection & their blog title and description are stored in the blogs collection.
 
+If the user didn't supply a profile image a default one will be assigned. 
+
 Once user is successfully registered they are redirected to the login form with a flash message informing them they've been successfully registered.
 
 ### 🛠 Login form
@@ -92,6 +94,8 @@ If the user inputs correct password but leaves the new password fields empty, a 
 Once again, WTForms is used to validate form on this page, all validators used in the registration form can be seen in `forms.py` file.
 
 If the validation of any of the fields fails on submit, a message will be displayed under the field in red text. 
+
+If the user didn't supply a post image a default one will be assigned. 
 
 Should an anonymous user try and access the `/user/new_post` page, they will be redirected to the login page with a flash message reading *You must be logged in to create a new post*
 
