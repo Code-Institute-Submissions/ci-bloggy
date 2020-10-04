@@ -13,11 +13,11 @@ class RegisterForm(FlaskForm):
     '''Define register form'''
     def username_check(form, username):
         '''Define check username function'''
-        specials = re.compile("[@_!#$%^&*()<>?/\|}{~:]")
+        specials = re.compile("[@!#$%^&*()<>?/\|}{~:]")
         # Check if username contains any of the defined special characters
         if specials.search(username.data) is not None:
-            raise ValidationError('You cannot use special charachters such as'
-                                  '[@_!#$%^&*()<>?/\|}{~:] in your username')
+            raise ValidationError('You cannot use special characters such as'
+                                  '[@!#$%^&*()<>?/\|}{~:] in your username')
         # Check if username exists in the database
         if check_username(form.username.data):
             raise ValidationError('User with such username already exists, '
@@ -85,7 +85,7 @@ class LoginForm(FlaskForm):
     def username_validation(form, username):
         '''Define check if username is in database check'''
         if check_username(form.username.data) is None:
-            raise ValidationError('User with such username does not exist')
+            raise ValidationError('User does not exist')
 
     username = StringField(
         'username', validators=[DataRequired(),
