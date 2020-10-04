@@ -26,9 +26,9 @@ def profile_page(username):
     get_profile_posts_pagination = get_users_posts(profile_id).skip((page-1) * per_page).limit(per_page)
     # Handle sorting if value is X sort by Y
     if request.form.get('sort') == "1":
-        profile_posts = get_profile_posts_pagination.sort("last_updated", 1)
-    if request.form.get('sort') == "2":
         profile_posts = get_profile_posts_pagination.sort("last_updated", -1)
+    if request.form.get('sort') == "2":
+        profile_posts = get_profile_posts_pagination.sort("last_updated", 1)
     if request.form.get('sort') == "3":
         profile_posts = get_profile_posts_pagination.sort("title", 1)
     if request.form.get('sort') == "4":

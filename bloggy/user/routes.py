@@ -108,9 +108,9 @@ def user_page():
         users_posts = get_users_posts(current_user_id).skip((page-1) * per_page).limit(per_page)
     # Handle sorting if value is X sort by Y
     if request.form.get('sort') == "1":
-        users_posts = users_posts.sort("last_updated", 1)
-    if request.form.get('sort') == "2":
         users_posts = users_posts.sort("last_updated", -1)
+    if request.form.get('sort') == "2":
+        users_posts = users_posts.sort("last_updated", 1)
     if request.form.get('sort') == "3":
         users_posts = users_posts.sort("title", 1)
     if request.form.get('sort') == "4":

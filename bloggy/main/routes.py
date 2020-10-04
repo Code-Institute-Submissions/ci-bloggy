@@ -20,9 +20,9 @@ def index():
     get_all_posts_pagination = mongo.db.posts.find().skip((page-1) * per_page).limit(per_page)
     # Handle sorting if value is X sort by Y
     if request.form.get('sort') == "1":
-        all_posts = get_all_posts_pagination.sort("last_updated", 1)
-    if request.form.get('sort') == "2":
         all_posts = get_all_posts_pagination.sort("last_updated", -1)
+    if request.form.get('sort') == "2":
+        all_posts = get_all_posts_pagination.sort("last_updated", 1)
     if request.form.get('sort') == "3":
         all_posts = get_all_posts_pagination.sort("title", 1)
     if request.form.get('sort') == "4":
