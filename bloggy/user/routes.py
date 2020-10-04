@@ -165,8 +165,8 @@ def edit_user():
                             flash("Passwords must match")
                             return redirect(url_for('user.edit_user'))
                     else: 
-                        flash("You entered your existing password but not the new password.'
-                              'Please check your fields and try again")
+                        flash("You entered your existing password but not the new password"
+                              "Please check your fields and try again")
                         return redirect(url_for('user.edit_user'))
             if form.profile_pic.data != '':
                 new_profile_pic = form.profile_pic.data
