@@ -28,11 +28,11 @@ Bloggy | Home
         <div class="valign-wrapper">
             <div class="col s12 m6 l7 hide-on-small-only">
                 <h1>Home of the blogs you love.</h1>
-                {% if session.user != Null %}
+                {% if session.user %}
                 <a class="waves-effect btn-large bloggy-button" href="{{ url_for('post.new_post') }}">Write a new
                     post</a>
                 {% endif %}
-                {% if session.user == Null %}
+                {% if not session.user %}
                 <a class="waves-effect btn-large bloggy-button" href="{{ url_for('user.login') }}">Start creating</a>
                 {% endif %}
             </div>
@@ -60,10 +60,10 @@ Bloggy | Home
     </div>
     <div class="row show-on-small hide-on-med-and-up center-align">
         <div class="col s12 m6 l7">
-            {% if session.user != Null %}
+            {% if session.user %}
             <a class="waves-effect btn-large bloggy-button" href="{{ url_for('post.new_post') }}">Write a new post</a>
             {% endif %}
-            {% if session.user == Null %}
+            {% if not session.user %}
             <a class="waves-effect btn-large bloggy-button" href="{{ url_for('user.login') }}">Start creating</a>
             {% endif %}
         </div>
