@@ -135,5 +135,4 @@ class EditProfileForm(FlaskForm):
         'password')
     confirm_new_password = PasswordField(
         'confirm_password')
-    blog_description = StringField(
-        'blog_description')
+    profile_pic = StringField('profile_pic')

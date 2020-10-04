@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}
-Bloggy | Log in
+Bloggy | Edit profile
 {% endblock title %}
 {% block main %}
 <!-- Page header -->
@@ -55,13 +55,13 @@ Bloggy | Log in
           <label for="password">Confirm new password</label>
         </div>
         <div class="input-field col s12">
-          <i class="material-icons prefix">description</i>
-          {{form.blog_description(value=current_blog_description)}}
-          {% if form.blog_description.errors %}
-          <ul class="center-align">{% for error in form.blog_description.errors %}<li style="font-size: small; color: #F1007C;">
+          <i class="material-icons prefix">image</i>
+          {{form.profile_pic(value=current_profile_pic)}}
+          {% if form.profile_pic.errors %}
+          <ul class="center-align">{% for error in form.profile_pic.errors %}<li style="font-size: small; color: #F1007C;">
               {{ error }}</li>{% endfor %}</ul>
           {% endif %}
-          <label for="password">Blog description</label>
+          <label for="password">Profile Image URL</label>
         </div>
         <div class="col s12 center-align">
           <button class="btn waves-effect bloggy-button" type="submit" name="action">Save changes</button>

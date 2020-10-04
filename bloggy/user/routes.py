@@ -138,6 +138,7 @@ def edit_user():
         user = get_user_from_username(current_user)
         # Get current password
         current_user_pasword = user["password"]
+        current_profile_pic = user["profile_img_url"]
         # Get current blog description
         blog = get_blog_from_user_id(user["_id"])
         current_blog_description = blog["description"]
@@ -164,18 +165,20 @@ def edit_user():
                             flash("Passwords must match")
                             return redirect(url_for('user.edit_user'))
                     else: 
-                        flash("You entered your existing password but not the new password. Please check your fields and try again")
+                        flash("You entered your existing password but not the new password.'
+                              'Please check your fields and try again")
                         return redirect(url_for('user.edit_user'))
-            if form.blog_description.data != '':
-                    new_description = form.blog_description.data
-                    update_description = { "$set": { "description": new_description } }
-                    mongo.db.blogs.update(blog, update_description)
-                    flash("Profile successfully updated")
-                    return redirect(url_for('user.user_page'))
-            else:
-                flash("Description field can't be empty")
-                return redirect(url_for('user.edit_user'))
-        return render_template('edit_user.html', user=user, current_blog_description=current_blog_description, form=form, current_user=current_user)
+            if form.profile_pic.data != '':
+                new_profile_pic = form.profile_pic.data
+                update_profile_pic = { "$set": { "profile_img_url": new_profile_pic } }
+                mongo.db.users.update(user, update_profile_pic)
+                flash("Profile successfully updated")
+                return redirect(url_for('user.user_page'))
+            flash("Profile image URL field can't be empty")
+            return redirect(url_for('user.edit_user'))
+        return render_template('edit_user.html', user=user,
+                               form=form, current_user=current_user,
+                               current_profile_pic=current_profile_pic)
     flash("You must be logged in to access this page")
     return redirect(url_for('main.index'))
 
