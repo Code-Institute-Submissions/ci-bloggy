@@ -279,6 +279,7 @@ I've personally used [Heroku](https://heroku.com/) to deploy this project for su
     | -------------     |:-------------:| 
     | IP               | 0.0.0.0
     | PORT           | 5000
+    | DEBUG        | False or True (False for production)
     | MONGO_URI        | Your unique Mongo URI goes here
     | MONGO_DBNAME        | bloggy
     | SECRET_KEY       | Your unique secret key
