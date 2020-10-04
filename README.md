@@ -71,7 +71,7 @@ Single post page contains the post title & post author details at the top with c
 
 Profile page/Blog page displays user's blog title & description as well as user's profile picture. Underneath that, all of user's posts are displayed. 
 
-Edit profile page features a form where user is asked for their current password, new password and confirmation of the new password (if they wish to change their password), and a field where they can edit their blog description.
+Edit profile page features a form where user is asked for their current password, new password and confirmation of the new password (if they wish to change their password), and a field where they can edit their profile image.
 
 Login page contains simple login form that prompts user for their username and password. Users that aren't registered yet are invited to register underneath the form.
 
