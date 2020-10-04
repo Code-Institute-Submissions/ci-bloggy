@@ -2,7 +2,8 @@ import re
 from flask_wtf import FlaskForm, RecaptchaField
 from wtforms import StringField, PasswordField
 from wtforms.validators import (DataRequired, Length, InputRequired,
-                                Email, EqualTo, ValidationError, URL, Regexp)
+                                Email, EqualTo, ValidationError, URL, Regexp, Optional)
+from wtforms.fields.html5 import EmailField, URLField
 from bloggy.utilities import check_username, check_email, check_existing_blog
 from slugify import slugify
 from bloggy import bcrypt
@@ -43,11 +44,10 @@ class RegisterForm(FlaskForm):
                                 InputRequired(
                                 message="This field is requried"),
                                 username_check])
-    profile_img_url = StringField('image_url', validators=[
-        DataRequired(),
-        URL(message="Please input a valid URL"),
-        InputRequired(message="This field is requried")])
-    email = StringField(
+    profile_img_url = URLField('image_url', validators=[
+        Optional(),
+        URL(message="Please input a valid URL")])
+    email = EmailField(
         'email', validators=[DataRequired(),
                              Email(),
                              InputRequired(
@@ -118,7 +118,7 @@ class PostForm(FlaskForm):
             "between 10 and 200 characters long"),
         InputRequired(
             message="This field is requried")])
-    image_url = StringField('image_url', validators=[
+    image_url = URLField('image_url', validators=[
         DataRequired(),
         URL(message="Please input a valid URL"),
         InputRequired(message="This field is requried")])

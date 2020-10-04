@@ -52,32 +52,40 @@ def register():
     '''Define register route'''
     # Define WTForms form
     form = RegisterForm()
+    # Define default profile image if user doesn't supply one
+    profile_img_url = 'https://cdn.pixabay.com/photo/2017/03/25/17/55/color-2174045_960_720.png'
     if form.validate_on_submit():
-            # Hash the password from the input field first
-            hashed_password = bcrypt.generate_password_hash(
+        # Check if form field is empty and if it is give it default profile image
+        if form.profile_img_url.data == '':
+                profile_img_url = profile_img_url
+        # Else if not get actual field value
+        else:
+                profile_img_url = form.profile_img_url.data
+        # Hash the password from the input field first
+        hashed_password = bcrypt.generate_password_hash(
                 form.password.data).decode('utf-8')
-            # Define register_user dictionary
-            register_user = {
-                "username": form.username.data,
-                "password": hashed_password,
-                "email": form.email.data,
-                "profile_img_url": form.profile_img_url.data
+        # Define register_user dictionary
+        register_user = {
+            "username": form.username.data,
+            "password": hashed_password,
+            "email": form.email.data,
+            "profile_img_url": profile_img_url
             }
-            # Get the inserted user's ID
-            registered_usr_id = mongo.db.users.insert_one(register_user)
-            # Define register blog dictionary
-            register_blog = {
-                "owner_id": ObjectId(registered_usr_id.inserted_id),
-                "title": form.blog_title.data,
-                "title-slug": slugify(form.blog_title.data),
-                "description": form.blog_description.data
-            }
-            # Insert blog details into the database
-            mongo.db.blogs.insert_one(register_blog)
-            # All goes well display flash message & return user to login form
-            flash(
-                "You have been sucessfully registered, you can now log in below")
-            return redirect(url_for('user.login'))
+        # Get the inserted user's ID
+        registered_usr_id = mongo.db.users.insert_one(register_user)
+        # Define register blog dictionary
+        register_blog = {
+            "owner_id": ObjectId(registered_usr_id.inserted_id),
+            "title": form.blog_title.data,
+            "title-slug": slugify(form.blog_title.data),
+            "description": form.blog_description.data
+        }
+        # Insert blog details into the database
+        mongo.db.blogs.insert_one(register_blog)
+        # All goes well display flash m essage & return user to login form
+        flash(
+            "You have been sucessfully registered, you can now log in below")
+        return redirect(url_for('user.login'))
     return render_template('register.html', form=form)
 
 
