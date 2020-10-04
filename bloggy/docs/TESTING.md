@@ -1,11 +1,8 @@
 # Bloggy - The home of blogs you love
 
 ![Bloggy logo](../static/img/logo.svg "Bloggy logo Logo")
-
-## Testing
-
 ## Table of Contents
-1. [**Testing**](#testing)
+1. [**Manual Testing**](#manual-testing)
     - [**Home page and posts displaying**](#🛠-home-page-and-posts-displaying)
     - [**Home page and posts searching**](#🛠-home-page-and-posts-searching)
     - [**Home page posts sorting**](##🛠-home-page-posts-sorting)
@@ -15,6 +12,9 @@
     - [**Read a single post**](#🛠-read-a-single-post)
     - [**Edit a post**](#🛠-edit-a-post)
     - [**Delete a post**](#🛠-delete-a-post)
+2. [**Devices and tools used**](#devices-and-tools-used)
+
+## Manual testing
 
 ### 🛠 Home page and posts displaying
 
@@ -95,7 +95,7 @@ Once again, WTForms is used to validate form on this page, all validators used i
 
 If the validation of any of the fields fails on submit, a message will be displayed under the field in red text. 
 
-If the user didn't supply a post image a default one will be assigned. 
+If the user didn't supply a profile image a default one will be assigned. 
 
 Should an anonymous user try and access the `/user/new_post` page, they will be redirected to the login page with a flash message reading *You must be logged in to create a new post*
 
@@ -121,11 +121,27 @@ If the user click's *Delete* the modal will disappear and the post will be delet
 
 Should an anonymous user try and access the `/post/<post_id>/delete` page, they will be redirected to the home page with a flash message reading *You don't have permission to delete this post*
 
+## Devices and tools used
 
+App has been tested on the following devices/browsers and no known issues could be reported:
 
+1. Macbook Pro 13" (macOS 10.15.6 Catalina)
+    * Google Chrome (v85)
+    * Safari (v14)
+    * Firefox (v81)
+    * Opera (v71)
+2. Desktop PC (Windows 10)
+    * Google Chrome (v85)
+    * Edge (v85)
+    * Firefox (v81)
+    * Opera (v71)
+3. iPhone 11 Pro Max (iOS 14.0.1)
+    * Safari 
+4. iPhone XR (iOS 14.0)
+    * Safari
 
+Python code has been checked using [PEP8 Compliance checker](http://pep8online.com/)
 
+CSS has been validated using [W3C CSS Validator](https://jigsaw.w3.org/css-validator/validator)
 
-
-
-
+HTML has been checked (validation will always fail due to Jinja templating language being used) using [W3C Markup Validator](https://validator.w3.org/)
