@@ -9,7 +9,9 @@ from bloggy.utilities import (check_username,
                               get_user_id_from_username, get_users_posts,
                               get_blog_from_user_id, get_user_from_username)
 
+
 user = Blueprint("user", __name__)
+
 
 @user.route('/login', methods=("GET", "POST"))
 def login():
@@ -55,7 +57,8 @@ def register():
     # Define default profile image if user doesn't supply one
     profile_img_url = 'https://cdn.pixabay.com/photo/2017/03/25/17/55/color-2174045_960_720.png'
     if form.validate_on_submit():
-        # Check if form field is empty and if it is give it default profile image
+        # Check if form field is empty and
+        # if it is give it default profile image
         if form.profile_img_url.data == '':
                 profile_img_url = profile_img_url
         # Else if not get actual field value
@@ -90,7 +93,7 @@ def register():
 
 
 @user.route('/user', methods=("GET", "POST"))
-def user_page():    
+def user_page():
     '''Define user page route'''
     page = request.args.get(get_page_parameter(), type=int, default=1)
     per_page = 6
@@ -102,10 +105,12 @@ def user_page():
     current_blog = get_blog_from_user_id(current_user_id)
     # Check if user is admin if it is, display all posts
     if current_user == 'admin':
-        users_posts = mongo.db.posts.find().skip((page-1) * per_page).limit(per_page)
+        users_posts = mongo.db.posts.find().skip(
+            (page-1) * per_page).limit(per_page)
     if current_user != 'admin':
         # Get current user's posts
-        users_posts = get_users_posts(current_user_id).skip((page-1) * per_page).limit(per_page)
+        users_posts = get_users_posts(
+            current_user_id).skip((page-1) * per_page).limit(per_page)
     # Handle sorting if value is X sort by Y
     if request.form.get('sort') == "1":
         users_posts = users_posts.sort("last_updated", -1)
@@ -123,18 +128,21 @@ def user_page():
     pagination = Pagination(
         page=page, per_page=per_page, total=users_posts.count(),
         record_name='posts')
-    return render_template('user.html', users_posts=users_posts, pagination=pagination, blog=current_blog, user=user, sorting_value=sorting_value)
+    return render_template(
+        'user.html', users_posts=users_posts,
+        pagination=pagination, blog=current_blog,
+        user=user, sorting_value=sorting_value)
 
 
 @user.route('/user/edit', methods=("GET", "POST"))
-def edit_user(): 
+def edit_user():
     '''Define edit user page route'''
     # Define WTForm
     form = EditProfileForm()
     # Get current user
     current_user = session.get("user")
-    # Check if user is logged in 
-    if current_user != None:
+    # Check if user is logged in
+    if current_user is not None:
         user = get_user_from_username(current_user)
         # Get current password
         current_user_pasword = user["password"]
@@ -148,29 +156,32 @@ def edit_user():
             # Check that existing password is not empty
             if form.existing_password.data != '':
                     if form.new_password.data and form.confirm_new_password.data != '':
-                    # Check that new password and confirm new password match
+                        # Check that new password and
+                        # confirm new password match
                         if form.new_password.data == form.confirm_new_password.data:
                             # check that existing password matches the db entry
-                            if bcrypt.check_password_hash(user["password"], password_to_check):
+                            if bcrypt.check_password_hash(
+                                    user["password"], password_to_check):
                                 new_password = bcrypt.generate_password_hash(
                                     form.new_password.data).decode('utf-8')
-                                update_password = { "$set": { "password": new_password } }
+                                update_password = {"$set": {"password": new_password}}
                                 mongo.db.users.update(user, update_password)
                                 flash("Profile successfully updated")
                                 return redirect(url_for('user.user_page'))
                             else:
                                 flash("Current password is not correct")
                                 return redirect(url_for('user.edit_user'))
-                        else: 
+                        else:
                             flash("Passwords must match")
                             return redirect(url_for('user.edit_user'))
-                    else: 
-                        flash("You entered your existing password but not the new password"
+                    else:
+                        flash("You entered your existing password"
+                              "but not the new password"
                               "Please check your fields and try again")
                         return redirect(url_for('user.edit_user'))
             if form.profile_pic.data != '':
                 new_profile_pic = form.profile_pic.data
-                update_profile_pic = { "$set": { "profile_img_url": new_profile_pic } }
+                update_profile_pic = {"$set": {"profile_img_url": new_profile_pic}}
                 mongo.db.users.update(user, update_profile_pic)
                 flash("Profile successfully updated")
                 return redirect(url_for('user.user_page'))
@@ -181,7 +192,3 @@ def edit_user():
                                current_profile_pic=current_profile_pic)
     flash("You must be logged in to access this page")
     return redirect(url_for('main.index'))
-
-
-
-

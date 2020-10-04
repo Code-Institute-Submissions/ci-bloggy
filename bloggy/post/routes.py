@@ -5,7 +5,8 @@ from bloggy import app, mongo, ObjectId
 from bloggy.forms import PostForm
 from datetime import datetime
 from bloggy.utilities import (all_posts, check_username,
-                              get_user_id_from_username, get_user_from_id, get_blog_from_user_id)
+                              get_user_id_from_username,
+                              get_user_from_id, get_blog_from_user_id)
 
 
 post = Blueprint("post", __name__)
@@ -33,7 +34,8 @@ def new_post():
         # Default post image
         image_url = 'https://cdn.pixabay.com/photo/2017/03/25/17/55/color-2174045_960_720.png'
         if form.validate_on_submit():
-            # Check if form field is empty and if it is give it default post image
+            # Check if form field is empty and
+            # if it is give it default post image
             if form.image_url.data == '':
                 image_url = image_url
             # Else if not get actual field value
@@ -59,7 +61,8 @@ def new_post():
                 # return them to the home page
                 flash("Your post has been submitted successfully.")
                 return redirect(url_for('user.user_page'))
-    # Else if user is not logged in flash message and promt them to log in
+    # Else if user is not logged in
+    # flash message and promt them to log in
     else:
         flash('You must be logged in to create a new post')
         return redirect(url_for('user.login'))
@@ -75,7 +78,8 @@ def post_page(post_id):
     creator = get_user_from_id(post["user_id"])
     current_views = post["views"]
     # Increment views by 1
-    mongo.db.posts.update_one({"_id": ObjectId(post_id)}, {"$inc": {"views": 1}})
+    mongo.db.posts.update_one(
+        {"_id": ObjectId(post_id)}, {"$inc": {"views": 1}})
     return render_template('post.html', post=post, creator=creator)
 
 
@@ -116,18 +120,20 @@ def edit_post(post_id):
     if current_user is None:
         flash("You don't have permission to edit this post")
         return redirect(url_for('main.index'))
-    if form.is_submitted() and form.validate() == False:
-        '''Form a fake post dict to pass onto the template and preserve already edited data'''
+    if form.is_submitted() and form.validate() is False:
+        '''Form a fake post dict to pass onto
+        the template and preserve already edited data'''
         post_id = mongo.db.posts.find_one({'_id': ObjectId(post_id)})["_id"]
         post = {
             "_id": post_id,
-            "title" : form.title.data,
-            "description" : form.description.data,
-            "body" : post_body,
-            "read_time" : form.read_time.data,
-            "image_url" : form.image_url.data
+            "title": form.title.data,
+            "description": form.description.data,
+            "body": post_body,
+            "read_time": form.read_time.data,
+            "image_url": form.image_url.data
         }
-        return render_template('edit_post.html', post=post, form=form, post_id=post_id)
+        return render_template(
+            'edit_post.html', post=post, form=form, post_id=post_id)
     if form.validate_on_submit():
         # Get data - refer to new post function above
         datetimesting = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
@@ -166,7 +172,7 @@ def delete_post(post_id):
     if current_user is None:
         flash("You don't have permission to delete this post")
         return redirect(url_for('main.index'))
-    # Check if user is admin if it is, inject 
+    # Check if user is admin if it is, inject
     # correct user id based
     # on the post to allow deletion
     if current_user == 'admin':

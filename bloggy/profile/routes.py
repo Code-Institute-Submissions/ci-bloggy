@@ -2,7 +2,8 @@ from flask import (
     Blueprint, render_template, request, session)
 from bloggy import app, mongo
 from flask_paginate import Pagination, get_page_parameter
-from bloggy.utilities import (get_users_posts, get_blog_from_user_id, get_user_from_username)
+from bloggy.utilities import (get_users_posts, get_blog_from_user_id,
+                              get_user_from_username)
 
 profile = Blueprint("profile", __name__)
 
@@ -18,12 +19,13 @@ def profile_page(username):
     profile = get_user_from_username(username)
     # Get user ID from database
     profile_id = profile["_id"]
-    # Get profile username 
+    # Get profile username
     profile_username = profile["username"]
     # Get user's blog
     profile_blog = get_blog_from_user_id(profile_id)
     # Get users posts from database
-    get_profile_posts_pagination = get_users_posts(profile_id).skip((page-1) * per_page).limit(per_page)
+    get_profile_posts_pagination = get_users_posts(
+        profile_id).skip((page-1) * per_page).limit(per_page)
     # Handle sorting if value is X sort by Y
     if request.form.get('sort') == "1":
         profile_posts = get_profile_posts_pagination.sort("last_updated", -1)
@@ -38,13 +40,16 @@ def profile_page(username):
     if request.form.get('sort') is None:
         profile_posts = get_profile_posts_pagination
     sorting_value = request.form.get('sort')
-    # Get current user 
+    # Get current user
     current_user = session.get("user")
     # Define pagination
     pagination = Pagination(
         page=page, per_page=per_page, total=profile_posts.count(),
         record_name='posts')
     return render_template('profile.html', profile=profile,
-                           profile_posts=profile_posts, profile_blog=profile_blog,
-                           pagination=pagination, profile_username=profile_username,
-                           current_user=current_user, sorting_value=sorting_value)
+                           profile_posts=profile_posts,
+                           profile_blog=profile_blog,
+                           pagination=pagination,
+                           profile_username=profile_username,
+                           current_user=current_user,
+                           sorting_value=sorting_value)
