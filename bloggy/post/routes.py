@@ -30,7 +30,15 @@ def new_post():
         blog_id = ObjectId(
             mongo.db.blogs.find_one(
                 {"owner_id": user_id})["_id"])
+        # Default post image
+        image_url = 'https://cdn.pixabay.com/photo/2017/03/25/17/55/color-2174045_960_720.png'
         if form.validate_on_submit():
+            # Check if form field is empty and if it is give it default post image
+            if form.image_url.data == '':
+                image_url = image_url
+            # Else if not get actual field value
+            else:
+                image_url = form.image_url.data
             # Check that body is not empty
             if post_body != '':
                 # Define new post dictionary
@@ -43,7 +51,7 @@ def new_post():
                     "body": post_body,
                     "last_updated": datetimesting,
                     "read_time": form.read_time.data,
-                    "image_url": form.image_url.data,
+                    "image_url": image_url,
                     "views": 0
                 }
                 mongo.db.posts.insert_one(new_post)

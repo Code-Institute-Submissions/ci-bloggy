@@ -119,9 +119,8 @@ class PostForm(FlaskForm):
         InputRequired(
             message="This field is requried")])
     image_url = URLField('image_url', validators=[
-        DataRequired(),
-        URL(message="Please input a valid URL"),
-        InputRequired(message="This field is requried")])
+        Optional(),
+        URL(message="Please input a valid URL")])
     read_time = StringField('read_time', validators=[
         DataRequired(),
         Length(min=1, max=3, message="Please input reading time"
