@@ -81,7 +81,7 @@ def register():
     return render_template('register.html', form=form)
 
 
-@user.route('/user')
+@user.route('/user', methods=("GET", "POST"))
 def user_page():    
     '''Define user page route'''
     page = request.args.get(get_page_parameter(), type=int, default=1)
@@ -98,10 +98,24 @@ def user_page():
     if current_user != 'admin':
         # Get current user's posts
         users_posts = get_users_posts(current_user_id).skip((page-1) * per_page).limit(per_page)
+    # Handle sorting if value is X sort by Y
+    if request.form.get('sort') == "1":
+        users_posts = users_posts.sort("last_updated", 1)
+    if request.form.get('sort') == "2":
+        users_posts = users_posts.sort("last_updated", -1)
+    if request.form.get('sort') == "3":
+        users_posts = users_posts.sort("title", 1)
+    if request.form.get('sort') == "4":
+        users_posts = users_posts.sort("title", -1)
+    if request.form.get('sort') == "5":
+        users_posts = users_posts.sort("views", -1)
+    if request.form.get('sort') is None:
+        users_posts = users_posts
+    sorting_value = request.form.get('sort')
     pagination = Pagination(
         page=page, per_page=per_page, total=users_posts.count(),
         record_name='posts')
-    return render_template('user.html', users_posts=users_posts, pagination=pagination, blog=current_blog, user=user)
+    return render_template('user.html', users_posts=users_posts, pagination=pagination, blog=current_blog, user=user, sorting_value=sorting_value)
 
 
 @user.route('/user/edit', methods=("GET", "POST"))
